@@ -1,0 +1,10 @@
+# Placeholder Image
+
+This directory should contain placeholder images for the application.
+
+For now, you can use any placeholder image service like:
+- https://via.placeholder.com/800x600
+- https://picsum.photos/800/600
+- Or upload your own placeholder images
+
+The application will gracefully handle missing images by showing a placeholder.
