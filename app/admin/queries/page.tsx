@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Header from '@/components/Header'
@@ -38,6 +38,32 @@ export default function AdminQueriesPage() {
   const [notes, setNotes] = useState('')
   const [filter, setFilter] = useState<'all' | 'pending' | 'responded' | 'escalated'>('all')
 
+  const fetchQueries = useCallback(async () => {
+    try {
+      setLoading(true)
+      let url = '/api/queries?'
+      if (filter === 'pending') {
+        url += 'status=PENDING'
+      } else if (filter === 'responded') {
+        url += 'status=RESPONDED'
+      } else if (filter === 'escalated') {
+        url += 'status=ESCALATED_LEVEL2,ESCALATED_LEVEL3'
+      }
+
+      const res = await fetch(url)
+      if (res.ok) {
+        const data = await res.json()
+        setQueries(data)
+      } else {
+        console.error('Failed to fetch queries')
+      }
+    } catch (error) {
+      console.error('Error fetching queries:', error)
+    } finally {
+      setLoading(false)
+    }
+  }, [filter])
+
   useEffect(() => {
     if (sessionStatus === 'loading') return
     
@@ -47,31 +73,7 @@ export default function AdminQueriesPage() {
     }
     
     fetchQueries()
-  }, [session, sessionStatus, router, filter])
-
-  const fetchQueries = async () => {
-    try {
-      setLoading(true)
-      let url = '/api/queries'
-      if (filter === 'pending') {
-        url += '?status=PENDING'
-      } else if (filter === 'responded') {
-        url += '?status=RESPONDED'
-      } else if (filter === 'escalated') {
-        url += '?status=ESCALATED_LEVEL2&status=ESCALATED_LEVEL3'
-      }
-
-      const response = await fetch(url)
-      if (response.ok) {
-        const data = await response.json()
-        setQueries(data)
-      }
-    } catch (error) {
-      console.error('Error fetching queries:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
+  }, [session, sessionStatus, router, fetchQueries])
 
   const handleMarkResponded = async (queryId: string, level: 'customerSupport' | 'manager' | 'ceo') => {
     try {

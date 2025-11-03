@@ -442,7 +442,7 @@ export default function ListBusinessPage() {
                 List Your Business
               </h1>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Join our platform and showcase your wedding services to thousands of couples. Fill out the form below and we'll review your submission.
+                Join our platform and showcase your wedding services to thousands of couples. Fill out the form below and we&apos;ll review your submission.
               </p>
               {!session && (
                 <div className="mt-4">

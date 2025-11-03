@@ -122,7 +122,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Get In Touch</h1>
           <p className="text-xl md:text-2xl text-white/90">
-            We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+            We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.
           </p>
         </div>
       </section>
@@ -136,7 +136,7 @@ export default function ContactPage() {
               <div>
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">Contact Information</h2>
                 <p className="text-gray-600 mb-8">
-                  Have questions? We're here to help. Reach out to us through any of these channels.
+                  Have questions? We&apos;re here to help. Reach out to us through any of these channels.
                 </p>
               </div>
 
@@ -175,7 +175,7 @@ export default function ContactPage() {
                   {success && (
                     <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
                       <p className="text-green-800">
-                        ✓ Thank you for contacting us! We'll get back to you soon.
+                        ✓ Thank you for contacting us! We&apos;ll get back to you soon.
                       </p>
                     </div>
                   )}
@@ -284,7 +284,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Find Us</h2>
-            <p className="text-gray-600">We're located in the heart of Karachi</p>
+            <p className="text-gray-600">We&apos;re located in the heart of Karachi</p>
           </div>
           
           <div className="bg-gray-200 rounded-lg h-96 flex items-center justify-center">

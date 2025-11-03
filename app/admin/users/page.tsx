@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Header from '@/components/Header'
@@ -56,18 +56,7 @@ export default function AdminUsersPage() {
     permissions: [] as Permission[],
   })
 
-  useEffect(() => {
-    if (sessionStatus === 'loading') return
-    
-    if (sessionStatus === 'unauthenticated' || !canAccessAdmin(session)) {
-      router.push('/auth/signin')
-      return
-    }
-    
-    fetchUsers()
-  }, [session, sessionStatus, router, filterRole, searchTerm])
-
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     try {
       setLoading(true)
       let url = '/api/admin/users?'
@@ -77,18 +66,32 @@ export default function AdminUsersPage() {
       if (searchTerm) {
         url += `search=${encodeURIComponent(searchTerm)}&`
       }
+      url = url.slice(0, -1) // Remove trailing &
 
-      const response = await fetch(url)
-      if (response.ok) {
-        const data = await response.json()
+      const res = await fetch(url)
+      if (res.ok) {
+        const data = await res.json()
         setUsers(data)
+      } else {
+        console.error('Failed to fetch users')
       }
     } catch (error) {
       console.error('Error fetching users:', error)
     } finally {
       setLoading(false)
     }
-  }
+  }, [filterRole, searchTerm])
+
+  useEffect(() => {
+    if (sessionStatus === 'loading') return
+    
+    if (sessionStatus === 'unauthenticated' || !canAccessAdmin(session)) {
+      router.push('/auth/signin')
+      return
+    }
+    
+    fetchUsers()
+  }, [session, sessionStatus, router, fetchUsers])
 
   const handleOpenDialog = (user?: User) => {
     if (user) {
