@@ -1,0 +1,94 @@
+/* ...existing code... */
+
+.containerMain {
+  /* ensures your container-main spacing + optional floral overlap space */
+  --side-padding: 2rem;
+  padding-left: var(--side-padding);
+  padding-right: var(--side-padding);
+}
+
+/* Top carousel */
+.carouselWrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  gap: 1rem;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  align-items: stretch;
+}
+
+/* each card container */
+.card {
+  padding: 1rem;
+  box-sizing: border-box;
+  transition: transform 400ms ease, opacity 400ms ease, box-shadow 400ms ease;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(20, 20, 20, 0.06);
+  margin: 0 0.5rem;
+}
+
+/* active center card */
+.active {
+  transform: scale(1.02);
+  opacity: 1;
+  box-shadow: 0 18px 40px rgba(20, 20, 20, 0.12);
+}
+
+/* non-active cards dimmed */
+.inactive {
+  transform: scale(0.97);
+  opacity: 0.45;
+  filter: grayscale(50%);
+}
+
+/* Bottom thumbnail strip */
+.thumbWrap {
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.thumbTrack {
+  display: flex;
+  gap: 1rem;
+  transition: transform 900ms linear;
+  will-change: transform;
+  align-items: center;
+}
+
+.thumbItem {
+  flex: 0 0 20%;
+  box-sizing: border-box;
+  padding: 0.25rem;
+  opacity: 0.95;
+}
+
+/* responsive tweaks */
+@media (max-width: 1024px) {
+  .card {
+    padding: 0.75rem;
+  }
+  .thumbItem {
+    flex: 0 0 33.3333%;
+  }
+}
+
+@media (max-width: 640px) {
+  .track {
+    gap: 0.5rem;
+  }
+  .card {
+    padding: 0.6rem;
+  }
+  .thumbItem {
+    flex: 0 0 50%;
+  }
+}
+
+/* ...existing code... */

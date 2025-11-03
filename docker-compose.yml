@@ -49,11 +49,12 @@ services:
     command: npm run dev
 
   # Redis (optional, for session storage)
+  # Note: Port changed to 6380 to avoid conflicts with other Redis instances
   redis:
     image: redis:7-alpine
     container_name: shadi-portal-redis
     ports:
-      - "6379:6379"
+      - "6380:6379"
     volumes:
       - redis_data:/data
     networks:

@@ -38,7 +38,6 @@ export async function POST(request: NextRequest) {
         message: inquiry.message,
         vendorName: inquiry.vendor.name,
         vendorEmail: inquiry.vendor.user.email,
-        vendorPhone: inquiry.vendor.user.phone || undefined,
       })
     } catch (emailError) {
       console.error('Error sending admin notification email:', emailError)

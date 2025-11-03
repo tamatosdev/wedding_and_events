@@ -1,63 +1,68 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
+import Link from "next/link";
+import Image from "next/image";
 
 const categories = [
-  { name: 'Wedding Venues', icon: '🏛️', slug: 'venue' },
-  { name: 'Catering', icon: '🍰', slug: 'catering' },
-  { name: 'Makeup Artists', icon: '💄', slug: 'makeup' },
-  { name: 'Bridal Wear', icon: '👗', slug: 'fashion' },
-  { name: 'Decorators', icon: '🌸', slug: 'decorations' },
-  { name: 'Photography', icon: '📸', slug: 'photography' },
-  { name: 'Music & DJ', icon: '🎵', slug: 'music' },
-  { name: 'Transport', icon: '🚗', slug: 'transport' },
-  { name: 'Flowers', icon: '🌹', slug: 'flowers' },
-  { name: 'Invitations', icon: '💌', slug: 'invitations' },
-]
+  { name: "Wedding Halls/Venues", category: "Venue", image: "/uploads/Vendor-1.png" },
+  { name: "Catering", category: "Catering", image: "/uploads/Vendor-2.png" },
+  { name: "Beauty Salon", category: "Beauty", image: "/uploads/Vendor-3.png" },
+  { name: "Boutiques", category: "Fashion", image: "/uploads/Vendor-4.png" },
+  { name: "Decoration", category: "Decoration", image: "/uploads/Vendor-5.png" }
+];
 
 export function CategoriesSection() {
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Find Every Vendor You Need
-          </h2>
-        </div>
-
-        {/* Categories Grid */}
-        <div className="flex overflow-x-auto gap-6 pb-4 scrollbar-hide">
-          {categories.map((category) => (
-            <Link
-              key={category.slug}
-              href={`/vendors?category=${category.slug}`}
-              className="flex-shrink-0 group"
-            >
-              <div className="w-32 h-32 bg-white border-2 border-gray-100 rounded-xl flex flex-col items-center justify-center hover:border-red-500 hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-                <div className="text-4xl mb-2 group-hover:scale-110 transition-transform">
-                  {category.icon}
+    <section className="relative flex items-center mt-10">
+      <div className="px-4 relative z-10 container-main Find-Every-Vendor">
+        <div className="text-center mx-auto">
+          <h1 className="text-4xl md:text-6xl font-bold mb-8 h2eading">
+            Find Every Vendor
+            <br /> You Need
+          </h1>
+          {/* Featured Venues Images */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-12 Venues-cart">
+            {categories.map((cat) => (
+              <Link 
+                key={cat.category}
+                href={`/vendors?category=${cat.category}`}
+                className="flex flex-col items-center hover:scale-105 transition-transform cursor-pointer"
+              >
+                <div className="bg-[#F7E9DB] border-vendor p-6 rounded-lg w-48 h-48 flex items-center justify-center mb-3">
+                  <Image
+                    src={cat.image}
+                    alt={cat.name}
+                    width={68}
+                    height={68}
+                    className="text-[#d13f43]"
+                  />
                 </div>
-                <span className="text-sm font-medium text-gray-700 text-center px-2">
-                  {category.name}
+                <span className="text-gray-800 font-medium vendor-span">
+                  {cat.name}
                 </span>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Advertisement Banner */}
-        <div className="mt-16 bg-gray-100 rounded-xl p-8 text-center">
-          <div className="flex items-center justify-center space-x-4">
-            <div className="w-16 h-16 bg-gray-300 rounded-lg flex items-center justify-center">
-              <span className="text-gray-500 text-sm">ADS</span>
-            </div>
-            <div className="text-gray-600">
-              <p className="text-lg font-medium">ADS GOES HERE</p>
-              <p className="text-sm">Advertisement space for partners</p>
-            </div>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
+      {/* Floral Decorations */}
+      <div className="Left-Floral">
+        <Image
+          src="/uploads/Flower-1.png" // Add your left floral image
+          alt="Left Floral"
+          width={200}
+          height={600}
+        />
+      </div>
+      <div className="Right-Floral">
+        <Image
+          src="/uploads/Flower-2.png" // Add your right floral image
+          alt="Right Floral"
+          width={400}
+          height={800}
+        />
+      </div>
+      {/* Background Image */}
     </section>
-  )
+  );
 }

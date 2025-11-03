@@ -35,58 +35,43 @@ export async function GET(request: NextRequest) {
       }
     }
 
+    // Build AND conditions array for combining filters
+    const andConditions: any[] = []
+
+    // Search filtering - name OR description
     if (search) {
-      where.OR = [
-        {
-          name: {
-            contains: search,
-            mode: 'insensitive',
+      andConditions.push({
+        OR: [
+          {
+            name: {
+              contains: search,
+              mode: 'insensitive',
+            },
           },
-        },
-        {
-          description: {
-            contains: search,
-            mode: 'insensitive',
+          {
+            description: {
+              contains: search,
+              mode: 'insensitive',
+            },
           },
-        },
-      ]
+        ],
+      })
     }
 
-    // Price filtering (extract numbers from pricing string)
-    if (minPrice || maxPrice) {
-      where.pricing = {}
-      if (minPrice) {
-        where.pricing.gte = minPrice
-      }
-      if (maxPrice) {
-        where.pricing.lte = maxPrice
-      }
-    }
-
-    // Capacity filtering
+    // Capacity filtering - AND condition
     if (capacity) {
       const capacityRanges = capacity.split(',')
-      where.OR = where.OR || []
-      where.OR.push({
+      andConditions.push({
         capacity: {
           in: capacityRanges,
         },
       })
     }
 
-    // Type filtering
-    if (type) {
-      const types = type.split(',')
-      where.type = {
-        in: types,
-      }
-    }
-
-    // Rating filtering
+    // Rating filtering - AND condition (but OR within multiple ratings)
     if (rating) {
       const ratings = rating.split(',')
-      const ratingConditions = []
-      
+      const ratingConditions: any[] = []
       ratings.forEach(r => {
         if (r === '2.5 Above') {
           ratingConditions.push({ rating: { gte: 2.5 } })
@@ -96,10 +81,35 @@ export async function GET(request: NextRequest) {
           ratingConditions.push({ rating: { gte: 4.5 } })
         }
       })
-      
       if (ratingConditions.length > 0) {
-        where.OR = where.OR || []
-        where.OR.push(...ratingConditions)
+        if (ratingConditions.length === 1) {
+          andConditions.push(ratingConditions[0])
+        } else {
+          andConditions.push({ OR: ratingConditions })
+        }
+      }
+    }
+
+    // Apply AND conditions if we have any
+    if (andConditions.length > 0) {
+      if (andConditions.length === 1) {
+        // Single condition - merge directly into where
+        Object.assign(where, andConditions[0])
+      } else {
+        // Multiple conditions - use AND
+        where.AND = andConditions
+      }
+    }
+
+    // Price filtering (note: pricing is a String field, not numeric, so this may need adjustment)
+    // For now, we'll skip price filtering as it requires parsing the pricing string
+    // TODO: Add proper price parsing if needed
+
+    // Type filtering
+    if (type) {
+      const types = type.split(',')
+      where.type = {
+        in: types,
       }
     }
 
@@ -122,17 +132,10 @@ export async function GET(request: NextRequest) {
         orderBy = { createdAt: 'desc' }
     }
 
+    // Only fetch approved vendors for public API
     const [vendors, total] = await Promise.all([
       prisma.vendor.findMany({
         where,
-        include: {
-          user: {
-            select: {
-              name: true,
-              email: true,
-            },
-          },
-        },
         skip,
         take: limit,
         orderBy,
@@ -158,10 +161,22 @@ export async function GET(request: NextRequest) {
         pages: Math.ceil(total / limit),
       },
     })
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error fetching vendors:', error)
+    
+    // Check if it's a database connection error
+    if (error?.code === 'P1001' || error?.message?.includes('Can\'t reach database server')) {
+      return NextResponse.json(
+        { error: 'Database connection failed. Please ensure the database is running.' },
+        { status: 503 }
+      )
+    }
+    
     return NextResponse.json(
-      { error: 'Failed to fetch vendors' },
+      { 
+        error: 'Failed to fetch vendors',
+        details: process.env.NODE_ENV === 'development' ? error?.message : undefined
+      },
       { status: 500 }
     )
   }

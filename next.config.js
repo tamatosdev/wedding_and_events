@@ -26,15 +26,13 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'picsum.photos',
-        port: '',
-        pathname: '/**',
-      },
     ],
-    unoptimized: true, // Disable image optimization for development
+    // Enable image optimization in production
+    unoptimized: process.env.NODE_ENV === 'development',
   },
+  // Optimize for production
+  reactStrictMode: true,
+  swcMinify: true,
 }
 
 module.exports = nextConfig

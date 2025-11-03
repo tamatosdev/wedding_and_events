@@ -10,6 +10,10 @@ export async function POST(request: NextRequest) {
     const session = await getServerSession(authOptions)
     
     if (!session) {
+      console.log('POST /api/upload-local - Unauthorized:', {
+        hasSession: !!session,
+        cookies: request.headers.get('cookie')?.substring(0, 50) || 'none'
+      })
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }

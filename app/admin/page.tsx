@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { Navbar } from '@/components/navbar'
+import Header from '@/components/Header'
+import { canAccessAdmin, userHasPermission } from '@/lib/auth-helpers-client'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ImageUpload } from '@/components/ui/image-upload'
@@ -70,15 +71,32 @@ export default function AdminDashboard() {
   const [editingVendor, setEditingVendor] = useState<Vendor | null>(null)
 
   useEffect(() => {
+    // Wait for session to finish loading
+    if (status === 'loading') {
+      return
+    }
+    
+    // Redirect to signin if not authenticated
     if (status === 'unauthenticated') {
       router.push('/auth/signin')
-    } else if (session?.user.role !== 'ADMIN') {
+      return
+    }
+    
+    // Redirect to homepage if user doesn't have admin access (by role or permissions)
+    if (session && !canAccessAdmin(session)) {
+      console.log('User without admin access attempted to access admin page:', {
+        hasSession: !!session,
+        role: session?.user?.role,
+        permissions: session?.user?.permissions,
+        email: session?.user?.email
+      })
       router.push('/')
+      return
     }
   }, [session, status, router])
 
   useEffect(() => {
-    if (session?.user.role === 'ADMIN') {
+    if (session && canAccessAdmin(session)) {
       fetchData()
     }
   }, [session])
@@ -164,7 +182,7 @@ export default function AdminDashboard() {
   if (status === 'loading' || loading) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Navbar />
+        <Header />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-200 rounded w-1/3 mb-4"></div>
@@ -179,13 +197,20 @@ export default function AdminDashboard() {
     )
   }
 
-  if (status === 'unauthenticated') {
-    return null
+  // Don't render if not authenticated or doesn't have admin access (redirect will happen via useEffect)
+  if (status === 'unauthenticated' || (session && !canAccessAdmin(session))) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-gray-600">Redirecting...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
+      <Header />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
@@ -195,11 +220,32 @@ export default function AdminDashboard() {
               <p className="text-gray-600">Manage vendors and view analytics</p>
             </div>
             <div className="flex space-x-4">
-              <Link href="/admin/cms">
-                <Button variant="outline" className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600">
-                  Content Management
+              {userHasPermission(session, 'manage_users') && (
+                <Link href="/admin/users">
+                  <Button variant="outline" className="bg-purple-600 hover:bg-purple-700 text-white border-purple-600">
+                    User Management
+                  </Button>
+                </Link>
+              )}
+              <Link href="/admin/queries">
+                <Button variant="outline" className="bg-green-600 hover:bg-green-700 text-white border-green-600">
+                  Contact Queries
                 </Button>
               </Link>
+              {userHasPermission(session, 'manage_cms') && (
+                <Link href="/admin/cms">
+                  <Button variant="outline" className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600">
+                    Content Management
+                  </Button>
+                </Link>
+              )}
+              <Button 
+                variant="outline" 
+                onClick={() => signOut({ callbackUrl: '/auth/signin' })}
+                className="border-red-500 text-red-600 hover:bg-red-50"
+              >
+                Logout
+              </Button>
             </div>
           </div>
           
@@ -230,61 +276,69 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* Stats Cards */}
-        {stats && (
+        {/* Stats Cards - Only visible to users with view_statistics permission */}
+        {stats && userHasPermission(session, 'view_statistics') && (
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-gray-600">
-                  Total Vendors
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stats.totalVendors}</div>
-              </CardContent>
-            </Card>
+            {(userHasPermission(session, 'view_vendors') || userHasPermission(session, 'manage_vendors')) && (
+              <>
+                <Card>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm font-medium text-gray-600">
+                      Total Vendors
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold">{stats.totalVendors}</div>
+                  </CardContent>
+                </Card>
 
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-gray-600">
-                  Approved Vendors
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-green-600">
-                  {stats.approvedVendors}
-                </div>
-              </CardContent>
-            </Card>
+                <Card>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm font-medium text-gray-600">
+                      Approved Vendors
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold text-green-600">
+                      {stats.approvedVendors}
+                    </div>
+                  </CardContent>
+                </Card>
 
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-gray-600">
-                  Pending Vendors
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-yellow-600">
-                  {stats.pendingVendors}
-                </div>
-              </CardContent>
-            </Card>
+                {userHasPermission(session, 'approve_vendors') && (
+                  <Card>
+                    <CardHeader className="pb-2">
+                      <CardTitle className="text-sm font-medium text-gray-600">
+                        Pending Vendors
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-2xl font-bold text-yellow-600">
+                        {stats.pendingVendors}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+              </>
+            )}
 
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-gray-600">
-                  Total Inquiries
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stats.totalInquiries}</div>
-              </CardContent>
-            </Card>
+            {userHasPermission(session, 'view_inquiries') && (
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-gray-600">
+                    Total Inquiries
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{stats.totalInquiries}</div>
+                </CardContent>
+              </Card>
+            )}
           </div>
         )}
 
-        {/* Charts */}
-        {stats && (
+        {/* Charts - Only visible to users with view_analytics permission */}
+        {stats && userHasPermission(session, 'view_analytics') && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             <Card>
               <CardHeader>
@@ -332,107 +386,117 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* Pending Vendors */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle>Pending Vendor Approvals</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {vendors.filter(v => !v.approved).map((vendor) => (
-                <div key={vendor.id} className="flex items-center justify-between p-4 border rounded-lg">
-                  <div className="flex items-center space-x-4">
-                    <div className="relative w-16 h-16">
-                      {vendor.images.length > 0 ? (
-                        <Image
-                          src={vendor.images[0]}
-                          alt={vendor.name}
-                          fill
-                          className="object-cover rounded"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gray-200 rounded flex items-center justify-center">
-                          <span className="text-gray-400 text-xs">No Image</span>
-                        </div>
+        {/* Pending Vendors - Only visible to users with approve_vendors permission */}
+        {(userHasPermission(session, 'approve_vendors') || userHasPermission(session, 'manage_vendors')) && (
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle>Pending Vendor Approvals</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {vendors.filter(v => !v.approved).map((vendor) => (
+                  <div key={vendor.id} className="flex items-center justify-between p-4 border rounded-lg">
+                    <div className="flex items-center space-x-4">
+                      <div className="relative w-16 h-16">
+                        {vendor.images.length > 0 ? (
+                          <Image
+                            src={vendor.images[0]}
+                            alt={vendor.name}
+                            fill
+                            className="object-cover rounded"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gray-200 rounded flex items-center justify-center">
+                            <span className="text-gray-400 text-xs">No Image</span>
+                          </div>
+                        )}
+                      </div>
+                      <div>
+                        <h3 className="font-semibold">{vendor.name}</h3>
+                        <p className="text-sm text-gray-600">
+                          {vendor.category} • {vendor.city}
+                        </p>
+                        <p className="text-sm text-gray-500">
+                          By: {vendor.user.name || vendor.user.email}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex space-x-2">
+                      {userHasPermission(session, 'manage_vendors') && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => setEditingVendor(vendor)}
+                        >
+                          Manage Images
+                        </Button>
+                      )}
+                      {userHasPermission(session, 'approve_vendors') && (
+                        <>
+                          <Button
+                            size="sm"
+                            onClick={() => handleApproveVendor(vendor.id)}
+                          >
+                            Approve
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="destructive"
+                            onClick={() => handleRejectVendor(vendor.id)}
+                          >
+                            Reject
+                          </Button>
+                        </>
                       )}
                     </div>
-                    <div>
-                      <h3 className="font-semibold">{vendor.name}</h3>
-                      <p className="text-sm text-gray-600">
-                        {vendor.category} • {vendor.city}
-                      </p>
-                      <p className="text-sm text-gray-500">
-                        By: {vendor.user.name || vendor.user.email}
-                      </p>
-                    </div>
                   </div>
-                  <div className="flex space-x-2">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => setEditingVendor(vendor)}
-                    >
-                      Manage Images
-                    </Button>
-                    <Button
-                      size="sm"
-                      onClick={() => handleApproveVendor(vendor.id)}
-                    >
-                      Approve
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="destructive"
-                      onClick={() => handleRejectVendor(vendor.id)}
-                    >
-                      Reject
-                    </Button>
-                  </div>
-                </div>
-              ))}
-              {vendors.filter(v => !v.approved).length === 0 && (
-                <p className="text-center text-gray-500 py-8">
-                  No pending vendor approvals
-                </p>
-              )}
-            </div>
-          </CardContent>
-        </Card>
+                ))}
+                {vendors.filter(v => !v.approved).length === 0 && (
+                  <p className="text-center text-gray-500 py-8">
+                    No pending vendor approvals
+                  </p>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
-        {/* Recent Inquiries */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Recent Inquiries</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {inquiries.slice(0, 10).map((inquiry) => (
-                <div key={inquiry.id} className="p-4 border rounded-lg">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-semibold">{inquiry.name}</h3>
-                    <span className="text-sm text-gray-500">
-                      {new Date(inquiry.createdAt).toLocaleDateString()}
-                    </span>
+        {/* Recent Inquiries - Only visible to users with view_inquiries permission */}
+        {userHasPermission(session, 'view_inquiries') && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Recent Inquiries</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {inquiries.slice(0, 10).map((inquiry) => (
+                  <div key={inquiry.id} className="p-4 border rounded-lg">
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="font-semibold">{inquiry.name}</h3>
+                      <span className="text-sm text-gray-500">
+                        {new Date(inquiry.createdAt).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-600 mb-2">
+                      <strong>Vendor:</strong> {inquiry.vendor.name}
+                    </p>
+                    <p className="text-sm text-gray-600 mb-2">
+                      <strong>Email:</strong> {inquiry.email}
+                    </p>
+                    <p className="text-sm text-gray-700">
+                      {inquiry.message}
+                    </p>
                   </div>
-                  <p className="text-sm text-gray-600 mb-2">
-                    <strong>Vendor:</strong> {inquiry.vendor.name}
+                ))}
+                {inquiries.length === 0 && (
+                  <p className="text-center text-gray-500 py-8">
+                    No inquiries yet
                   </p>
-                  <p className="text-sm text-gray-600 mb-2">
-                    <strong>Email:</strong> {inquiry.email}
-                  </p>
-                  <p className="text-sm text-gray-700">
-                    {inquiry.message}
-                  </p>
-                </div>
-              ))}
-              {inquiries.length === 0 && (
-                <p className="text-center text-gray-500 py-8">
-                  No inquiries yet
-                </p>
-              )}
-            </div>
-          </CardContent>
-        </Card>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Image Management Modal */}
         {editingVendor && (

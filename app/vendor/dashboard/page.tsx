@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { Navbar } from '@/components/navbar'
+import Header from '@/components/Header'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -136,7 +136,7 @@ export default function VendorDashboard() {
   if (status === 'loading' || loading) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Navbar />
+        <Header />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-200 rounded w-1/3 mb-4"></div>
@@ -158,7 +158,7 @@ export default function VendorDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
+      <Header />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-8">
@@ -166,9 +166,18 @@ export default function VendorDashboard() {
             <h1 className="text-3xl font-bold text-gray-900">Vendor Dashboard</h1>
             <p className="text-gray-600">Manage your vendor listings</p>
           </div>
-          <Button onClick={() => setShowForm(true)}>
-            Add New Listing
-          </Button>
+          <div className="flex space-x-2">
+            {session && canAccessAdmin(session) && (
+              <Link href="/admin">
+                <Button variant="outline" className="bg-purple-600 hover:bg-purple-700 text-white border-purple-600">
+                  Admin Panel
+                </Button>
+              </Link>
+            )}
+            <Button onClick={() => setShowForm(true)}>
+              Add New Listing
+            </Button>
+          </div>
         </div>
 
         {/* Add/Edit Form */}

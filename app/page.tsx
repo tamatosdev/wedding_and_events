@@ -1,22 +1,41 @@
-import { Navbar } from '@/components/navbar'
+import Header from '@/components/Header'
 import { HeroSection } from '@/components/home/hero-section'
 import { CategoriesSection } from '@/components/home/categories-section'
 import { FeaturedListings } from '@/components/home/featured-listings'
-import { ProcessSection } from '@/components/home/process-section'
-import { TestimonialsSection } from '@/components/home/testimonials-section'
-import { CTASection } from '@/components/home/cta-section'
-import { Footer } from '@/components/home/footer'
+import WeddingPlanning from '@/components/home/Wedding-planning'
+import TestimonialsSection from '@/components/home/testimonials-section'
+import { CTASection } from '@/components/ui/cta-section'
+import { SimpleSeamlessStressFree } from '@/components/home/SimpleSeamlessStressFree'
+import Footer from '@/components/footer'
+import Image from 'next/image'
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
+      {/* Left Border */}
+        <Image
+        width={100}
+        height={100}
+          src="/uploads/border.png"
+          alt="Left Border"
+          className="site-border left"
+        />
+        {/* Right Border */}
+        <Image
+        width={100}
+        height={100}
+          src="/uploads/border.png"
+          alt="Right Border"
+          className="site-border right"
+        />
+      <Header />
       
       <main>
         <HeroSection />
         <CategoriesSection />
+        <SimpleSeamlessStressFree />
         <FeaturedListings />
-        <ProcessSection />
+        <WeddingPlanning />
         <TestimonialsSection />
         <CTASection />
       </main>

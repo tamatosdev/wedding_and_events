@@ -8,6 +8,10 @@ export async function GET(request: NextRequest) {
     const session = await getServerSession(authOptions)
     
     if (!session || session.user.role !== 'VENDOR') {
+      console.log('GET /api/vendor/vendors - Unauthorized:', {
+        hasSession: !!session,
+        role: session?.user?.role
+      })
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
@@ -38,9 +42,21 @@ export async function POST(request: NextRequest) {
     const session = await getServerSession(authOptions)
     
     if (!session || session.user.role !== 'VENDOR') {
+      console.log('POST /api/vendor/vendors - Unauthorized:', {
+        hasSession: !!session,
+        role: session?.user?.role,
+        cookies: request.headers.get('cookie')?.substring(0, 50) || 'none'
+      })
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
+      )
+    }
+
+    if (!session.user.email) {
+      return NextResponse.json(
+        { error: 'User email not found' },
+        { status: 400 }
       )
     }
 
@@ -56,7 +72,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { name, category, city, pricing, description, images = [] } = await request.json()
+    const { name, category, city, pricing, description, images = [], capacity, type } = await request.json()
 
     if (!name || !category || !city || !pricing || !description) {
       return NextResponse.json(
@@ -65,6 +81,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Create vendor with approved=false (pending admin approval)
     const vendor = await prisma.vendor.create({
       data: {
         name,
@@ -73,7 +90,10 @@ export async function POST(request: NextRequest) {
         pricing,
         description,
         images,
+        capacity: capacity || null,
+        type: type || null,
         userId: user.id,
+        approved: false, // Explicitly set to false for admin approval
       },
     })
 

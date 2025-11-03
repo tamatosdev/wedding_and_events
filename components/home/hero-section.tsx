@@ -1,149 +1,228 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import Link from 'next/link'
-import Image from 'next/image'
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export function HeroSection() {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('')
-  const [selectedCity, setSelectedCity] = useState('')
+  const [searchMode, setSearchMode] = useState<"service" | "name">("service");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const router = useRouter();
+
+  const categories = ["Venue", "Catering", "Photography", "Fashion", "Decoration"];
+  const cities = ["Karachi", "Lahore", "Islamabad", "Rawalpindi", "Faisalabad", "Multan", "Peshawar", "Quetta"];
 
   const handleSearch = () => {
-    const params = new URLSearchParams()
-    if (searchTerm) params.append('search', searchTerm)
-    if (selectedCategory) params.append('category', selectedCategory)
-    if (selectedCity) params.append('city', selectedCity)
+    const params = new URLSearchParams();
     
-    window.location.href = `/vendors?${params.toString()}`
-  }
+    if (searchMode === "name") {
+      // Search by name only
+      if (searchTerm.trim()) {
+        params.append("search", searchTerm.trim());
+      }
+    } else {
+      // Search by service & city
+      if (selectedCategory) params.append("category", selectedCategory);
+      if (selectedCity) params.append("city", selectedCity);
+      if (searchTerm.trim()) params.append("search", searchTerm.trim());
+    }
+
+    router.push(`/vendors?${params.toString()}`);
+  };
 
   const featuredVenues = [
     {
       id: 1,
-      name: 'Royal Banquet Hall',
-      image: '/placeholder-image.jpg',
-      price: 'PKR 150,000 - 300,000'
+      name: "Royal Banquet Hall",
+      image: "/placeholder-image.jpg",
+      price: "PKR 150,000 - 300,000",
     },
     {
       id: 2,
-      name: 'Garden Venue',
-      image: '/placeholder-image.jpg',
-      price: 'PKR 100,000 - 200,000'
+      name: "Garden Venue",
+      image: "/placeholder-image.jpg",
+      price: "PKR 100,000 - 200,000",
     },
     {
       id: 3,
-      name: 'Luxury Hotel',
-      image: '/placeholder-image.jpg',
-      price: 'PKR 200,000 - 500,000'
+      name: "Luxury Hotel",
+      image: "/placeholder-image.jpg",
+      price: "PKR 200,000 - 500,000",
     },
     {
       id: 4,
-      name: 'Traditional Hall',
-      image: '/placeholder-image.jpg',
-      price: 'PKR 80,000 - 150,000'
-    }
-  ]
+      name: "Traditional Hall",
+      image: "/placeholder-image.jpg",
+      price: "PKR 80,000 - 150,000",
+    },
+  ];
 
   return (
-    <section className="relative bg-gradient-to-b from-amber-50 to-white py-16">
-      {/* Decorative Elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-10 left-10 w-20 h-20 bg-red-100 rounded-full opacity-20"></div>
-        <div className="absolute top-20 right-20 w-16 h-16 bg-blue-100 rounded-full opacity-20"></div>
-        <div className="absolute bottom-20 left-20 w-12 h-12 bg-green-100 rounded-full opacity-20"></div>
-        <div className="absolute bottom-10 right-10 w-24 h-24 bg-purple-100 rounded-full opacity-20"></div>
+    <section className="relative min-h-[150vh] flex items-center mt-10">
+      {/* Floral Decorations */}
+      <div className="Left-Floral">
+        <Image
+          src="/uploads/Artboard-2@4x.png" // Add your left floral image
+          alt="Left Floral"
+          width={250}
+          height={700}
+        />
       </div>
+      <div className="Right-Floral">
+        <Image
+          src="/uploads/Artboard2@4x(1).png" // Add your right floral image
+          alt="Right Floral"
+          width={250}
+          height={700}
+        />
+      </div>
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0 background-hero-img container-main">
+        <div className="px-4 relative z-10 inner-background-hero-img">
+          <div className="text-center mx-auto">
+            <h1 className="text-4xl md:text-6xl font-bold mb-8">
+              Your Perfect
+              <br />
+              <span className="text-[#d13f43]">Event</span> Starts Here!
+            </h1>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Hero Title */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
-            Your Perfect <span className="text-red-600">Event</span> Starts Here!
-          </h1>
-        </div>
+            {/* Search Box */}
+            <div className="bg-white rounded-2xl p-4 shadow-lg max-w-3xl mx-auto">
+              {/* Search Tabs */}
+              <div className="mt-1 mb-5 flex justify-center gap-4">
+                <button 
+                  onClick={() => {
+                    setSearchMode("service");
+                    setSearchTerm("");
+                  }}
+                  className={`px-6 py-2 rounded-full text-sm transition-colors ${
+                    searchMode === "service"
+                      ? "bg-[#d13f43] text-white"
+                      : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
+                  }`}
+                >
+                  Search by Service & City
+                </button>
+                <button 
+                  onClick={() => {
+                    setSearchMode("name");
+                    setSelectedCategory("");
+                    setSelectedCity("");
+                  }}
+                  className={`px-6 py-2 rounded-full text-sm transition-colors ${
+                    searchMode === "name"
+                      ? "bg-[#d13f43] text-white"
+                      : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
+                  }`}
+                >
+                  Search by Name
+                </button>
+              </div>
 
-        {/* Search Bar */}
-        <div className="max-w-4xl mx-auto mb-16">
-          <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div>
-                <select
-                  className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                >
-                  <option value="">Select Category</option>
-                  <option value="Venue">Wedding Venues</option>
-                  <option value="Catering">Catering</option>
-                  <option value="Photography">Photography</option>
-                  <option value="Fashion">Bridal Wear</option>
-                  <option value="Decorations">Decorators</option>
-                  <option value="Makeup">Makeup Artists</option>
-                </select>
-              </div>
-              
-              <div>
-                <select
-                  className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                  value={selectedCity}
-                  onChange={(e) => setSelectedCity(e.target.value)}
-                >
-                  <option value="">Select City</option>
-                  <option value="Karachi">Karachi</option>
-                  <option value="Lahore">Lahore</option>
-                  <option value="Islamabad">Islamabad</option>
-                  <option value="Rawalpindi">Rawalpindi</option>
-                  <option value="Faisalabad">Faisalabad</option>
-                  <option value="Multan">Multan</option>
-                </select>
-              </div>
-              
-              <div>
-                <Input
-                  placeholder="Search vendors..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="h-12"
-                  onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+              {searchMode === "name" ? (
+                /* Search by Name Mode */
+                <div className="flex flex-col md:flex-row gap-4">
+                  <div className="flex-1">
+                    <Input
+                      type="text"
+                      placeholder="Enter vendor name to search..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          handleSearch();
+                        }
+                      }}
+                      className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#d13f43]"
+                    />
+                  </div>
+                  <button 
+                    onClick={handleSearch}
+                    className="bg-[#d13f43] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#bf383c] transition-colors"
+                  >
+                    Search
+                  </button>
+                </div>
+              ) : (
+                /* Search by Service & City Mode */
+                <div className="flex flex-col md:flex-row gap-4">
+                  <div className="flex-1">
+                    <select 
+                      className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#d13f43]"
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                    >
+                      <option value="">Select Service</option>
+                      {categories.map((cat) => (
+                        <option key={cat} value={cat}>{cat}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="flex-1">
+                    <select 
+                      className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#d13f43]"
+                      value={selectedCity}
+                      onChange={(e) => setSelectedCity(e.target.value)}
+                    >
+                      <option value="">Select City</option>
+                      {cities.map((city) => (
+                        <option key={city} value={city}>{city}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <button 
+                    onClick={handleSearch}
+                    className="bg-[#d13f43] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#bf383c] transition-colors"
+                  >
+                    Search
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Featured Venues Images */}
+            <div className="mt-12 pt-4 grid grid-cols-1 md:grid-cols-4 gap-4 mx-auto">
+              <div className="relative h-100 rounded-lg overflow-hidden mt-2 pt-12">
+                <Image
+                  src="/uploads/Rectangle-4.png"
+                  alt="Venue 1"
+                  width={300}
+                  height={600}
                 />
               </div>
-              
-              <div>
-                <Button 
-                  onClick={handleSearch}
-                  className="w-full h-12 bg-red-600 hover:bg-red-700 text-white font-semibold"
-                >
-                  Search
-                </Button>
+              <div className="relative h-100 rounded-lg overflow-hidden">
+                <Image
+                  src="/uploads/Rectangle-3.png"
+                  alt="Venue 2"
+                  width={300}
+                  height={600}
+                />
+              </div>
+              <div className="relative h-100 rounded-lg overflow-hidden mt-2 pt-12">
+                <Image
+                  src="/uploads/Rectangle-2.png"
+                  alt="Venue 3"
+                  width={300}
+                  height={600}
+                />
+              </div>
+              <div className="relative h-100 rounded-lg overflow-hidden">
+                <Image
+                  src="/uploads/Rectangle-1.png"
+                  alt="Venue 4"
+                  width={300}
+                  height={600}
+                />
               </div>
             </div>
           </div>
         </div>
-
-        {/* Featured Venues Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          {featuredVenues.map((venue) => (
-            <div key={venue.id} className="group cursor-pointer">
-              <div className="relative h-48 rounded-xl overflow-hidden shadow-lg group-hover:shadow-xl transition-shadow">
-                <Image
-                  src={venue.image}
-                  alt={venue.name}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-30 transition-opacity"></div>
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <h3 className="font-semibold text-sm mb-1">{venue.name}</h3>
-                  <p className="text-xs opacity-90">{venue.price}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
-  )
+  );
 }

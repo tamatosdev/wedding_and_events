@@ -31,12 +31,21 @@ export default function SignInPage() {
       if (result?.error) {
         setError('Invalid email or password')
       } else {
-        // Get the session to check user role
+        // Get the session to check user role and permissions
         const session = await getSession()
-        if (session?.user.role === 'ADMIN') {
+        // Import canAccessAdmin dynamically to avoid SSR issues
+        const { canAccessAdmin } = await import('@/lib/auth-helpers-client')
+        
+        if (session && canAccessAdmin(session)) {
           router.push('/admin')
         } else if (session?.user.role === 'VENDOR') {
           router.push('/vendor/dashboard')
+        } else if (session?.user.role === 'CUSTOMER_SUPPORT') {
+          // Customer Support goes to queries page
+          router.push('/admin/queries')
+        } else if (session?.user.role === 'MANAGER') {
+          // Manager goes to admin dashboard
+          router.push('/admin')
         } else {
           router.push('/')
         }

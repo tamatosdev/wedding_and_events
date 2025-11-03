@@ -45,6 +45,8 @@ model User {
   image         String?
   password      String?
   role          Role      @default(VENDOR)
+  permissions   Json?     // Custom permissions/duties for the user
+  isActive      Boolean   @default(true)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
@@ -138,4 +140,46 @@ model FeaturedVendor {
 enum Role {
   ADMIN
   VENDOR
+  CUSTOMER_SUPPORT
+  MANAGER
+}
+
+enum QueryStatus {
+  PENDING
+  RESPONDED
+  ESCALATED_LEVEL2
+  ESCALATED_LEVEL3
+  RESOLVED
+}
+
+enum EscalationLevel {
+  CUSTOMER_SUPPORT
+  MANAGER
+  CEO
+}
+
+model ContactQuery {
+  id                    String          @id @default(cuid())
+  name                  String
+  email                 String
+  phone                 String?
+  subject               String?
+  message               String          @db.Text
+  status                QueryStatus     @default(PENDING)
+  escalationLevel       EscalationLevel @default(CUSTOMER_SUPPORT)
+  customerSupportResponded Boolean     @default(false)
+  managerResponded      Boolean         @default(false)
+  ceoResponded          Boolean         @default(false)
+  createdAt             DateTime        @default(now())
+  respondedAt           DateTime?
+  escalatedToManagerAt DateTime?
+  escalatedToCEOAt      DateTime?
+  resolvedAt            DateTime?
+  lastEscalationCheck   DateTime        @default(now())
+  notes                 String?         @db.Text
+  
+  @@index([status])
+  @@index([escalationLevel])
+  @@index([createdAt])
+  @@index([lastEscalationCheck])
 }

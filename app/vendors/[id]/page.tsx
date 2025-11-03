@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Navbar } from '@/components/navbar'
+import Header from '@/components/Header'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -156,7 +156,7 @@ Additional Information: ${bookingForm.additionalInfo}`,
   if (loading) {
     return (
       <div className="min-h-screen bg-white">
-        <Navbar />
+        <Header />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-200 rounded w-1/3 mb-4"></div>
@@ -178,7 +178,7 @@ Additional Information: ${bookingForm.additionalInfo}`,
   if (!vendor) {
     return (
       <div className="min-h-screen bg-white">
-        <Navbar />
+        <Header />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-gray-900 mb-4">
@@ -195,7 +195,7 @@ Additional Information: ${bookingForm.additionalInfo}`,
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
+      <Header />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
@@ -448,7 +448,7 @@ Additional Information: ${bookingForm.additionalInfo}`,
                       Booking Request Submitted!
                     </h3>
                     <p className="text-gray-600 mb-4">
-                      Thank you for your interest. We'll contact you soon to confirm availability.
+                      Thank you for your interest. We&apos;ll contact you soon to confirm availability.
                     </p>
                     <Button onClick={() => setSubmitted(false)}>
                       Submit Another Request

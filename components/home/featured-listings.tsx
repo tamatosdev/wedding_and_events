@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -8,99 +8,102 @@ import Image from 'next/image'
 interface Vendor {
   id: string
   name: string
-  image: string
+  images: string[]
   rating: number
   reviews: number
-  price: string
+  pricing: string
   category: string
+  city: string
 }
 
-const featuredVendors: Vendor[] = [
-  {
-    id: '1',
-    name: 'Auditorium Banquet',
-    image: '/placeholder-image.jpg',
-    rating: 4.5,
-    reviews: 25,
-    price: 'PKR 50,000 - 100,000',
-    category: 'Venue'
-  },
-  {
-    id: '2',
-    name: 'Royal Garden Hall',
-    image: '/placeholder-image.jpg',
-    rating: 4.8,
-    reviews: 42,
-    price: 'PKR 80,000 - 150,000',
-    category: 'Venue'
-  },
-  {
-    id: '3',
-    name: 'Luxury Palace',
-    image: '/placeholder-image.jpg',
-    rating: 4.7,
-    reviews: 38,
-    price: 'PKR 120,000 - 250,000',
-    category: 'Venue'
-  },
-  {
-    id: '4',
-    name: 'Grand Ballroom',
-    image: '/placeholder-image.jpg',
-    rating: 4.6,
-    reviews: 31,
-    price: 'PKR 90,000 - 180,000',
-    category: 'Venue'
-  },
-  {
-    id: '5',
-    name: 'Elite Catering',
-    image: '/placeholder-image.jpg',
-    rating: 4.9,
-    reviews: 67,
-    price: 'PKR 500 - 1,200 per person',
-    category: 'Catering'
-  },
-  {
-    id: '6',
-    name: 'Royal Cuisine',
-    image: '/placeholder-image.jpg',
-    rating: 4.7,
-    reviews: 54,
-    price: 'PKR 400 - 1,000 per person',
-    category: 'Catering'
+interface VendorsResponse {
+  vendors: Vendor[]
+  pagination: {
+    page: number
+    limit: number
+    total: number
+    pages: number
   }
-]
+}
 
 const categories = [
-  { title: 'Find Best Venues', vendors: featuredVendors.filter(v => v.category === 'Venue') },
-  { title: 'Find Best Catering Service', vendors: featuredVendors.filter(v => v.category === 'Catering') },
-  { title: 'Find Best Beauty Salon', vendors: featuredVendors.slice(0, 4) },
-  { title: 'Find Best Boutiques', vendors: featuredVendors.slice(0, 4) },
-  { title: 'Find Best Decor Service', vendors: featuredVendors.slice(0, 4) }
+  { title: 'Find Best Venues', category: 'Venue' },
+  { title: 'Find Best Catering Service', category: 'Catering' },
+  { title: 'Find Best Photography', category: 'Photography' },
+  { title: 'Find Best Boutiques', category: 'Fashion' },
+  { title: 'Find Best Decor Service', category: 'Decoration' }
 ]
 
 export function FeaturedListings() {
   return (
     <div className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {categories.map((category, categoryIndex) => (
-          <div key={categoryIndex} className="mb-16">
-            <div className="flex justify-between items-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900">
-                {category.title}
-              </h2>
-              <Link href="/vendors">
-                <Button variant="outline" className="text-red-600 border-red-600 hover:bg-red-50">
-                  View All
-                </Button>
-              </Link>
-            </div>
-
-            <VendorCarousel vendors={category.vendors} />
-          </div>
+        {categories.map((categoryData, categoryIndex) => (
+          <CategorySection 
+            key={categoryIndex} 
+            title={categoryData.title} 
+            category={categoryData.category}
+          />
         ))}
       </div>
+    </div>
+  )
+}
+
+function CategorySection({ title, category }: { title: string; category: string }) {
+  const [vendors, setVendors] = useState<Vendor[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchVendors() {
+      try {
+        setLoading(true)
+        const response = await fetch(`/api/vendors?category=${category}&limit=8`)
+        const data: VendorsResponse = await response.json()
+        setVendors(data.vendors || [])
+      } catch (error) {
+        console.error(`Error fetching ${category} vendors:`, error)
+        setVendors([])
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchVendors()
+  }, [category])
+
+  if (loading) {
+    return (
+      <div className="mb-16">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900">{title}</h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="bg-gray-200 animate-pulse rounded-xl h-64"></div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  if (vendors.length === 0) {
+    return null // Don't show empty categories
+  }
+
+  return (
+    <div className="mb-16">
+      <div className="flex justify-between items-center mb-8">
+        <h2 className="text-3xl font-bold text-gray-900">
+          {title}
+        </h2>
+        <Link href={`/vendors?category=${category}`}>
+          <Button variant="outline" className="text-red-600 border-red-600 hover:bg-red-50">
+            View All
+          </Button>
+        </Link>
+      </div>
+
+      <VendorCarousel vendors={vendors} />
     </div>
   )
 }
@@ -118,6 +121,10 @@ function VendorCarousel({ vendors }: { vendors: Vendor[] }) {
     setCurrentIndex(prev => Math.max(prev - 1, 0))
   }
 
+  if (vendors.length === 0) {
+    return null
+  }
+
   return (
     <div className="relative">
       {/* Carousel Container */}
@@ -131,7 +138,7 @@ function VendorCarousel({ vendors }: { vendors: Vendor[] }) {
               <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden">
                 <div className="relative h-48">
                   <Image
-                    src={vendor.image}
+                    src={vendor.images && vendor.images.length > 0 ? vendor.images[0] : '/placeholder-image.jpg'}
                     alt={vendor.name}
                     fill
                     className="object-cover"
@@ -145,7 +152,7 @@ function VendorCarousel({ vendors }: { vendors: Vendor[] }) {
                         <svg
                           key={i}
                           className={`w-4 h-4 ${
-                            i < Math.floor(vendor.rating) ? 'text-yellow-400' : 'text-gray-300'
+                            i < Math.floor(vendor.rating || 0) ? 'text-yellow-400' : 'text-gray-300'
                           }`}
                           fill="currentColor"
                           viewBox="0 0 20 20"
@@ -155,10 +162,10 @@ function VendorCarousel({ vendors }: { vendors: Vendor[] }) {
                       ))}
                     </div>
                     <span className="text-sm text-gray-600 ml-2">
-                      {vendor.rating} ({vendor.reviews} Reviews)
+                      {vendor.rating?.toFixed(1) || '0.0'} ({(vendor.reviews || 0)} Reviews)
                     </span>
                   </div>
-                  <p className="text-sm text-gray-600 mb-3">{vendor.price}</p>
+                  <p className="text-sm text-gray-600 mb-3">{vendor.pricing}</p>
                   <Link href={`/vendors/${vendor.id}`}>
                     <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
                       View Details

@@ -57,3 +57,262 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ...existing code... */
+
+.site-border {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 32px; /* Adjust width as needed */
+  z-index: 100;
+  pointer-events: none;
+}
+
+.site-border.left {
+  left: 0;
+}
+
+.site-border.right {
+  right: 0;
+}
+
+/* ...existing code... */
+
+.main-header-nav{
+  color: #2E2E2E;
+  font-weight: 400;
+  font-family: DM Sans, sans-serif;
+  font-size: 16px;
+  transition: color 0.3s, font-weight 0.3s;
+}
+.main-header-nav.active {
+  color: #D13F43;
+  font-weight: 600;
+}
+
+.fontSize {
+  font-size: 16px;
+  font-family: DM sans, sans-serif;
+}
+
+/* footer css */
+
+.logo-desc {
+    width: 25%;
+}
+.Quick-links {
+    width: 10%;
+}
+
+.services {
+    width: 13%;
+}
+
+.md\:col-span-1.useful {
+    width: 13%;
+}
+
+.newsletter {
+    width: 30%;
+}
+.main-footer-flex {
+    display: flex !important;
+    justify-content: space-between;
+}
+.Quick-links h3 {
+    font-size: 18px;
+    font-family: 'DM Sans';
+    font-weight: 600;
+}
+.justify-sub{
+    justify-content: flex-end;
+}
+
+.background-hero-img {
+    background-image: url('/uploads/Union(2).png');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+.container-main{
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.inner-background-hero-img{
+   margin-top: 120px;
+}
+.Left-Floral {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.Right-Floral {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.Find-Every-Vendor {
+    margin-top: 110px;
+    width: 100%;
+}
+.h2eading {
+    font-weight: 600;
+    font-family: 'DM Sans';
+    line-height: 1.1em !important;
+}
+.border-vendor{
+    border: 2px solid #DD374033;
+}
+.vendor-span {
+    color: #2E2E2E !important;
+    font-size: 18px;
+    font-family: 'DM Sans';
+    font-weight: 600;
+}
+.Left-Floral-first{
+    position: absolute;
+    top: 45px;
+    left: 0;
+}
+.inner-item {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    width: 100%;
+}
+.inner-item p {
+    text-align: start;
+}
+.simple-inner-item{
+  width: 25%;
+}
+.Venues-cart{
+  margin-inline: 65px;
+}
+.inner-item span {
+    font-size: 16px;
+    font-family: 'DM Sans';
+    font-weight: 600;
+    background-color: #DD3740;
+    color: #fff;
+    padding-inline: 16px;
+    padding-block: 2px;
+    border-radius: 20px;
+}
+.inner-item h2 {
+    font-size: 25px;
+    font-family: 'DM Sans';
+    font-weight: 500;
+    padding-top: 10px;
+}
+.inner-item p {
+    font-size: 16px;
+    font-family: 'DM Sans';
+    font-weight: 400;
+    padding-top: 10px;
+    color: #2E2E2E;
+    line-height: 1.3em;
+}
+.dream-event {
+    margin-inline: 110px;
+    padding-block: 80px;
+}
+.dream-event h2 {
+    font-size: 48px;
+    line-height: 1.01em;
+    font-family: 'DM Sans';
+    font-weight: 600;
+}
+.dream-event p {
+    font-family: 'DM Sans';
+    font-size: 16px;
+    padding-inline: 265px;
+    font-weight: 400;
+}
+.dream-event button {
+    font-size: 16px;
+    font-family: 'DM Sans';
+}
+.Left-Floral-Planning{
+    position: absolute;
+    bottom: 48px;
+    left: 0;
+}
+.Right-Floral-Planning{
+    position: absolute;
+    bottom: 0;
+    right: 100px;
+}
+.Planning-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 150px;
+}
+.Planning-image {
+    width: 50%;
+}
+.Planning-text {
+    width: 50%;
+    text-align: start;
+}
+.Planning-image img {
+    width: 100%;
+}
+.Planning-text h2 {
+    font-size: 48px;
+    font-family: 'DM Sans';
+    font-weight: 600;
+    line-height: 1.1em;
+    padding-bottom: 14px;
+}
+.Planning-text p {
+    font-family: 'DM Sans';
+    font-size: 16px;
+    font-weight: 400;
+    padding-bottom: 15px;
+}
+.Testimonial-cards{
+  display: flex;
+}
+/* Testimonial */
+
+.Testimonial-cards{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  gap: 25px;
+  height: 320px;
+}
+.inner-testimonial {
+    width: 60%;
+}
+.Testimonial-cards img {
+    width: 40%;
+    height: 100%;
+    margin: 0px;
+}
+.inner-testimonial p {
+    font-size: 18px;
+    font-family: 'DM Sans';
+    font-weight: 600;
+    line-height: 1.1em;
+}
+.inner-testimonial span {
+    color: #2E2E2E;
+    font-size: 16px;
+    font-family: 'DM Sans';
+    font-weight: 400;
+}
+.padding-bottom {
+    padding-bottom: 30px !important;
+}
+

@@ -12,7 +12,7 @@ export async function sendEmail({
   text: string
   html: string
 }) {
-  const transporter = nodemailer.createTransporter({
+  const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: Number(process.env.SMTP_PORT),
     secure: false,

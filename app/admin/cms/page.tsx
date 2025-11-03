@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { Navbar } from '@/components/navbar'
+import Header from '@/components/Header'
+import { canAccessAdmin } from '@/lib/auth-helpers-client'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -70,13 +71,13 @@ export default function AdminCMSPage() {
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/auth/signin')
-    } else if (session?.user.role !== 'ADMIN') {
+    } else if (session && !canAccessAdmin(session)) {
       router.push('/')
     }
   }, [session, status, router])
 
   useEffect(() => {
-    if (session?.user.role === 'ADMIN') {
+    if (session && canAccessAdmin(session)) {
       fetchCMSData()
     }
   }, [session])
@@ -210,7 +211,7 @@ export default function AdminCMSPage() {
   if (status === 'loading' || loading) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Navbar />
+        <Header />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-200 rounded w-1/3 mb-4"></div>
@@ -225,13 +226,13 @@ export default function AdminCMSPage() {
     )
   }
 
-  if (status === 'unauthenticated' || session?.user.role !== 'ADMIN') {
+  if (status === 'unauthenticated' || !canAccessAdmin(session)) {
     return null
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
+      <Header />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-8">
@@ -239,9 +240,18 @@ export default function AdminCMSPage() {
             <h1 className="text-3xl font-bold text-gray-900">Content Management System</h1>
             <p className="text-gray-600">Manage homepage sections and featured vendors</p>
           </div>
-          <Link href="/admin">
-            <Button variant="outline">Back to Admin Dashboard</Button>
-          </Link>
+          <div className="flex space-x-2">
+            <Link href="/admin">
+              <Button variant="outline">Back to Admin Dashboard</Button>
+            </Link>
+            <Button 
+              variant="outline" 
+              onClick={() => signOut({ callbackUrl: '/auth/signin' })}
+              className="border-red-500 text-red-600 hover:bg-red-50"
+            >
+              Logout
+            </Button>
+          </div>
         </div>
 
         {/* Homepage Sections Management */}
