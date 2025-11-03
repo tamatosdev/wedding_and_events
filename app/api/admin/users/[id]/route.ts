@@ -186,12 +186,19 @@ export async function DELETE(
     }
     
     const session = await getServerSession(authOptions)
+    
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      )
+    }
 
     // Prevent deleting yourself
     if (session.user.id === params.id) {
       return NextResponse.json(
         { error: 'Cannot delete your own account' },
-        { status: 400 }
+        { status: 403 }
       )
     }
 
