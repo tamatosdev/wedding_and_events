@@ -6,6 +6,7 @@ import bcrypt from 'bcryptjs'
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as any,
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -14,35 +15,49 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          return null
-        }
-
-        const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email
+        try {
+          if (!credentials?.email || !credentials?.password) {
+            console.log('Missing credentials')
+            return null
           }
-        })
 
-        if (!user || !user.password) {
+          // Check if NEXTAUTH_SECRET is set
+          if (!process.env.NEXTAUTH_SECRET) {
+            console.error('NEXTAUTH_SECRET is missing')
+            throw new Error('NEXTAUTH_SECRET is not configured')
+          }
+
+          const user = await prisma.user.findUnique({
+            where: {
+              email: credentials.email
+            }
+          })
+
+          if (!user || !user.password) {
+            console.log('User not found or no password set')
+            return null
+          }
+
+          const isPasswordValid = await bcrypt.compare(
+            credentials.password,
+            user.password
+          )
+
+          if (!isPasswordValid) {
+            console.log('Invalid password')
+            return null
+          }
+
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            role: user.role,
+            permissions: (user.permissions as string[]) || null,
+          }
+        } catch (error) {
+          console.error('Authorization error:', error)
           return null
-        }
-
-        const isPasswordValid = await bcrypt.compare(
-          credentials.password,
-          user.password
-        )
-
-        if (!isPasswordValid) {
-          return null
-        }
-
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          role: user.role,
-          permissions: (user.permissions as string[]) || null,
         }
       }
     })
