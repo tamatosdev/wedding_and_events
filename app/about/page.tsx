@@ -89,7 +89,7 @@ export default function AboutPage() {
                 About Us
               </h1>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Pakistan's most trusted wedding planning platform. We connect couples with verified venues and vendors to make wedding planning simple, stress-free, and joyful.
+                Pakistan&apos;s most trusted wedding planning platform. We connect couples with verified venues and vendors to make wedding planning simple, stress-free, and joyful.
               </p>
             </div>
           </div>
@@ -109,7 +109,7 @@ export default function AboutPage() {
                 Our platform was created to solve this problem by connecting couples with verified, trusted vendors in one convenient place. We carefully vet all our partners to ensure they meet our high standards for quality, reliability, and customer service.
               </p>
               <p>
-                Today, we've helped thousands of couples plan their perfect day, working with over 2000 verified vendors across 50+ cities in Pakistan. We're proud to be Pakistan's most trusted wedding planning platform.
+                Today, we&apos;ve helped thousands of couples plan their perfect day, working with over 2000 verified vendors across 50+ cities in Pakistan. We&apos;re proud to be Pakistan&apos;s most trusted wedding planning platform.
               </p>
             </div>
           </div>
