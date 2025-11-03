@@ -6,6 +6,8 @@ import bcrypt from 'bcryptjs'
 import { validatePermissions } from '@/lib/permissions'
 import { canAccessAdminServer } from '@/lib/auth-helpers-server'
 
+export const dynamic = 'force-dynamic'
+
 // Get all users (admin only)
 export async function GET(request: NextRequest) {
   try {

@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { checkAndEscalateQueries } from '@/lib/escalation'
 
+export const dynamic = 'force-dynamic'
+
 /**
  * Cron endpoint to check and escalate queries
  * This should be called every 5-10 minutes by a cron service
