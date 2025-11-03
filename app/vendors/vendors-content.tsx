@@ -111,10 +111,15 @@ export default function VendorsPage() {
       if (filters.rating.length > 0) params.append('rating', filters.rating.join(','))
 
       const response = await fetch(`/api/vendors?${params}`)
+      if (!response.ok) {
+        console.error('Error fetching vendors:', response.status, response.statusText)
+        setVendors([])
+        return
+      }
       const data: VendorsResponse = await response.json()
       
-      setVendors(data.vendors)
-      setPagination(data.pagination)
+      setVendors(data?.vendors || [])
+      setPagination(data?.pagination || { page: 1, limit: 6, total: 0, pages: 0 })
     } catch (error) {
       console.error('Error fetching vendors:', error)
     } finally {

@@ -59,8 +59,13 @@ function CategorySection({ title, category }: { title: string; category: string 
       try {
         setLoading(true)
         const response = await fetch(`/api/vendors?category=${category}&limit=8`)
+        if (!response.ok) {
+          console.error(`Error fetching ${category} vendors:`, response.status, response.statusText)
+          setVendors([])
+          return
+        }
         const data: VendorsResponse = await response.json()
-        setVendors(data.vendors || [])
+        setVendors(data?.vendors || [])
       } catch (error) {
         console.error(`Error fetching ${category} vendors:`, error)
         setVendors([])
