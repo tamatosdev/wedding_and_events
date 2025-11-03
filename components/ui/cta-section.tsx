@@ -44,7 +44,7 @@ export function CTASection() {
               Find Your Venue
             </Button>
           </Link>
-          <Link href="/vendor-signup">
+          <Link href="/list-business">
             <Button variant="outline" className="border border-gray-300 text-white hover:bg-white hover:text-[#541A1A] px-6 py-3 rounded-full font-medium bg-transparent">
               Join as a Vendor
             </Button>

@@ -147,6 +147,7 @@ function VendorCarousel({ vendors }: { vendors: Vendor[] }) {
                     alt={vendor.name}
                     fill
                     className="object-cover"
+                    unoptimized
                   />
                 </div>
                 <div className="p-4">

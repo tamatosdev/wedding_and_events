@@ -46,18 +46,14 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Left Border */}
-      <Image
-        width={100}
-        height={100}
-        src="/uploads/border.png"
+      <img
+        src="/uploads/Border.png"
         alt="Left Border"
         className="site-border left"
       />
       {/* Right Border */}
-      <Image
-        width={100}
-        height={100}
-        src="/uploads/border.png"
+      <img
+        src="/uploads/Border.png"
         alt="Right Border"
         className="site-border right"
       />

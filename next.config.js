@@ -29,6 +29,8 @@ const nextConfig = {
     ],
     // Enable image optimization in production
     unoptimized: process.env.NODE_ENV === 'development',
+    // Allow local images from /uploads
+    domains: [],
   },
   // Optimize for production
   reactStrictMode: true,

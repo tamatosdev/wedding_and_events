@@ -72,18 +72,14 @@ export default function BlogsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Left Border */}
-      <Image
-        width={100}
-        height={100}
-        src="/uploads/border.png"
+      <img
+        src="/uploads/Border.png"
         alt="Left Border"
         className="site-border left"
       />
       {/* Right Border */}
-      <Image
-        width={100}
-        height={100}
-        src="/uploads/border.png"
+      <img
+        src="/uploads/Border.png"
         alt="Right Border"
         className="site-border right"
       />
@@ -124,7 +120,7 @@ export default function BlogsPage() {
         {/* Featured Blog Post */}
         {blogPosts.length > 0 && (
           <section className="py-8 container-main mx-auto px-4">
-            <Link href={`/blogs/${blogPosts[0].id}`} className="block">
+            <div className="block">
               <Card className="overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
                   <div className="relative h-64 md:h-full min-h-[400px]">
@@ -133,6 +129,7 @@ export default function BlogsPage() {
                       alt={blogPosts[0].title}
                       fill
                       className="object-cover"
+                      unoptimized
                     />
                   </div>
                   <CardContent className="p-8 flex flex-col justify-center">
@@ -156,7 +153,7 @@ export default function BlogsPage() {
                   </CardContent>
                 </div>
               </Card>
-            </Link>
+            </div>
           </section>
         )}
 
@@ -165,7 +162,7 @@ export default function BlogsPage() {
           <h2 className="text-3xl font-bold mb-8 text-gray-900">Latest Articles</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.slice(1).map((post) => (
-              <Link key={post.id} href={`/blogs/${post.id}`}>
+              <div key={post.id}>
                 <Card className="overflow-hidden hover:shadow-xl transition-shadow cursor-pointer h-full">
                   <div className="relative h-48">
                     <Image
@@ -173,6 +170,7 @@ export default function BlogsPage() {
                       alt={post.title}
                       fill
                       className="object-cover"
+                      unoptimized
                     />
                   </div>
                   <CardContent className="p-6">
@@ -196,7 +194,7 @@ export default function BlogsPage() {
                     </div>
                   </CardContent>
                 </Card>
-              </Link>
+              </div>
             ))}
           </div>
         </section>

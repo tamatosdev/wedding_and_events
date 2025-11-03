@@ -402,6 +402,7 @@ export default function VenuesContent() {
                           alt={vendor.name}
                           fill
                           className="object-cover"
+                          unoptimized
                         />
                       </div>
                       <CardContent className="p-4">

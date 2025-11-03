@@ -233,6 +233,7 @@ Additional Information: ${bookingForm.additionalInfo}`,
               alt={vendor.name}
               fill
               className="object-cover"
+              unoptimized
             />
             
             {/* Navigation Arrows */}
@@ -653,6 +654,7 @@ Additional Information: ${bookingForm.additionalInfo}`,
                           alt={`Similar venue ${i}`}
                           fill
                           className="object-cover"
+                          unoptimized
                         />
                       </div>
                       <h4 className="font-semibold mb-1">{vendor.name}</h4>
