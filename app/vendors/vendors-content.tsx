@@ -80,8 +80,7 @@ export default function VendorsPage() {
   }, [searchParams])
 
   const cities = [
-    'Karachi', 'Lahore', 'Islamabad', 'Rawalpindi', 
-    'Faisalabad', 'Multan', 'Peshawar', 'Quetta'
+    'Karachi' // Only Karachi is supported
   ]
 
   const capacityRanges = [

@@ -80,10 +80,8 @@ export default function VenuesContent() {
     }
   }, [searchParams])
 
-  const cities = [
-    'Karachi', 'Lahore', 'Islamabad', 'Rawalpindi', 
-    'Faisalabad', 'Multan', 'Peshawar', 'Quetta'
-  ]
+  // TODO: Show only Karachi temporarily - uncomment other cities when ready
+  const cities = ['Karachi'] // ['Lahore', 'Islamabad', 'Rawalpindi', 'Faisalabad', 'Multan', 'Peshawar', 'Quetta']
 
   const capacityRanges = [
     '0-100', '100-300', '300-500', '500-1000', '1000-1500', '1500-2000'
@@ -210,7 +208,7 @@ export default function VenuesContent() {
           
           <div className="relative z-10">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Top Event Venues
+              Explore Our Wedding Venues
             </h1>
             <p className="text-lg text-gray-600 max-w-3xl">
               Browse verified venues across your city. Filter by location, price and capacity to find your dream space.

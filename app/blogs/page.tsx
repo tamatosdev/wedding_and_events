@@ -4,6 +4,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Wedding Blog - Tips, Ideas & Inspiration | Wedding & Events',
+  description: 'Expert advice, tips, and inspiration for planning your perfect wedding day. Read our latest articles on venues, catering, photography, and more.',
+  keywords: 'wedding blog, wedding tips, wedding planning, wedding ideas, wedding inspiration, Pakistan weddings',
+}
 
 const blogPosts = [
   {
@@ -157,11 +164,11 @@ export default function BlogsPage() {
           </section>
         )}
 
-        {/* Blog Posts Grid */}
+        {/* Blog Posts Grid - Showing 3 demo blog cards */}
         <section className="py-12 container-main mx-auto px-4">
           <h2 className="text-3xl font-bold mb-8 text-gray-900">Latest Articles</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.slice(1).map((post) => (
+            {blogPosts.slice(1, 4).map((post) => (
               <div key={post.id}>
                 <Card className="overflow-hidden hover:shadow-xl transition-shadow cursor-pointer h-full">
                   <div className="relative h-48">
@@ -199,7 +206,9 @@ export default function BlogsPage() {
           </div>
         </section>
 
-        {/* Newsletter Section */}
+        {/* Newsletter Section - Commented out until subscription is implemented */}
+        {/* TODO: Re-enable newsletter section once subscription functionality is ready */}
+        {/*
         <section className="py-16 bg-[#F7E9DB] mt-12">
           <div className="container-main mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-4 text-gray-900">
@@ -226,6 +235,7 @@ export default function BlogsPage() {
             </form>
           </div>
         </section>
+        */}
       </main>
 
       <Footer />

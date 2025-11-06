@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import VenuesContent from './venues-content'
+import { ChannelsSection } from '@/components/home/channels-section'
 
 export default function VenuesPage() {
   return (
@@ -9,6 +10,8 @@ export default function VenuesPage() {
       </div>
     }>
       <VenuesContent />
+      {/* Channels Section - Displaying 5 venue channels */}
+      <ChannelsSection />
     </Suspense>
   )
 }

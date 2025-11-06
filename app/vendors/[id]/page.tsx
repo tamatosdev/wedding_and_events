@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
+import { DatePicker } from '@/components/ui/date-picker'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -490,13 +491,12 @@ Additional Information: ${bookingForm.additionalInfo}`,
                         />
                       </div>
                       <div>
-                        <Label htmlFor="eventDate">Event Date</Label>
-                        <Input
+                        <Label htmlFor="eventDate">Preferred Event Date</Label>
+                        <DatePicker
                           id="eventDate"
-                          type="date"
-                          placeholder="Select Your Date"
                           value={bookingForm.eventDate}
-                          onChange={(e) => setBookingForm({ ...bookingForm, eventDate: e.target.value })}
+                          onChange={(date) => setBookingForm({ ...bookingForm, eventDate: date })}
+                          placeholder="Select your preferred date"
                           required
                         />
                       </div>

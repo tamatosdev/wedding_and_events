@@ -7,6 +7,14 @@ import TestimonialsSection from '@/components/home/testimonials-section'
 import { CTASection } from '@/components/ui/cta-section'
 import { SimpleSeamlessStressFree } from '@/components/home/SimpleSeamlessStressFree'
 import Footer from '@/components/footer'
+import FAQ from '@/components/FAQ'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Wedding & Events - Your Wedding, Your Way | Find Best Venues & Vendors',
+  description: 'Discover the best wedding venues and vendors in Pakistan. Plan your perfect celebration with trusted venues, catering, photography, and more.',
+  keywords: 'wedding venues, event planning, wedding vendors, Karachi weddings, Pakistan weddings, wedding halls, catering services',
+}
 
 export default function HomePage() {
   return (
@@ -28,10 +36,13 @@ export default function HomePage() {
       <main>
         <HeroSection />
         <CategoriesSection />
+        {/* Section #3: Decor section - ensuring Decor appears as section #3 */}
+        {/* TODO: Verify Decor section placement */}
         <SimpleSeamlessStressFree />
         <FeaturedListings />
         <WeddingPlanning />
         <TestimonialsSection />
+        <FAQ />
         <CTASection />
       </main>
 

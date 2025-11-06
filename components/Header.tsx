@@ -2,17 +2,31 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 export default function Header() {
   const pathname = usePathname();
+  const [logoError, setLogoError] = useState(false);
 
   return (
     <header className="bg-[#fff] border-b border-gray-300 py-4">
       <nav className="mx-auto flex items-center justify-between px-6 container-main" style={{ maxWidth: "1280px" }}>
         {/* Logo and Title */}
         <div className="flex items-center space-x-3">
-          <Link href="/" passHref>
-            <Image src="/uploads/The-Wedding-and-event-logo.png" alt="Wedding & Events Logo" width={150} height={48} priority />
+          <Link href="/" passHref className="flex items-center space-x-2">
+            <Image 
+              src={logoError ? "/uploads/The-Wedding-and-event-logo.png" : "/assets/logo-new.png"} 
+              alt="Wedding & Events - Your Wedding, Your Way" 
+              width={150} 
+              height={48} 
+              priority 
+              className="h-12 w-auto"
+              onError={() => setLogoError(true)}
+            />
+            {/* TODO: Replace /assets/logo-new.png with actual logo image - Currently falls back to existing logo */}
+            <span className="text-sm text-gray-600 font-medium hidden md:block">
+              Your Wedding, Your Way
+            </span>
           </Link>
         </div>
         {/* Navigation */}
@@ -61,12 +75,12 @@ export default function Header() {
         {/* Actions */}
         <div className="flex items-center space-x-4">
           {/* Contact Us Button */}
-          <Link href="/contact" className="px-6 py-3 border-2 border-gray-900 rounded-full font-semibold text-gray-900 hover:bg-gray-100 transition fontSize">
+          <Link href="/contact#contact" className="px-6 py-3 border-2 border-gray-900 rounded-full font-semibold text-gray-900 hover:bg-gray-100 transition fontSize">
             Contact Us
           </Link>
-          {/* List your Business Button */}
-          <Link href="/list-business" className="px-6 py-3 rounded-full font-semibold text-white bg-[#d13f43] hover:bg-[#b82f33] transition fontSize">
-            List your Business
+          {/* Partner Onboarding Button */}
+          <Link href="/partner-onboarding" className="px-6 py-3 rounded-full font-semibold text-white bg-[#d13f43] hover:bg-[#b82f33] transition fontSize">
+            Partner Onboarding
           </Link>
         </div>
       </nav>

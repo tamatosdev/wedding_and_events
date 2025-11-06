@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Header from '@/components/Header'
 import Footer from '@/components/footer'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
@@ -118,7 +117,7 @@ export default function ContactPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-[#d13f43] to-[#bf383c] text-white py-20">
+      <section id="contact" className="relative bg-gradient-to-r from-[#d13f43] to-[#bf383c] text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Get In Touch</h1>
           <p className="text-xl md:text-2xl text-white/90">

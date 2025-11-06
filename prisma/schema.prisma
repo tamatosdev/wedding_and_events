@@ -183,3 +183,234 @@ model ContactQuery {
   @@index([createdAt])
   @@index([lastEscalationCheck])
 }
+
+enum VenueSubmissionStatus {
+  PENDING
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  CONTACTED
+}
+
+model VenueOnboardingSubmission {
+  id                    String                  @id @default(cuid())
+  
+  // Step 1: Owner Details
+  ownerName             String
+  ownerMobile1         String
+  ownerMobile2         String?
+  ownerLandline         String?
+  ownerEmail            String
+  businessName          String
+  
+  // Step 2: Manager/POC Details
+  managerName           String
+  managerMobile1       String
+  managerMobile2        String?
+  managerLandline       String?
+  managerEmail          String
+  
+  // Step 3: Business Details
+  businessName2         String
+  city                  String
+  area                  String
+  completeAddress       String                  @db.Text
+  website               String?
+  businessEmail         String?
+  
+  // Step 4: Bank Details
+  bankName              String?
+  branchCity            String?
+  accountNumber         String?
+  ibanNumber            String?
+  
+  // Step 5: Venue Information
+  venueType             String?
+  singleMultipleSites    String?
+  guestCapacity         String?
+  venuePricingRange     String
+  cateringAvailable     String?
+  outsideCateringAllowed String?
+  
+  // Step 6: Facilities & Accessibility
+  parkingCapacity       String?
+  parkingType           String?
+  wheelchairAccessible  String?
+  wheelchairAvailable   String?
+  namazAreaMen          String?
+  namazAreaLadies       String?
+  bridalSuite           String?
+  
+  // Step 7: Amenities
+  amenities             String?                 @db.Text
+  airConditioning       String?
+  heating               String?
+  elevators             String?
+  securityStaff         String?
+  backupGenerator       String?
+  dedicatedStaff        String?
+  
+  // Step 8: Policies
+  cancellationPolicy    String                  @db.Text
+  fireInsurance         String?
+  weArrangeInsurance    String?
+  prohibitedItems       String?                 @db.Text
+  
+  // Step 9: Upload & Summary
+  fileUrls              String[]                 // URLs of uploaded files
+  companyOverview       String?                 @db.Text
+  undertakingName       String?
+  undertakingDesignation String?
+  undertakingCNIC       String?
+  undertakingCompany    String?
+  undertakingMobile     String?
+  undertakingEmail      String?
+  undertakingSignature  String?
+  undertakingDate       String?
+  
+  // Status & Review
+  status                VenueSubmissionStatus   @default(PENDING)
+  reviewedBy            String?                 // User ID who reviewed
+  reviewedAt            DateTime?
+  adminNotes            String?                 @db.Text
+  
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  
+  @@index([status])
+  @@index([createdAt])
+  @@index([city])
+  @@index([ownerEmail])
+}
+
+enum PartnerBusinessType {
+  WEDDING
+  BOUTIQUES
+  BEAUTY_PARLOR
+  DECOR
+  CATERING
+}
+
+enum PartnerSubmissionStatus {
+  PENDING
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  CONTACTED
+}
+
+model PartnerOnboardingSubmission {
+  id                    String                  @id @default(cuid())
+  businessType          PartnerBusinessType
+  
+  // Owner Details
+  ownerName             String
+  ownerMobile1         String
+  ownerMobile2         String?
+  ownerLandline         String?
+  ownerEmail            String
+  
+  // Manager Details
+  managerName           String
+  managerMobile1       String
+  managerMobile2        String?
+  managerLandline       String?
+  managerEmail          String
+  
+  // Business Details
+  businessName          String
+  city                  String
+  area                  String
+  completeAddress       String                  @db.Text
+  website               String?
+  businessEmail         String?
+  
+  // Bank Details
+  bankName              String?
+  branchCity            String?
+  accountNumber         String?
+  ibanNumber            String?
+  
+  // Common Fields
+  businessDuration      String?
+  numberOfBranches      String?
+  cancellationPolicy    String                  @db.Text
+  fireInsurance         String?
+  weArrangeInsurance    String?
+  wheelchairAccessible  String?
+  fileUrls              String[]
+  
+  // Venue specific fields
+  venueType             String?
+  guestCapacity         String?
+  venuePricingRange     String?
+  cateringAvailable     String?
+  outsideCateringAllowed String?
+  parkingCapacity       String?
+  parkingType           String?
+  amenities             String?                 @db.Text
+  bridalSuite           String?
+  namazAreaMen          String?
+  namazAreaLadies       String?
+  
+  // Boutique specific fields
+  dressType             String?
+  designOrResell        String?
+  fabrics               String?                 @db.Text
+  priceRange            String?
+  customization         String?                 @db.Text
+  rentalPolicy          String?                 @db.Text
+  delivery              String?                 @db.Text
+  
+  // Salon specific fields
+  servicesList          String?                 @db.Text
+  packages              String?                 @db.Text
+  operatingHours        String?
+  brandsUsed            String?                 @db.Text
+  staffExpertise        String?                 @db.Text
+  bridalTrials          String?                 @db.Text
+  salonPricing          String?
+  promotions            String?                 @db.Text
+  hygiene               String?                 @db.Text
+  
+  // Décor specific fields
+  decorType             String?
+  decorStyle            String?
+  eventTypes            String?                 @db.Text
+  decorPricingRange     String?
+  setupTime             String?
+  equipmentProvided      String?                 @db.Text
+  customDesign          String?
+  themesAvailable       String?                 @db.Text
+  floralsIncluded       String?
+  lightingServices      String?
+  
+  // Catering specific fields
+  cuisineType           String?
+  menuStyle             String?
+  servingStyle          String?
+  minimumGuests         String?
+  maximumGuests         String?
+  cateringPricingRange  String?
+  halalCertified        String?
+  vegetarianOptions     String?
+  dietaryAccommodations String?                 @db.Text
+  setupService          String?
+  servingStaff          String?
+  equipmentRental       String?
+  
+  // Status & Review
+  status                PartnerSubmissionStatus @default(PENDING)
+  reviewedBy            String?
+  reviewedAt            DateTime?
+  adminNotes            String?                 @db.Text
+  
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  
+  @@index([status])
+  @@index([createdAt])
+  @@index([businessType])
+  @@index([city])
+  @@index([ownerEmail])
+}

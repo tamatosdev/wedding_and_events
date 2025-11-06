@@ -234,6 +234,16 @@ export default function AdminDashboard() {
                   Contact Queries
                 </Button>
               </Link>
+              <Link href="/admin/venue-submissions">
+                <Button variant="outline" className="bg-amber-600 hover:bg-amber-700 text-white border-amber-600">
+                  Venue Submissions
+                </Button>
+              </Link>
+              <Link href="/admin/partners">
+                <Button variant="outline" className="bg-[#D13F43] hover:bg-[#b82f33] text-white border-[#D13F43]">
+                  Partner Submissions
+                </Button>
+              </Link>
               {userHasPermission(session, 'manage_cms') && (
                 <Link href="/admin/cms">
                   <Button variant="outline" className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600">

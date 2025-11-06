@@ -241,13 +241,7 @@ export default function VendorDashboard() {
                     >
                       <option value="">Select City</option>
                       <option value="Karachi">Karachi</option>
-                      <option value="Lahore">Lahore</option>
-                      <option value="Islamabad">Islamabad</option>
-                      <option value="Rawalpindi">Rawalpindi</option>
-                      <option value="Faisalabad">Faisalabad</option>
-                      <option value="Multan">Multan</option>
-                      <option value="Peshawar">Peshawar</option>
-                      <option value="Quetta">Quetta</option>
+                      {/* Only Karachi is supported */}
                     </select>
                   </div>
                   

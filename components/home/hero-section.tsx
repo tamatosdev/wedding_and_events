@@ -15,7 +15,7 @@ export function HeroSection() {
   const router = useRouter();
 
   const categories = ["Venue", "Catering", "Photography", "Fashion", "Decoration"];
-  const cities = ["Karachi", "Lahore", "Islamabad", "Rawalpindi", "Faisalabad", "Multan", "Peshawar", "Quetta"];
+  const cities = ["Karachi"]; // Only Karachi is supported
 
   const handleSearch = () => {
     const params = new URLSearchParams();

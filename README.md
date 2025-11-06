@@ -316,6 +316,110 @@ Modify email templates in `lib/email.ts` for custom email designs.
 
 This project is licensed under the MIT License.
 
+## 📋 Deployment Checklist for Vercel
+
+### Pre-Deployment
+- [ ] All environment variables configured in Vercel dashboard
+- [ ] Database migrations run (`npm run db:push`)
+- [ ] Build passes locally (`npm run build`)
+- [ ] Test all critical user flows
+- [ ] Verify WhatsApp button functionality
+- [ ] Check contact form submission
+- [ ] Verify image uploads work correctly
+
+### Environment Variables (Vercel)
+Required variables in Vercel dashboard:
+```env
+DATABASE_URL=
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+SMTP_HOST=
+SMTP_PORT=
+SMTP_USER=
+SMTP_PASS=
+ADMIN_EMAIL=
+ADMIN_PHONE=
+ADMIN_NAME=
+```
+
+### Build Configuration
+- Build Command: `npm run build`
+- Output Directory: `.next`
+- Install Command: `npm install`
+
+### Post-Deployment
+- [ ] Verify site loads correctly
+- [ ] Test contact form
+- [ ] Check WhatsApp button
+- [ ] Verify image uploads
+- [ ] Test vendor and admin dashboards
+- [ ] Check email notifications
+
+## 📝 Notes for Content Team
+
+### Pending Content Sections
+
+The following sections require content writer input:
+
+1. **Homepage Sections**
+   - Hero section tagline optimization
+   - Categories descriptions
+   - Testimonials (real customer reviews needed)
+   - CTA section copy
+
+2. **Blog Posts**
+   - Current blog posts are demo placeholders
+   - Need real blog content with SEO-optimized titles and descriptions
+   - Blog images need to be replaced with actual photos
+
+3. **FAQ Section**
+   - Current FAQs are placeholder content
+   - Need real frequently asked questions based on customer inquiries
+   - Answers should be SEO-optimized
+
+4. **Channel Pages**
+   - Channel descriptions need real content
+   - Feature lists need actual venue features
+   - Partner information needs to be replaced with real partners
+
+5. **Venue Pages**
+   - Venue descriptions are placeholders
+   - Need real venue details, pricing, and amenities
+   - Images need to be replaced with actual venue photos
+
+6. **SEO Content**
+   - Meta descriptions need refinement
+   - Keywords need to be optimized based on analytics
+   - Alt text for images needs improvement
+
+### Image Assets Needed
+
+- [ ] `/public/assets/logo-new.png` - New logo file
+- [ ] `/public/assets/channel1.jpg` through `/public/assets/channel5.jpg` - Channel images
+- [ ] Venue photos for sample venues
+- [ ] Partner logos/images
+- [ ] Blog post featured images
+
+### TODO Comments in Code
+
+Search for `// TODO:` comments throughout the codebase to find:
+- Content placeholders that need real copy
+- Image paths that need actual assets
+- SEO keywords that need optimization
+- Sections that need client confirmation
+
+### Content Guidelines
+
+When adding new content:
+- Use SEO-friendly headings (H1, H2, H3)
+- Include relevant keywords naturally
+- Keep descriptions concise but informative
+- Use alt text for all images
+- Ensure mobile-friendly formatting
+
 ## 🆘 Support
 
 For support and questions:
