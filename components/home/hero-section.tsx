@@ -14,7 +14,7 @@ export function HeroSection() {
   const [selectedCity, setSelectedCity] = useState("");
   const router = useRouter();
 
-  const categories = ["Venue", "Catering", "Photography", "Fashion", "Decoration"];
+  const categories = ["Venues", "Catering", "Beauty Parlor", "Boutiques", "Decoration"];
   const cities = ["Karachi"]; // Only Karachi is supported
 
   const handleSearch = () => {
@@ -189,36 +189,48 @@ export function HeroSection() {
             <div className="mt-12 pt-4 grid grid-cols-1 md:grid-cols-4 gap-4 mx-auto">
               <div className="relative h-100 rounded-lg overflow-hidden mt-2 pt-12">
                 <Image
-                  src="/uploads/Rectangle-4.png"
+                  src="/uploads/wedding.png"
                   alt="Venue 1"
                   width={300}
                   height={600}
+                  className="rounded-lg"
                 />
               </div>
               <div className="relative h-100 rounded-lg overflow-hidden">
                 <Image
-                  src="/uploads/Rectangle-3.png"
+                  src="/uploads/catering.png"
                   alt="Venue 2"
                   width={300}
                   height={600}
+                  className="rounded-lg"
                 />
               </div>
               <div className="relative h-100 rounded-lg overflow-hidden mt-2 pt-12">
                 <Image
-                  src="/uploads/Rectangle-2.png"
+                  src="/uploads/parlor.png"
                   alt="Venue 3"
                   width={300}
                   height={600}
+                  className="rounded-lg"
                 />
               </div>
               <div className="relative h-100 rounded-lg overflow-hidden">
                 <Image
-                  src="/uploads/Rectangle-1.png"
+                  src="/uploads/boutique.png"
                   alt="Venue 4"
                   width={300}
                   height={600}
+                  className="rounded-lg"
                 />
               </div>
+              {/* <div className="relative h-100 rounded-lg overflow-hidden">
+                <Image
+                  src="/uploads/decor.png"
+                  alt="Venue 5"
+                  width={300}
+                  height={600}
+                />
+              </div> */}
             </div>
           </div>
         </div>

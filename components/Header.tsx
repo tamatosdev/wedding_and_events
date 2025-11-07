@@ -17,16 +17,16 @@ export default function Header() {
             <Image 
               src={logoError ? "/uploads/The-Wedding-and-event-logo.png" : "/assets/logo-new.png"} 
               alt="Wedding & Events - Your Wedding, Your Way" 
-              width={150} 
-              height={48} 
+              width={300} 
+              height={96} 
               priority 
-              className="h-12 w-auto"
+              className="h-24 w-auto"
               onError={() => setLogoError(true)}
             />
             {/* TODO: Replace /assets/logo-new.png with actual logo image - Currently falls back to existing logo */}
-            <span className="text-sm text-gray-600 font-medium hidden md:block">
+            {/* <span className="text-sm text-gray-600 font-medium hidden md:block">
               Your Wedding, Your Way
-            </span>
+            </span> */}
           </Link>
         </div>
         {/* Navigation */}

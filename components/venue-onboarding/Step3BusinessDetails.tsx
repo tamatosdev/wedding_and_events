@@ -12,10 +12,7 @@ interface Step3BusinessDetailsProps {
   form: UseFormReturn<FormData>
 }
 
-const cities = [
-  'Karachi', 'Lahore', 'Islamabad', 'Rawalpindi', 
-  'Faisalabad', 'Multan', 'Peshawar', 'Quetta', 'Other'
-]
+const cities = ['Karachi']
 
 export default function Step3BusinessDetails({ form }: Step3BusinessDetailsProps) {
   const { register, formState: { errors }, watch } = form

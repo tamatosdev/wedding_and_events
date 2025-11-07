@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Header from '@/components/Header'
 import Footer from '@/components/footer'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'

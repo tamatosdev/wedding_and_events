@@ -12,10 +12,7 @@ interface Step4BusinessDetailsProps {
   form: UseFormReturn<FormData>
 }
 
-const cities = [
-  'Karachi', 'Lahore', 'Islamabad', 'Rawalpindi', 
-  'Faisalabad', 'Multan', 'Peshawar', 'Quetta', 'Other'
-]
+const cities = ['Karachi']
 
 export default function Step4BusinessDetails({ form }: Step4BusinessDetailsProps) {
   const { register, formState: { errors } } = form

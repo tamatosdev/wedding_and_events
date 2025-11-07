@@ -46,42 +46,7 @@ export default function TestimonialsMarquee() {
   return (
     <section className="py-16 bg-gray-50 overflow-hidden">
       <h2 className="text-4xl md:text-6xl text-center font-bold mb-8 h2eading">What Our Customers Say?</h2>
-      {/* ===== TOP MARQUEE ===== */}
-      <Swiper
-        modules={[Autoplay, FreeMode]}
-        slidesPerView={3}
-        spaceBetween={30}
-        freeMode={true}
-        loop={true}
-        speed={8000} // <- speed ko barhao taake smooth scroll mile
-        autoplay={{
-          delay: 0,
-          disableOnInteraction: false,
-          reverseDirection: false,
-        }}
-        allowTouchMove={false}
-        className="padding-bottom flex items-center"
-      >
-        {[...testimonials, ...testimonials].map((item) => (
-          <SwiperSlide key={`top-${item.id}-${Math.random()}`} className="!w-[550px]">
-            <div className="flex bg-white rounded-2xl shadow-md w-[550px] p-4 flex-col Testimonial-cards">
-              <Image
-              width={550}
-              height={550}
-                src={item.image}
-                alt={item.author}
-                className="w-full h-48 object-cover rounded-xl mb-3"
-              />
-              <div className="inner-testimonial">
-                <p className="text-gray-700 text-sm mb-2">“{item.quote}”</p>
-                <span className="text-blue-600 text-sm font-semibold">— {item.author}</span>
-              </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-
-      {/* ===== BOTTOM MARQUEE (Opposite Direction) ===== */}
+      {/* ===== SINGLE MARQUEE ===== */}
       <Swiper
         modules={[Autoplay, FreeMode]}
         slidesPerView={3}
@@ -92,14 +57,14 @@ export default function TestimonialsMarquee() {
         autoplay={{
           delay: 0,
           disableOnInteraction: false,
-          reverseDirection: true,
+          reverseDirection: false,
         }}
         allowTouchMove={false}
         className="padding-bottom flex items-center"
       >
         {[...testimonials, ...testimonials].map((item) => (
-          <SwiperSlide key={`bottom-${item.id}-${Math.random()}`} className="!w-[550px]">
-            <div className="bg-white rounded-2xl shadow-md w-[550px] p-4 flex flex-col Testimonial-cards">
+          <SwiperSlide key={`${item.id}-${Math.random()}`} className="!w-[550px]">
+            <div className="flex bg-white rounded-2xl shadow-md w-[550px] p-4 flex-col Testimonial-cards">
               <Image
               width={550}
               height={550}
@@ -108,8 +73,8 @@ export default function TestimonialsMarquee() {
                 className="w-full h-48 object-cover rounded-xl mb-3"
               />
               <div className="inner-testimonial">
-                <p className="text-gray-700 text-sm mb-2">“{item.quote}”</p>
-                <span className="text-green-600 text-sm font-semibold">— {item.author}</span>
+                <p className="text-gray-700 text-sm mb-2">"{item.quote}"</p>
+                <span className="text-blue-600 text-sm font-semibold">— {item.author}</span>
               </div>
             </div>
           </SwiperSlide>
