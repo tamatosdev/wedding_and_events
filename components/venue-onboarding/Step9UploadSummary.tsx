@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { UseFormReturn } from 'react-hook-form'
-import { FormData } from '@/app/venue-onboarding/page'
+import { FormData } from '@/lib/venue-onboarding/types'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'

@@ -1,7 +1,7 @@
 'use client'
 
 import { UseFormReturn } from 'react-hook-form'
-import { FormData } from '@/app/venue-onboarding/page'
+import { FormData } from '@/lib/venue-onboarding/types'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { CheckCircle2 } from 'lucide-react'
 
