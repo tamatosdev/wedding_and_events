@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Header from '@/components/Header'
 import Footer from '@/components/footer'
 import { PartnerFormProvider, usePartnerForm } from '@/contexts/PartnerFormContext'
@@ -61,10 +62,25 @@ function PartnerOnboardingForm() {
     isSubmitting,
     isSubmitted,
     updateFormData,
+    setBusinessType,
     setIsSubmitting,
     setIsSubmitted,
     resetForm,
   } = usePartnerForm()
+
+  const searchParams = useSearchParams()
+
+  // Check for type parameter in URL (for redirects from /venue-onboarding)
+  useEffect(() => {
+    const typeParam = searchParams.get('type')
+    if (typeParam && !businessType) {
+      // Map legacy 'venue' to 'wedding' if needed
+      const mappedType = typeParam === 'venue' ? 'wedding' : typeParam
+      if (['wedding', 'boutiques', 'beauty-parlor', 'decor', 'catering'].includes(mappedType)) {
+        setBusinessType(mappedType as any)
+      }
+    }
+  }, [searchParams, businessType, setBusinessType])
 
   const { currentStep, totalSteps, getCurrentStepConfig, goToNextStep } = useFormSteps()
   const steps = getStepsForBusinessType(businessType)
