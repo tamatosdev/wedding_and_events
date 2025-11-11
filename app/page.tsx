@@ -1,5 +1,6 @@
 import Header from '@/components/Header'
 import { HeroSection } from '@/components/home/hero-section'
+import { BannerSection } from '@/components/home/banner-section'
 import { CategoriesSection } from '@/components/home/categories-section'
 import { FeaturedListings } from '@/components/home/featured-listings'
 import WeddingPlanning from '@/components/home/Wedding-planning'
@@ -35,7 +36,9 @@ export default function HomePage() {
       
       <main>
         <HeroSection />
+        
         <CategoriesSection />
+        <BannerSection />
         {/* Section #3: Decor section - ensuring Decor appears as section #3 */}
         {/* TODO: Verify Decor section placement */}
         <SimpleSeamlessStressFree />

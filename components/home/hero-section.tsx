@@ -63,7 +63,7 @@ export function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-[150vh] flex items-center mt-10">
+    <section className="relative min-h-[90vh] flex items-center mt-10">
       {/* Floral Decorations */}
       <div className="Left-Floral">
         <Image
@@ -186,8 +186,8 @@ export function HeroSection() {
             </div>
 
             {/* Featured Venues Images */}
-            <div className="mt-12 pt-4 grid grid-cols-1 md:grid-cols-4 gap-4 mx-auto">
-              <div className="relative h-100 rounded-lg overflow-hidden mt-2 pt-12">
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4 mx-auto">
+              <div className="relative h-100 rounded-lg overflow-hidden mt-1 pt-6">
                 <Image
                   src="/uploads/wedding.png"
                   alt="Venue 1"
@@ -205,7 +205,7 @@ export function HeroSection() {
                   className="rounded-lg"
                 />
               </div>
-              <div className="relative h-100 rounded-lg overflow-hidden mt-2 pt-12">
+              <div className="relative h-100 rounded-lg overflow-hidden mt-1 pt-6">
                 <Image
                   src="/uploads/parlor.png"
                   alt="Venue 3"
