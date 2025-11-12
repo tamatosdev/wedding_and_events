@@ -20,15 +20,11 @@ export default function WeddingPlanning() {
               Because Planning Your Wedding Should Feel Like a Celebration
             </h2>
             <p>
-              We believe your wedding should be as beautiful and effortless as
-              the love you’re celebrating. Our platform brings together trusted
-              venues, verified vendors, and inspiring ideas all in one seamless
-              experience.
+             Your wedding is a celebration of love and joy - and planning it should feel just as special.
+              At The Wedding and Event, we bring trusted venues, reliable vendors, and creative ideas together in one seamless space, making every step easy, exciting, and full of heart.
             </p>
             <p>
-              From discovering dream venues to connecting with decorators,
-              photographers, and makeup artists, we make planning simple,
-              transparent, and joyful.
+              Because when planning feels joyful, you can focus on what truly matters - celebrating your love story, your way.
             </p>
             <Link href="/venues">
               <Button className="bg-[#DD3740] hover:bg-[#DD3740] text-white px-8 py-3 rounded-full font-medium">

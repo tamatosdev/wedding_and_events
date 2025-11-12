@@ -12,7 +12,8 @@ export default function Footer() {
               <Image src="/uploads/The-Wedding-and-event-logo.png" alt="Wedding & Events Logo" width={160} height={48} priority />
             </div>
             <p className="text-gray-700 text-sm max-w-xs mt-5">
-              Pakistan’s most trusted wedding planning platform. We connect couples with verified venues and vendors to make wedding planning simple, stress-free, and joyful.
+              Pakistan’s most innovative wedding planning platform. 
+              We connect couples with verified venues and vendors to make every celebration seamless, joyful, and truly unforgettable.
             </p>
           </div>
 

@@ -44,14 +44,18 @@ export function PartnerFormProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  // Save form data to localStorage
+  // Save form data to localStorage with debouncing
   useEffect(() => {
-    const dataToSave = {
-      formData,
-      currentStep,
-      businessType,
-    }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave))
+    const timeoutId = setTimeout(() => {
+      const dataToSave = {
+        formData,
+        currentStep,
+        businessType,
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave))
+    }, 500) // Debounce localStorage saves
+
+    return () => clearTimeout(timeoutId)
   }, [formData, currentStep, businessType])
 
   const updateFormData = (data: Partial<FormData>) => {

@@ -9,49 +9,49 @@ const services = [
     id: 1,
     name: 'Wedding Halls & Venues',
     category: 'Venue',
-    description: 'Beautiful wedding halls and event spaces perfect for your special day. From intimate gatherings to grand celebrations.',
+    description: 'Discover stunning wedding halls and event spaces designed to make your special day unforgettable. From cozy gatherings to grand celebrations, find the perfect venue that matches your vision.',
     image: '/uploads/Vendor-1.png',
-    features: ['Indoor & Outdoor', 'Multiple Capacities', 'Catering Options', 'Parking Available']
+    features: ['Indoor & Outdoor Options', 'Multiple Capacity Choices', 'Custom Catering Services', 'Convenient Parking Facilities']
   },
   {
     id: 2,
     name: 'Catering Services',
     category: 'Catering',
-    description: 'Premium catering services with a wide variety of Pakistani and continental cuisine. Professional staff and excellent service.',
+    description: 'Experience premium catering that delights every palate. From authentic Pakistani flavors to elegant continental cuisine, our expert chefs and professional staff ensure every meal is served with perfection and care.',
     image: '/uploads/Vendor-2.png',
-    features: ['Pakistani Cuisine', 'Continental Options', 'Custom Menus', 'Professional Staff']
+    features: ['Authentic Pakistani Cuisine', 'Exquisite Continental Options', 'Customized Menu Selections', 'Professional Service Team']
   },
   {
     id: 3,
     name: 'Photography & Videography',
     category: 'Photography',
-    description: 'Capture your precious moments with professional wedding photography and videography services. Artistic excellence guaranteed.',
-    image: '/uploads/Vendor-3.png',
-    features: ['Pre-Wedding Shoots', 'Wedding Coverage', 'Drone Photography', 'Video Editing']
+    description: 'Capture every emotion, smile, and moment with our professional wedding photography and videography services. Blending creativity with expertise, we turn your special day into timeless memories.',
+    image: '/uploads/photography.png',
+    features: ['Pre-Wedding Shoots', 'Full Wedding Coverage', 'Drone Cinematography', 'Expert Video Editing']
   },
   {
     id: 4,
     name: 'Beauty & Salon Services',
     category: 'Beauty',
-    description: 'Professional beauty and salon services for brides and wedding parties. Makeup, hairstyling, and more.',
+    description: 'Step into the spotlight with our professional bridal beauty and salon services -  where every look is crafted to make you feel radiant on your big day. From flawless makeup to elegant hairstyles, we ensure you shine with confidence and grace.',
     image: '/uploads/Vendor-3.png',
-    features: ['Bridal Makeup', 'Hairstyling', 'Mehndi Services', 'Bridal Packages']
+    features: ['Signature Bridal Makeup', 'Elegant Hairstyling', 'Traditional Mehndi Art', 'Custom Bridal Packages']
   },
   {
     id: 5,
     name: 'Bridal Couture & Fashion',
     category: 'Fashion',
-    description: 'Exclusive bridal wear collection with traditional and modern designs. Custom tailoring and designer collections available.',
+    description: 'Explore an exclusive bridal wear collection that blends timeless tradition with modern elegance. From designer ensembles to custom-tailored creations, find the perfect look to make your special day truly unforgettable.',
     image: '/uploads/Vendor-4.png',
-    features: ['Designer Collections', 'Custom Tailoring', 'Traditional & Modern', 'Accessories']
+    features: ['Designer Bridal Collections', 'Custom Tailoring Services', 'Traditional & Contemporary Styles', 'Elegant Accessories']
   },
   {
     id: 6,
     name: 'Decoration & Styling',
     category: 'Decoration',
-    description: 'Transform your venue with stunning decorations. From floral arrangements to stage setups, we have it all.',
+    description: 'Bring your dream wedding to life with breathtaking décor. From enchanting floral arrangements to stunning stage designs, we create an ambiance that leaves a lasting impression.',
     image: '/uploads/Vendor-5.png',
-    features: ['Floral Arrangements', 'Stage Decoration', 'Lighting Setup', 'Theme Decorations']
+    features: ['Exquisite Floral Arrangements', 'Elegant Stage Décor', 'Customized Lighting Setups', 'Themed Event Decorations']
   }
 ]
 
@@ -98,14 +98,14 @@ export default function ServicesPage() {
                 Our Services
               </h1>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Complete wedding planning solutions. From venues to catering, photography to decoration - we connect you with the best vendors.
+                Complete wedding planning made effortless. From venues to décor, photography to catering we connect you with trusted vendors who bring your dream day to life.
               </p>
             </div>
           </div>
         </section>
 
         {/* Services Grid */}
-        <section className="py-12 container-main mx-auto px-4">
+        <section className="py-12 container-main mx-auto px-4 services-grid">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => (
               <div

@@ -2,43 +2,43 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Building2, Shirt, Sparkles, Palette, UtensilsCrossed } from 'lucide-react'
+// import { Building2, Shirt, Sparkles, Palette, UtensilsCrossed } from 'lucide-react'
 
 const categories = [
   { 
     name: "Wedding Halls/Venues", 
     category: "Wedding", 
     image: "/uploads/Vendor-1.png",
-    icon: Building2,
+   
     link: "/partners?type=wedding"
   },
   { 
     name: "Catering", 
     category: "Catering", 
     image: "/uploads/Vendor-2.png",
-    icon: UtensilsCrossed,
+    
     link: "/partners?type=catering"
+  },
+  { 
+    name: "Decoration", 
+    category: "Decoration", 
+    image: "/uploads/Vendor-5.png",
+    
+    link: "/partners?type=decor"
   },
   { 
     name: "Beauty Parlor", 
     category: "Beauty Parlor", 
     image: "/uploads/Vendor-3.png",
-    icon: Sparkles,
+    
     link: "/partners?type=beauty-parlor"
   },
   { 
     name: "Boutiques", 
     category: "Boutiques", 
     image: "/uploads/Vendor-4.png",
-    icon: Shirt,
+   
     link: "/partners?type=boutiques"
-  },
-  { 
-    name: "Decoration", 
-    category: "Decoration", 
-    image: "/uploads/Vendor-5.png",
-    icon: Palette,
-    link: "/partners?type=decor"
   }
 ];
 
@@ -54,7 +54,7 @@ export function CategoriesSection() {
           {/* Featured Categories with Icons */}
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-12 Venues-cart">
             {categories.map((cat) => {
-              const Icon = cat.icon
+            
               return (
                 <Link 
                   key={cat.category}
@@ -71,7 +71,7 @@ export function CategoriesSection() {
                     />
                     {/* Icon overlay on hover */}
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-[#D13F43]/10">
-                      <Icon className="w-12 h-12 text-[#D13F43]" />
+                     
                     </div>
                   </div>
                   <span className="text-gray-800 font-medium vendor-span">

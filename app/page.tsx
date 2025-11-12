@@ -36,9 +36,9 @@ export default function HomePage() {
       
       <main>
         <HeroSection />
-        
         <CategoriesSection />
         <BannerSection />
+        
         {/* Section #3: Decor section - ensuring Decor appears as section #3 */}
         {/* TODO: Verify Decor section placement */}
         <SimpleSeamlessStressFree />

@@ -55,10 +55,26 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
+    font-family: 'DM Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'DM Sans', sans-serif;
+  }
+  p, span, div, a, button, input, textarea, select, label {
+    font-family: 'DM Sans', sans-serif;
   }
 }
 
 /* ...existing code... */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&family=Unbounded:wght@200..900&display=swap');
+
+/* Apply DM Sans globally */
+* {
+  font-family: 'DM Sans', sans-serif !important;
+}
+
+
 
 .site-border {
   position: fixed;
@@ -128,9 +144,11 @@
 .justify-sub{
     justify-content: flex-end;
 }
-
+.business-type-grid > div > div {
+    min-height: 250px;
+}
 .background-hero-img {
-    background-image: url('/uploads/Union(2).png');
+    background-image: url('/uploads/hero-background.png');
     background-size: cover;
     background-position: top center;
     width: 100%;
@@ -194,10 +212,10 @@
   width: 25%;
 }
 .Venues-cart{
-  margin-inline: 65px;
+  margin-inline: 45px;
 }
 .inner-item span {
-    font-size: 16px;
+    font-size: 14px;
      /* font-family: 'DM Sans'; */
     font-weight: 600;
     background-color: #DD3740;
@@ -231,10 +249,12 @@
     font-weight: 600;
 }
 .dream-event p {
-    /* font-family: 'DM Sans'; */ 
+  /* font-family: 'DM Sans'; */
     font-size: 16px;
-    padding-inline: 265px;
+    /* padding-inline: 265px; */
     font-weight: 400;
+    width: 50%;
+    margin: 20px auto;
 }
 .dream-event button {
     font-size: 16px;
@@ -280,43 +300,68 @@
     font-weight: 400;
     padding-bottom: 15px;
 }
-.Testimonial-cards{
-  display: flex;
+/* Testimonials Marquee Section */
+.testimonials-marquee {
+  overflow: visible !important;
+  padding-bottom: 40px;
 }
-/* Testimonial */
 
-.Testimonial-cards{
+.testimonials-marquee .swiper-wrapper {
+  transition-timing-function: linear !important;
+}
+
+.Testimonial-cards {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  width: 100%;
-  gap: 25px;
-  height: 320px;
+  align-items: stretch;
+  width: 550px;
+  /* height: 320px; */
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.testimonials-marquee img {
+    border-radius: 10px;
 }
 .inner-testimonial {
-    width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem;
 }
-.Testimonial-cards img {
-    width: 40%;
-    height: 100%;
-    margin: 0px;
-}
+
 .inner-testimonial p {
-    font-size: 18px;
-    /* font-family: 'DM Sans'; */
-    font-weight: 600;
-    line-height: 1.1em;
+  font-size: 18px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  line-height: 1.1em;
+  color: #2E2E2E;
+  margin-bottom: 1.5rem;
 }
+
 .inner-testimonial span {
-    color: #2E2E2E;
-    font-size: 16px;
-    /* font-family: 'DM Sans'; */
-    font-weight: 400;
+  color: #2E2E2E;
+  font-size: 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+}
+
+.padding-bottom {
+  padding-bottom: 30px !important;
 }
 .padding-bottom {
     padding-bottom: 30px !important;
 }
-
+.services-grid img {
+    width: 120px;
+    height: 120px;
+}
+.services-grid p {
+    font-size: 14px;
+}
+.services-grid h3 {
+    font-size: 20px;
+}
 /* Animations for onboarding form */
 @keyframes fade-in {
   from {
@@ -351,5 +396,26 @@
 .banner-section a:hover img {
   transform: scale(1.02);
   box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.15);
+}
+
+/* Catering Services Section */
+.catering-services-section {
+  background-color: #6B2C38;
+  padding: 2rem 0;
+  border-radius: 0.75rem;
+  margin-bottom: 4rem;
+}
+
+.catering-services-section h2 {
+  color: white;
+}
+
+.catering-services-section .view-all-btn {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.catering-services-section .view-all-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 

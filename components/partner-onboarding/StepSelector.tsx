@@ -17,19 +17,10 @@ const businessTypes = [
     borderColor: 'border-[#DD374033]',
   },
   {
-    id: 'boutiques' as BusinessType,
-    title: 'Boutiques',
-    description: 'Bridal wear, designer dresses, and fashion boutiques',
-    icon: Shirt,
-    color: 'bg-[#D13F43]',
-    bgColor: 'bg-[#F7E9DB]',
-    borderColor: 'border-[#DD374033]',
-  },
-  {
-    id: 'beauty-parlor' as BusinessType,
-    title: 'Beauty Parlor',
-    description: 'Bridal makeup, hair styling, and beauty services',
-    icon: Sparkles,
+    id: 'catering' as BusinessType,
+    title: 'Catering',
+    description: 'Food catering, beverages, and dining services for events',
+    icon: UtensilsCrossed,
     color: 'bg-[#D13F43]',
     bgColor: 'bg-[#F7E9DB]',
     borderColor: 'border-[#DD374033]',
@@ -44,14 +35,26 @@ const businessTypes = [
     borderColor: 'border-[#DD374033]',
   },
   {
-    id: 'catering' as BusinessType,
-    title: 'Catering',
-    description: 'Food catering, beverages, and dining services for events',
-    icon: UtensilsCrossed,
+    id: 'beauty-parlor' as BusinessType,
+    title: 'Beauty Parlor',
+    description: 'Bridal makeup, hair styling, and beauty services',
+    icon: Sparkles,
     color: 'bg-[#D13F43]',
     bgColor: 'bg-[#F7E9DB]',
     borderColor: 'border-[#DD374033]',
   },
+  {
+    id: 'boutiques' as BusinessType,
+    title: 'Boutiques',
+    description: 'Bridal wear, designer dresses, and fashion boutiques',
+    icon: Shirt,
+    color: 'bg-[#D13F43]',
+    bgColor: 'bg-[#F7E9DB]',
+    borderColor: 'border-[#DD374033]',
+  },
+  
+  
+  
 ]
 
 export default function StepSelector() {
@@ -84,7 +87,7 @@ export default function StepSelector() {
         </motion.p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 business-type-grid">
         {businessTypes.map((type, index) => {
           const Icon = type.icon
           const isSelected = businessType === type.id

@@ -10,7 +10,7 @@ export function BannerSection() {
         <div className="flex justify-center">
           <div className="w-full max-w-6xl">
             <Link 
-              href="https://mctbusiness.com/" 
+              href="https://mctbusiness.com/insurance/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="block hover:opacity-90 transition-opacity cursor-pointer"

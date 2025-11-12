@@ -68,6 +68,15 @@ export interface FormData {
   prohibitedItems?: string
 
   // Step 9: Upload & Summary
+  companyOverview?: string
+  undertakingName?: string
+  undertakingDesignation?: string
+  undertakingCNIC?: string
+  undertakingCompany?: string
+  undertakingMobile?: string
+  undertakingEmail?: string
+  undertakingSignature?: string
+  undertakingDate?: string
   files?: File[]
 }
 

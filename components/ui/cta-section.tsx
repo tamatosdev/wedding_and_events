@@ -31,10 +31,10 @@ export function CTASection() {
       {/* Text Content */}
       <div className="relative z-10 mx-auto bg-[#4B1F27] border border-[#6B1C1C] dream-event rounded-2xl py-16 overflow-hidden">
         <h2 className="text-3xl md:text-4xl font-semibold">
-          Ready To Plan <br /> <span className="font-bold">Your Dream Event?</span>
+          Ready to make your dream <br /> <span className="font-bold"> event a reality?</span>
         </h2>
         <p className="mt-4 text-gray-200 text-sm md:text-base">
-          Discover trusted venues, book your favorite vendors, and enjoy a stress-free planning experience.
+          Explore beautiful venues, connect with the right vendors, and let us make your planning journey effortless and exciting.
         </p>
 
         {/* Buttons */}

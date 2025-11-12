@@ -13,25 +13,26 @@ const stats = [
 
 const values = [
   {
-    title: 'Trust & Reliability',
-    description: 'We verify all our vendors to ensure you get the best service and peace of mind.',
+    title: 'Smart Planning Tools',
+    description: 'Enjoy a seamless experience with our easy-to-use, technology-driven platform.',
     icon: '✓'
   },
   {
-    title: 'Simplicity',
-    description: 'We make wedding planning simple and stress-free with our easy-to-use platform.',
+    title: 'All-in-One Convenience',
+    description: 'Access trusted venues, vendors, and services in one place without the hassle of endless searches.',
     icon: '✓'
   },
   {
-    title: 'Excellence',
-    description: 'We connect you with top-rated vendors who deliver exceptional service.',
+    title: 'Endless Choices',
+    description: 'Explore diverse options across every category to suit your preferences and budget.',
     icon: '✓'
   },
   {
-    title: 'Support',
-    description: 'Our team is here to help you every step of the way in your wedding planning journey.',
+    title: 'Unforgettable Celebrations',
+    description: 'We focus on crafting events that leave lasting impressions for you and your guests.',
     icon: '✓'
-  }
+  },
+  
 ]
 
 const team = [
@@ -85,8 +86,9 @@ export default function AboutPage() {
                 About Us
               </h1>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Pakistan&apos;s most trusted wedding planning platform. We connect couples with verified venues and vendors to make wedding planning simple, stress-free, and joyful.
+                Welcome to The Wedding and Event - Pakistani’s most innovative one-window wedding and event planning platform. We’re here to make your big day effortless, memorable, and uniquely yours.
               </p>
+              <p>From venues and catering to photography, beauty salons, bridal couture, fashion, and event décor, we bring everything you need together in one place - just a click away. Our goal is simple: to save you time, eliminate stress, and help you enjoy a flawless celebration that perfectly reflects your story.</p>
             </div>
           </div>
         </section>
@@ -99,13 +101,13 @@ export default function AboutPage() {
             </h2>
             <div className="prose prose-lg max-w-none text-gray-600 space-y-4">
               <p>
-                Wedding & Events was founded with a simple mission: to make wedding planning easier, more accessible, and less stressful for couples across Pakistan. We understand that planning a wedding can be overwhelming, with countless decisions to make and vendors to choose from.
+                The Wedding and Event was founded with a vision to transform how people plan weddings and events in Pakistani. We realized how overwhelming it can be to manage multiple vendors, compare endless options, and coordinate every little detail.
               </p>
               <p>
-                Our platform was created to solve this problem by connecting couples with verified, trusted vendors in one convenient place. We carefully vet all our partners to ensure they meet our high standards for quality, reliability, and customer service.
+                That’s why we created a smart, reliable platform that connects you directly with verified venues and vendors - ensuring convenience, quality, and complete peace of mind.
               </p>
               <p>
-                Today, we&apos;ve helped thousands of couples plan their perfect day, working with over 2000 verified vendors across 50+ cities in Pakistan. We&apos;re proud to be Pakistan&apos;s most trusted wedding planning platform.
+                Today, we proudly help countless couples and families in Pakistan plan seamless, joyful celebrations - turning dreams into unforgettable experiences, one event at a time.
               </p>
             </div>
           </div>
@@ -133,11 +135,11 @@ export default function AboutPage() {
         <section className="py-16 container-main mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-              Our Values
+              Why Choose Us
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            {/* <p className="text-gray-600 max-w-2xl mx-auto">
               What drives us and makes us the trusted choice for wedding planning
-            </p>
+            </p> */}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
@@ -164,9 +166,8 @@ export default function AboutPage() {
                 Our Mission
               </h2>
               <p className="text-xl text-gray-700 text-center leading-relaxed">
-                To empower couples to plan their perfect wedding by providing easy access to verified vendors, 
-                trusted recommendations, and personalized support - making wedding planning a joyful experience 
-                rather than a stressful one.
+                To simplify and innovate the way people plan weddings and events in Pakistan- by offering a complete,
+                 one-window solution that ensures every celebration is smooth, joyful, and absolutely stress-free.
               </p>
             </div>
           </div>

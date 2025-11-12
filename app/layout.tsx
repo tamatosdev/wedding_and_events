@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import { DM_Sans } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import { Providers } from './providers'
 import WhatsAppButton from '@/components/whatsapp-button'
 
-const dmSans = DM_Sans({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Wedding & Events - Your Wedding, Your Way',
@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={dmSans.className}>
+      <body className={inter.className}>
         <Providers>
           {children}
           <WhatsAppButton />
