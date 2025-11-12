@@ -189,7 +189,7 @@ export function HeroSection() {
             <div className="mt-12 pt-4 grid grid-cols-1 md:grid-cols-4 gap-4 mx-auto">
               <div className="relative h-100 rounded-lg overflow-hidden mt-2 pt-12">
                 <Image
-                  src="/uploads/wedding.png"
+                  src="/uploads/Wedding.png"
                   alt="Venue 1"
                   width={300}
                   height={600}
@@ -198,7 +198,7 @@ export function HeroSection() {
               </div>
               <div className="relative h-100 rounded-lg overflow-hidden">
                 <Image
-                  src="/uploads/catering.png"
+                  src="/uploads/Catering.png"
                   alt="Venue 2"
                   width={300}
                   height={600}
@@ -207,7 +207,7 @@ export function HeroSection() {
               </div>
               <div className="relative h-100 rounded-lg overflow-hidden mt-2 pt-12">
                 <Image
-                  src="/uploads/parlor.png"
+                  src="/uploads/Parlor.png"
                   alt="Venue 3"
                   width={300}
                   height={600}
@@ -216,7 +216,7 @@ export function HeroSection() {
               </div>
               <div className="relative h-100 rounded-lg overflow-hidden">
                 <Image
-                  src="/uploads/boutique.png"
+                  src="/uploads/Boutique.png"
                   alt="Venue 4"
                   width={300}
                   height={600}
