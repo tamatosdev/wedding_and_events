@@ -4,8 +4,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useHomepageCMS } from "@/hooks/useHomepageCMS";
 
+interface Category {
+  name: string;
+  category: string;
+  image: string;
+  link: string;
+}
+
 // Default categories fallback
-const defaultCategories = [
+const defaultCategories: Category[] = [
   { 
     name: "Wedding Halls/Venues", 
     category: "Wedding", 
@@ -43,7 +50,7 @@ export function CategoriesSection() {
   
   // Get categories content from CMS or use defaults
   const categoriesContent = cmsData?.content?.categories;
-  const categories = categoriesContent?.content?.items || defaultCategories;
+  const categories: Category[] = (categoriesContent?.content?.items as Category[]) || defaultCategories;
   const title = categoriesContent?.title || "Find Every Vendor\nYou Need";
   const leftFloral = categoriesContent?.images?.[0] || "/uploads/Flower-1.png";
   const rightFloral = categoriesContent?.images?.[1] || "/uploads/Flower-2.png";
@@ -62,7 +69,7 @@ export function CategoriesSection() {
           </h1>
           {/* Featured Categories with Icons */}
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-12 Venues-cart">
-            {categories.map((cat) => {
+            {categories.map((cat: Category) => {
             
               return (
                 <Link 
