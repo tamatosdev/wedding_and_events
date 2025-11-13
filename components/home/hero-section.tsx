@@ -63,7 +63,7 @@ export function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-[100vh] flex items-center mt-10">
+    <section className="relative herro-main  flex items-center mt-10">
       {/* Floral Decorations */}
       <div className="Left-Floral">
         <Image
@@ -189,7 +189,7 @@ export function HeroSection() {
             <div className="mt-12 pt-4 grid grid-cols-1 md:grid-cols-4 gap-4 mx-auto">
               <div className="relative h-100 rounded-lg overflow-hidden mt-2 pt-12">
                 <Image
-                  src="/uploads/Wedding.png"
+                  src="/uploads/venues-1.png"
                   alt="Venue 1"
                   width={300}
                   height={600}
@@ -198,7 +198,7 @@ export function HeroSection() {
               </div>
               <div className="relative h-100 rounded-lg overflow-hidden">
                 <Image
-                  src="/uploads/Catering.png"
+                  src="/uploads/catering-new.png"
                   alt="Venue 2"
                   width={300}
                   height={600}
@@ -207,7 +207,7 @@ export function HeroSection() {
               </div>
               <div className="relative h-100 rounded-lg overflow-hidden mt-2 pt-12">
                 <Image
-                  src="/uploads/Parlor.png"
+                  src="/uploads/decor-1.png"
                   alt="Venue 3"
                   width={300}
                   height={600}
@@ -216,7 +216,7 @@ export function HeroSection() {
               </div>
               <div className="relative h-100 rounded-lg overflow-hidden">
                 <Image
-                  src="/uploads/Boutique.png"
+                  src="/uploads/bridal-1.jpg"
                   alt="Venue 4"
                   width={300}
                   height={600}

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
+import Image from 'next/image'
 import { Phone, Mail, MessageCircle, MapPin, Star } from 'lucide-react'
 import { DemoPartner } from '@/lib/data/demoPartners'
 
@@ -53,11 +54,23 @@ export default function PartnerCard({ partner, index = 0 }: PartnerCardProps) {
       <Card className={`h-full flex flex-col border-2 ${businessTypeColors[partner.businessType]} hover:shadow-lg transition-all duration-300`}>
         {/* Image */}
         <div className="relative w-full h-48 bg-gradient-to-br from-[#F7E9DB] to-[#F7E9DB]/50 overflow-hidden">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-[#D13F43] text-4xl font-bold" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-              {partner.name.charAt(0)}
+          {(partner.image && (partner.image.startsWith('/uploads/') || partner.image.startsWith('/assets/')) ) ? (
+            <Image
+              src={partner.image}
+              alt={partner.name}
+              fill
+              style={{ objectFit: 'cover' }}
+              className="rounded-t-xl"
+              sizes="(max-width: 768px) 100vw, 25vw"
+              priority={true}
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-[#D13F43] text-4xl font-bold" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                {partner.name.charAt(0)}
+              </div>
             </div>
-          </div>
+          )}
           {/* Badge */}
           <div className="absolute top-3 right-3">
             <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-[#D13F43]">
@@ -65,11 +78,11 @@ export default function PartnerCard({ partner, index = 0 }: PartnerCardProps) {
             </span>
           </div>
           {/* Demo Badge */}
-          <div className="absolute top-3 left-3">
+          {/* <div className="absolute top-3 left-3">
             <span className="px-2 py-1 rounded-full text-xs font-semibold bg-white/90 text-[#2E2E2E]">
               Demo
             </span>
-          </div>
+          </div> */}
         </div>
 
         <CardContent className="p-6 flex-1 flex flex-col">

@@ -147,6 +147,9 @@
 .business-type-grid > div > div {
     min-height: 250px;
 }
+.herro-main{
+  min-height: 800px;
+}
 .background-hero-img {
     background-image: url('/uploads/hero-background.png');
     background-size: cover;

@@ -5,20 +5,15 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Building2 } from 'lucide-react'
-import { usePartnerForm } from '@/contexts/PartnerFormContext'
+import { useFormContext } from 'react-hook-form'
 
 import { CITIES } from '@/lib/constants'
 
 const cities = CITIES
 
+
 export default function BusinessInfo() {
-  const { formData, updateFormData } = usePartnerForm()
-  const errors: Record<string, string> = {}
-
-  const handleChange = (field: string, value: string) => {
-    updateFormData({ [field]: value } as any)
-  }
-
+  const { register, formState: { errors } } = useFormContext();
   return (
     <div className="space-y-6">
       <div className="text-center mb-6">
@@ -42,14 +37,12 @@ export default function BusinessInfo() {
             </Label>
             <Input
               id="businessName"
-              name="businessName"
-              value={formData.businessName || ''}
-              onChange={(e) => handleChange('businessName', e.target.value)}
+              {...register('businessName')}
               placeholder="Enter business name"
               className="mt-2 border-gray-300 focus:border-[#D13F43] focus:ring-[#D13F43]"
             />
-            {errors.businessName && (
-              <p className="text-[#D13F43] text-sm mt-1">{errors.businessName}</p>
+            {typeof errors.businessName?.message === 'string' && (
+              <p className="text-[#D13F43] text-sm mt-1">{errors.businessName.message}</p>
             )}
           </div>
 
@@ -60,9 +53,7 @@ export default function BusinessInfo() {
               </Label>
               <select
                 id="city"
-                name="city"
-                value={formData.city || 'Karachi'}
-                onChange={(e) => handleChange('city', e.target.value)}
+                {...register('city')}
                 className="mt-2 flex h-10 w-full rounded-md border border-gray-300 bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D13F43] focus-visible:ring-offset-2"
               >
                 {cities.map((city) => (
@@ -71,8 +62,8 @@ export default function BusinessInfo() {
                   </option>
                 ))}
               </select>
-              {errors.city && (
-                <p className="text-[#D13F43] text-sm mt-1">{errors.city}</p>
+              {typeof errors.city?.message === 'string' && (
+                <p className="text-[#D13F43] text-sm mt-1">{errors.city.message}</p>
               )}
             </div>
 
@@ -82,14 +73,12 @@ export default function BusinessInfo() {
               </Label>
               <Input
                 id="area"
-                name="area"
-                value={formData.area || ''}
-                onChange={(e) => handleChange('area', e.target.value)}
+                {...register('area')}
                 placeholder="Enter area/locality"
                 className="mt-2 border-gray-300 focus:border-[#D13F43] focus:ring-[#D13F43]"
               />
-              {errors.area && (
-                <p className="text-[#D13F43] text-sm mt-1">{errors.area}</p>
+              {typeof errors.area?.message === 'string' && (
+                <p className="text-[#D13F43] text-sm mt-1">{errors.area.message}</p>
               )}
             </div>
           </div>
@@ -100,15 +89,13 @@ export default function BusinessInfo() {
             </Label>
             <Textarea
               id="completeAddress"
-              name="completeAddress"
-              value={formData.completeAddress || ''}
-              onChange={(e) => handleChange('completeAddress', e.target.value)}
+              {...register('completeAddress')}
               placeholder="Enter complete address with landmarks"
               rows={4}
               className="mt-2 border-gray-300 focus:border-[#D13F43] focus:ring-[#D13F43]"
             />
-            {errors.completeAddress && (
-              <p className="text-[#D13F43] text-sm mt-1">{errors.completeAddress}</p>
+            {typeof errors.completeAddress?.message === 'string' && (
+              <p className="text-[#D13F43] text-sm mt-1">{errors.completeAddress.message}</p>
             )}
           </div>
 
@@ -119,10 +106,8 @@ export default function BusinessInfo() {
               </Label>
               <Input
                 id="website"
-                name="website"
                 type="url"
-                value={formData.website || ''}
-                onChange={(e) => handleChange('website', e.target.value)}
+                {...register('website')}
                 placeholder="https://www.example.com (Optional)"
                 className="mt-2 border-gray-300 focus:border-[#D13F43] focus:ring-[#D13F43]"
               />
@@ -134,21 +119,19 @@ export default function BusinessInfo() {
               </Label>
               <Input
                 id="businessEmail"
-                name="businessEmail"
                 type="email"
-                value={formData.businessEmail || ''}
-                onChange={(e) => handleChange('businessEmail', e.target.value)}
+                {...register('businessEmail')}
                 placeholder="business@example.com (Optional)"
                 className="mt-2 border-gray-300 focus:border-[#D13F43] focus:ring-[#D13F43]"
               />
-              {errors.businessEmail && (
-                <p className="text-[#D13F43] text-sm mt-1">{errors.businessEmail}</p>
+              {typeof errors.businessEmail?.message === 'string' && (
+                <p className="text-[#D13F43] text-sm mt-1">{errors.businessEmail.message}</p>
               )}
             </div>
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
 

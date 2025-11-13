@@ -117,17 +117,29 @@ function PartnerCarousel({ partners }: { partners: DemoPartner[] }) {
             <div key={partner.id} className="w-1/4 flex-shrink-0 px-3">
               <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-[#DD374033]">
                 <div className="relative h-48 bg-gradient-to-br from-[#F7E9DB] to-[#F7E9DB]/50">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[#D13F43] text-4xl font-bold" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                      {partner.name.charAt(0)}
+                  {(partner.image && (partner.image.startsWith('/uploads/') || partner.image.startsWith('/assets/')) ) ? (
+                    <Image
+                      src={partner.image}
+                      alt={partner.name}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      className="rounded-t-xl"
+                      sizes="(max-width: 768px) 100vw, 25vw"
+                      priority={true}
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-[#D13F43] text-4xl font-bold" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                        {partner.name.charAt(0)}
+                      </div>
                     </div>
-                  </div>
+                  )}
                   {/* Demo Badge */}
-                  <div className="absolute top-2 right-2">
+                  {/* <div className="absolute top-2 right-2">
                     <span className="px-2 py-1 rounded-full text-xs font-semibold bg-white/90 text-[#2E2E2E]">
                       Demo
                     </span>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-[#2E2E2E] mb-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>{partner.name}</h3>

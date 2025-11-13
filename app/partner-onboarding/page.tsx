@@ -1,15 +1,27 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Header from '@/components/Header'
 import Footer from '@/components/footer'
 import { PartnerFormProvider, usePartnerForm } from '@/contexts/PartnerFormContext'
+import OwnerBusinessDetails from '@/components/partner-onboarding/Decor/OwnerBusinessDetails'
+import LocationBankDetails from '@/components/partner-onboarding/Decor/LocationBankDetails'
+import DecorExperienceServices from '@/components/partner-onboarding/Decor/DecorExperienceServices'
+import DecorReputationPricing from '@/components/partner-onboarding/Decor/DecorReputationPricing'
+import DecorPoliciesAdditional from '@/components/partner-onboarding/Decor/DecorPoliciesAdditional'
+
+// Venue Components
+import VenueOwnerBusinessDetails from '@/components/partner-onboarding/Venue/VenueOwnerBusinessDetails'
+import VenueLocationBankDetails from '@/components/partner-onboarding/Venue/VenueLocationBankDetails'
+import VenueInformation from '@/components/partner-onboarding/Venue/VenueInformation'
+import VenueFacilitiesAmenities from '@/components/partner-onboarding/Venue/VenueFacilitiesAmenities'
+import VenuePoliciesServices from '@/components/partner-onboarding/Venue/VenuePoliciesServices'
 import { useFormSteps } from '@/hooks/useFormSteps'
 import { getStepsForBusinessType } from '@/lib/partner-onboarding/formConfig'
 import { baseFormSchema } from '@/lib/partner-onboarding/validationSchemas'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { useForm, FormProvider } from 'react-hook-form'
 import { motion } from 'framer-motion'
 
 // Components
@@ -55,7 +67,11 @@ import CateringPolicies from '@/components/partner-onboarding/Catering/CateringP
 import ReviewSubmit from '@/components/partner-onboarding/ReviewSubmit'
 import WhatsAppFloating from '@/components/whatsapp-floating'
 
+import { useRef } from 'react'
+
+
 function PartnerOnboardingForm() {
+  console.log('PartnerOnboardingForm rendered');
   const {
     formData,
     businessType,
@@ -68,6 +84,7 @@ function PartnerOnboardingForm() {
     resetForm,
   } = usePartnerForm()
 
+  const [debug, setDebug] = useState('')
   const searchParams = useSearchParams()
 
   // Check for type parameter in URL (for redirects from /venue-onboarding)
@@ -82,7 +99,7 @@ function PartnerOnboardingForm() {
     }
   }, [searchParams, businessType, setBusinessType])
 
-  const { currentStep, totalSteps, getCurrentStepConfig, goToNextStep } = useFormSteps()
+  const { currentStep, totalSteps, getCurrentStepConfig } = useFormSteps()
   const steps = getStepsForBusinessType(businessType)
   const currentStepConfig = getCurrentStepConfig()
 
@@ -92,23 +109,32 @@ function PartnerOnboardingForm() {
     mode: 'onChange',
   })
 
-  // Sync form with context
+  // Ref to expose form for NavigationButtons
+  const formRef = useRef(form)
+
+  // Only sync context to form on mount (for initial values)
   useEffect(() => {
     if (formData) {
       Object.keys(formData).forEach((key) => {
         form.setValue(key as any, formData[key as keyof typeof formData])
       })
     }
-  }, [formData, form])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-  // Watch form changes and update context
-  const watchedValues = form.watch()
+  // On step change, sync form state to context (except initial mount)
   useEffect(() => {
-    updateFormData(watchedValues as any)
-  }, [watchedValues, updateFormData])
+    if (currentStep > 1) {
+      updateFormData(form.getValues() as any)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentStep])
 
   const handleSubmit = async () => {
+    console.log('handleSubmit called');
+    setDebug('Submit button clicked')
     const isValid = await form.trigger()
+    setDebug('Validation result: ' + isValid)
     if (!isValid) {
       // Scroll to first error
       const firstError = Object.keys(form.formState.errors)[0]
@@ -119,10 +145,13 @@ function PartnerOnboardingForm() {
       return
     }
 
+    // Sync form state to context on submit
+    updateFormData(form.getValues() as any)
+
     setIsSubmitting(true)
     try {
       const data = form.getValues()
-
+      setDebug('Submitting data: ' + JSON.stringify(data))
       const response = await fetch('/api/partner-onboarding', {
         method: 'POST',
         headers: {
@@ -131,15 +160,19 @@ function PartnerOnboardingForm() {
         body: JSON.stringify(data),
       })
 
+      setDebug('Response status: ' + response.status)
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}))
+        setDebug('Error: ' + (errorData.error || 'Failed to submit application'))
         throw new Error(errorData.error || 'Failed to submit application')
       }
 
       const result = await response.json()
+      setDebug('Success!')
       setIsSubmitted(true)
       resetForm()
     } catch (error) {
+      setDebug('Submission error: ' + (error instanceof Error ? error.message : 'Failed to submit form. Please try again.'))
       console.error('Submission error:', error)
       alert(error instanceof Error ? error.message : 'Failed to submit form. Please try again.')
     } finally {
@@ -147,18 +180,47 @@ function PartnerOnboardingForm() {
     }
   }
 
+  // Custom next step handler that syncs form state to context before navigation
+  const { goToNextStep: goToNextStepInternal, ...formStepsRest } = useFormSteps()
+  const handleNextStep = async () => {
+    updateFormData(form.getValues() as any)
+    await new Promise((resolve) => setTimeout(resolve, 0))
+    await goToNextStepInternal()
+  }
+
   const renderStepContent = () => {
     if (!currentStepConfig) return null
-
     const stepId = currentStepConfig.id
-
     switch (stepId) {
       case 'business-type':
         return <StepSelector />
-      case 'owner-details':
-        return <OwnerDetails />
+      // New Venue Steps
+      case 'owner-business-details':
+        if (businessType === 'wedding') return <VenueOwnerBusinessDetails />
+        return <OwnerBusinessDetails />
       case 'manager-details':
         return <ManagerDetails />
+      case 'location-bank-details':
+        if (businessType === 'wedding') return <VenueLocationBankDetails />
+        return <LocationBankDetails />
+      case 'venue-information':
+        return <VenueInformation />
+      case 'facilities-amenities':
+        return <VenueFacilitiesAmenities />
+      case 'policies-additional-services':
+        return <VenuePoliciesServices />
+      // Decor Steps
+      case 'experience-services':
+        return <DecorExperienceServices />
+      case 'reputation-pricing-description':
+        return <DecorReputationPricing />
+      case 'policies-additional':
+        return <DecorPoliciesAdditional />
+      case 'review-submit':
+        return <ReviewSubmit />
+      // fallback to old steps for other business types
+      case 'owner-details':
+        return <OwnerDetails />
       case 'business-info':
         return <BusinessInfo />
       case 'bank-details':
@@ -197,8 +259,6 @@ function PartnerOnboardingForm() {
         return <GeneralQuestions />
       case 'upload-summary':
         return <UploadSummary />
-      case 'review-submit':
-        return <ReviewSubmit />
       default:
         return null
     }
@@ -276,10 +336,21 @@ function PartnerOnboardingForm() {
           <ProgressBar />
 
           <StepWrapper stepKey={currentStep}>
-            <div className="bg-white rounded-lg shadow-lg p-8 border border-[#DD374033]">
-              {renderStepContent()}
-              <NavigationButtons onSubmit={handleSubmit} isSubmitting={isSubmitting} />
-            </div>
+            <FormProvider {...form}>
+              <form onSubmit={form.handleSubmit(handleSubmit)} className="bg-white rounded-lg shadow-lg p-8 border border-[#DD374033]">
+                {debug && (
+                  <div className="mb-4 p-2 bg-yellow-100 border border-yellow-300 rounded text-yellow-800">
+                    Debug: {debug}
+                  </div>
+                )}
+                {renderStepContent()}
+                <NavigationButtons
+                  isSubmitting={isSubmitting}
+                  onNextStep={handleNextStep}
+                  {...formStepsRest}
+                />
+              </form>
+            </FormProvider>
           </StepWrapper>
         </div>
       </div>

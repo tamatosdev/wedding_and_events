@@ -18,8 +18,8 @@ const contactInfo = [
       </svg>
     ),
     title: 'Email Us',
-    content: 'admin@shadiportal.com',
-    link: 'mailto:admin@shadiportal.com',
+    content: 'info@theweddingandevent.com',
+    link: 'mailto:info@theweddingandevent.com',
   },
   {
     icon: (
@@ -28,8 +28,8 @@ const contactInfo = [
       </svg>
     ),
     title: 'Call Us',
-    content: '+92-XXX-XXXXXXX',
-    link: 'tel:+92XXXXXXXXX',
+    content: '+923141113007',
+    link: 'tel:+923141113007',
   },
   {
     icon: (
@@ -39,7 +39,7 @@ const contactInfo = [
       </svg>
     ),
     title: 'Visit Us',
-    content: 'Karachi, Pakistan',
+    content: 'Plot No.25-C, 4th Floor, Al-Murtaza Commercial Lane 4, Phase 8, DHA.',
     link: '#',
   },
 ]
@@ -287,15 +287,17 @@ export default function ContactPage() {
             <p className="text-gray-600">We&apos;re located in the heart of Karachi</p>
           </div>
           
-          <div className="bg-gray-200 rounded-lg h-96 flex items-center justify-center">
-            <div className="text-center text-gray-500">
-              <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <p className="text-lg">Map integration available</p>
-              <p className="text-sm">Karachi, Pakistan</p>
-            </div>
+          <div className="bg-gray-200 rounded-lg h-96 overflow-hidden flex items-center justify-center">
+            <iframe
+              title="Our Location"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Plot+No.25-C,+4th+Floor,+Al-Murtaza+Commercial+Lane+4,+Phase+8,+DHA,+Karachi,+Pakistan&output=embed"
+            ></iframe>
           </div>
         </div>
       </section>
