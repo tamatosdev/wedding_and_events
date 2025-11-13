@@ -29,11 +29,28 @@ export async function GET(request: NextRequest) {
       },
     })
 
-    return NextResponse.json(inquiries)
-  } catch (error) {
+    console.log(`Fetched ${inquiries.length} inquiries from database`)
+    
+    // Filter out inquiries with missing vendors (in case of deleted vendors)
+    const validInquiries = inquiries.filter(inq => inq.vendor !== null)
+    
+    if (validInquiries.length !== inquiries.length) {
+      console.warn(`Found ${inquiries.length - validInquiries.length} inquiries with missing vendors`)
+    }
+    
+    return NextResponse.json(validInquiries)
+  } catch (error: any) {
     console.error('Error fetching inquiries:', error)
+    console.error('Error details:', {
+      message: error?.message,
+      code: error?.code,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+    })
     return NextResponse.json(
-      { error: 'Failed to fetch inquiries' },
+      { 
+        error: 'Failed to fetch inquiries',
+        details: process.env.NODE_ENV === 'development' ? error?.message : undefined
+      },
       { status: 500 }
     )
   }

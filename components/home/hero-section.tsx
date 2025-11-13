@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useHomepageCMS } from "@/hooks/useHomepageCMS";
 
 export function HeroSection() {
   const [searchMode, setSearchMode] = useState<"service" | "name">("service");
@@ -13,9 +14,22 @@ export function HeroSection() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const router = useRouter();
+  const { data: cmsData, loading } = useHomepageCMS();
 
-  const categories = ["Venues", "Catering", "Decoration", "Beauty Parlor", "Boutiques" ];
-  const cities = ["Karachi"]; // Only Karachi is supported
+  // Get hero content from CMS or use defaults
+  const heroContent = cmsData?.content?.hero;
+  const heroTitle = heroContent?.title || "Your Perfect\nEvent Starts Here!";
+  const heroImages = heroContent?.images || [
+    "/uploads/venues-1.png",
+    "/uploads/catering-new.png",
+    "/uploads/decor-1.png",
+    "/uploads/bridal-1.jpg"
+  ];
+  const heroCategories = heroContent?.content?.categories || ["Venues", "Catering", "Decoration", "Beauty Parlor", "Boutiques"];
+  const heroCities = heroContent?.content?.cities || ["Karachi"];
+
+  const categories = heroCategories;
+  const cities = heroCities;
 
   const handleSearch = () => {
     const params = new URLSearchParams();
@@ -86,9 +100,23 @@ export function HeroSection() {
         <div className="px-4 relative z-10 inner-background-hero-img">
           <div className="text-center mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold mb-8">
-              Your Perfect
-              <br />
-              <span className="text-[#d13f43]">Event</span> Starts Here!
+              {heroTitle.split('\n').map((line, i) => (
+                <span key={i}>
+                  {line.includes('Event') ? (
+                    <>
+                      {line.split('Event').map((part, j) => (
+                        <span key={j}>
+                          {part}
+                          {j === 0 && <span className="text-[#d13f43]">Event</span>}
+                        </span>
+                      ))}
+                    </>
+                  ) : (
+                    line
+                  )}
+                  {i < heroTitle.split('\n').length - 1 && <br />}
+                </span>
+              ))}
             </h1>
 
             {/* Search Box */}
@@ -158,7 +186,7 @@ export function HeroSection() {
                       onChange={(e) => setSelectedCategory(e.target.value)}
                     >
                       <option value="">Select Service</option>
-                      {categories.map((cat) => (
+                      {categories.map((cat: string) => (
                         <option key={cat} value={cat}>{cat}</option>
                       ))}
                     </select>
@@ -170,7 +198,7 @@ export function HeroSection() {
                       onChange={(e) => setSelectedCity(e.target.value)}
                     >
                       <option value="">Select City</option>
-                      {cities.map((city) => (
+                      {cities.map((city: string) => (
                         <option key={city} value={city}>{city}</option>
                       ))}
                     </select>
@@ -187,42 +215,20 @@ export function HeroSection() {
 
             {/* Featured Venues Images */}
             <div className="mt-12 pt-4 grid grid-cols-1 md:grid-cols-4 gap-4 mx-auto">
-              <div className="relative h-100 rounded-lg overflow-hidden mt-2 pt-12">
-                <Image
-                  src="/uploads/venues-1.png"
-                  alt="Venue 1"
-                  width={300}
-                  height={600}
-                  className="rounded-lg"
-                />
-              </div>
-              <div className="relative h-100 rounded-lg overflow-hidden">
-                <Image
-                  src="/uploads/catering-new.png"
-                  alt="Venue 2"
-                  width={300}
-                  height={600}
-                  className="rounded-lg"
-                />
-              </div>
-              <div className="relative h-100 rounded-lg overflow-hidden mt-2 pt-12">
-                <Image
-                  src="/uploads/decor-1.png"
-                  alt="Venue 3"
-                  width={300}
-                  height={600}
-                  className="rounded-lg"
-                />
-              </div>
-              <div className="relative h-100 rounded-lg overflow-hidden">
-                <Image
-                  src="/uploads/bridal-1.jpg"
-                  alt="Venue 4"
-                  width={300}
-                  height={600}
-                  className="rounded-lg"
-                />
-              </div>
+              {heroImages.map((image, index) => (
+                <div 
+                  key={index} 
+                  className={`relative h-100 rounded-lg overflow-hidden ${index % 2 === 0 ? 'mt-2 pt-12' : ''}`}
+                >
+                  <Image
+                    src={image}
+                    alt={`Hero Image ${index + 1}`}
+                    width={300}
+                    height={600}
+                    className="rounded-lg"
+                  />
+                </div>
+              ))}
               {/* <div className="relative h-100 rounded-lg overflow-hidden">
                 <Image
                   src="/uploads/decor.png"

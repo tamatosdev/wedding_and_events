@@ -4,11 +4,33 @@ import { prisma } from '@/lib/prisma'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
+    
+    console.log('Received partner onboarding submission:', {
+      businessType: body.businessType,
+      hasOwnerName: !!body.ownerName,
+      hasOwnerMobile1: !!body.ownerMobile1,
+      hasOwnerEmail: !!body.ownerEmail,
+      allKeys: Object.keys(body),
+    })
 
     // Validate required fields
     if (!body.businessType || !body.ownerName || !body.ownerMobile1 || !body.ownerEmail) {
+      console.error('Missing required fields:', {
+        businessType: body.businessType,
+        ownerName: body.ownerName,
+        ownerMobile1: body.ownerMobile1,
+        ownerEmail: body.ownerEmail,
+      })
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { 
+          error: 'Missing required fields',
+          details: {
+            businessType: !body.businessType,
+            ownerName: !body.ownerName,
+            ownerMobile1: !body.ownerMobile1,
+            ownerEmail: !body.ownerEmail,
+          }
+        },
         { status: 400 }
       )
     }
@@ -144,10 +166,19 @@ export async function POST(request: NextRequest) {
       },
       { status: 201 }
     )
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error creating partner onboarding submission:', error)
+    console.error('Error details:', {
+      message: error?.message,
+      code: error?.code,
+      meta: error?.meta,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+    })
     return NextResponse.json(
-      { error: 'Failed to submit application' },
+      { 
+        error: 'Failed to submit application',
+        details: process.env.NODE_ENV === 'development' ? error?.message : undefined
+      },
       { status: 500 }
     )
   }

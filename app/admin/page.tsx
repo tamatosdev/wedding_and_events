@@ -114,16 +114,25 @@ export default function AdminDashboard() {
       if (vendorsRes.ok) {
         const vendorsData = await vendorsRes.json()
         setVendors(vendorsData)
+      } else {
+        console.error('Failed to fetch vendors:', vendorsRes.status, vendorsRes.statusText)
       }
 
       if (inquiriesRes.ok) {
         const inquiriesData = await inquiriesRes.json()
+        console.log('Fetched inquiries:', inquiriesData.length, inquiriesData)
         setInquiries(inquiriesData)
+      } else {
+        const errorData = await inquiriesRes.json().catch(() => ({}))
+        console.error('Failed to fetch inquiries:', inquiriesRes.status, inquiriesRes.statusText, errorData)
+        setInquiries([])
       }
 
       if (statsRes.ok) {
         const statsData = await statsRes.json()
         setStats(statsData)
+      } else {
+        console.error('Failed to fetch stats:', statsRes.status, statsRes.statusText)
       }
     } catch (error) {
       console.error('Error fetching admin data:', error)
@@ -229,6 +238,11 @@ export default function AdminDashboard() {
                   </Button>
                 </Link>
               )}
+              <Link href="/admin/vendors">
+                <Button variant="outline" className="bg-indigo-600 hover:bg-indigo-700 text-white border-indigo-600">
+                  Manage Vendors
+                </Button>
+              </Link>
               <Link href="/admin/queries">
                 <Button variant="outline" className="bg-green-600 hover:bg-green-700 text-white border-green-600">
                   Contact Queries
@@ -473,39 +487,25 @@ export default function AdminDashboard() {
           </Card>
         )}
 
-        {/* Recent Inquiries - Only visible to users with view_inquiries permission */}
+        {/* Note: Inquiries are now shown in Contact Queries tab */}
         {userHasPermission(session, 'view_inquiries') && (
-          <Card>
+          <Card className="bg-blue-50 border-blue-200">
             <CardHeader>
-              <CardTitle>Recent Inquiries</CardTitle>
+              <CardTitle className="text-blue-900">📧 All User Queries in Contact Queries Tab</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {inquiries.slice(0, 10).map((inquiry) => (
-                  <div key={inquiry.id} className="p-4 border rounded-lg">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="font-semibold">{inquiry.name}</h3>
-                      <span className="text-sm text-gray-500">
-                        {new Date(inquiry.createdAt).toLocaleDateString()}
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-600 mb-2">
-                      <strong>Vendor:</strong> {inquiry.vendor.name}
-                    </p>
-                    <p className="text-sm text-gray-600 mb-2">
-                      <strong>Email:</strong> {inquiry.email}
-                    </p>
-                    <p className="text-sm text-gray-700">
-                      {inquiry.message}
-                    </p>
-                  </div>
-                ))}
-                {inquiries.length === 0 && (
-                  <p className="text-center text-gray-500 py-8">
-                    No inquiries yet
-                  </p>
-                )}
-              </div>
+              <p className="text-sm text-blue-800 mb-4">
+                All customer inquiries (including vendor booking requests) are now managed in the{' '}
+                <Link href="/admin/queries" className="font-semibold underline hover:text-blue-900">
+                  Contact Queries
+                </Link>{' '}
+                tab where representatives can respond and chat with customers.
+              </p>
+              <Link href="/admin/queries">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                  Go to Contact Queries →
+                </Button>
+              </Link>
             </CardContent>
           </Card>
         )}

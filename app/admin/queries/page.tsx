@@ -27,6 +27,9 @@ interface ContactQuery {
   escalatedToManagerAt: string | null
   escalatedToCEOAt: string | null
   notes: string | null
+  source?: 'inquiry' | 'contact' // Track source of query
+  inquiryId?: string // Original inquiry ID if from vendor inquiry
+  vendorName?: string // Vendor name if from inquiry
 }
 
 export default function AdminQueriesPage() {
@@ -77,6 +80,16 @@ export default function AdminQueriesPage() {
 
   const handleMarkResponded = async (queryId: string, level: 'customerSupport' | 'manager' | 'ceo') => {
     try {
+      // Check if this is an inquiry-based query (prefixed with 'inquiry-')
+      const isInquiryQuery = queryId.startsWith('inquiry-')
+      
+      if (isInquiryQuery) {
+        // For inquiry-based queries, we can't update them directly
+        // They need to be converted to ContactQuery first, or we just show a message
+        alert('This is a vendor inquiry. New inquiries are automatically added to Contact Queries. Please respond via the contact query system.')
+        return
+      }
+
       const updateData: any = {}
       if (level === 'customerSupport') {
         updateData.customerSupportResponded = true
@@ -105,6 +118,12 @@ export default function AdminQueriesPage() {
 
   const handleSaveNotes = async () => {
     if (!selectedQuery) return
+
+    // Check if this is an inquiry-based query
+    if (selectedQuery.id.startsWith('inquiry-')) {
+      alert('Notes cannot be saved for vendor inquiries. New inquiries are automatically added to Contact Queries where you can add notes.')
+      return
+    }
 
     try {
       const response = await fetch(`/api/queries/${selectedQuery.id}`, {
@@ -244,9 +263,21 @@ export default function AdminQueriesPage() {
                     </div>
                     
                     <div className="mb-3">
-                      <p className="text-sm font-medium text-gray-700">
-                        {query.subject || 'General Inquiry'}
-                      </p>
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="text-sm font-medium text-gray-700">
+                          {query.subject || 'General Inquiry'}
+                        </p>
+                        {query.source === 'inquiry' && (
+                          <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
+                            Vendor Inquiry
+                          </span>
+                        )}
+                      </div>
+                      {query.vendorName && (
+                        <p className="text-xs text-gray-500 mb-1">
+                          Vendor: <strong>{query.vendorName}</strong>
+                        </p>
+                      )}
                       <p className="text-sm text-gray-600 line-clamp-2 mt-1">
                         {query.message}
                       </p>
@@ -303,8 +334,20 @@ export default function AdminQueriesPage() {
                   )}
 
                   <div>
-                    <p className="text-sm font-medium text-gray-700">Subject</p>
+                    <div className="flex items-center gap-2 mb-1">
+                      <p className="text-sm font-medium text-gray-700">Subject</p>
+                      {selectedQuery.source === 'inquiry' && (
+                        <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
+                          Vendor Inquiry
+                        </span>
+                      )}
+                    </div>
                     <p className="text-gray-900">{selectedQuery.subject || 'General Inquiry'}</p>
+                    {selectedQuery.vendorName && (
+                      <p className="text-sm text-gray-600 mt-1">
+                        <strong>Vendor:</strong> {selectedQuery.vendorName}
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -384,20 +427,27 @@ export default function AdminQueriesPage() {
                   </div>
 
                   <div className="pt-4 border-t">
-                    <Button
-                      variant="outline"
-                      className="w-full"
-                      onClick={() => {
-                        const response = fetch(`/api/queries/${selectedQuery.id}`, {
-                          method: 'PUT',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify({ status: 'RESOLVED' }),
-                        })
-                        response.then(() => fetchQueries())
-                      }}
-                    >
-                      Mark as Resolved
-                    </Button>
+                    {selectedQuery.id.startsWith('inquiry-') ? (
+                      <div className="text-sm text-gray-600 bg-blue-50 p-3 rounded">
+                        <p className="font-medium mb-1">Vendor Inquiry</p>
+                        <p>This is a vendor inquiry. New inquiries are automatically added to Contact Queries where you can manage them fully.</p>
+                      </div>
+                    ) : (
+                      <Button
+                        variant="outline"
+                        className="w-full"
+                        onClick={() => {
+                          const response = fetch(`/api/queries/${selectedQuery.id}`, {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ status: 'RESOLVED' }),
+                          })
+                          response.then(() => fetchQueries())
+                        }}
+                      >
+                        Mark as Resolved
+                      </Button>
+                    )}
                   </div>
                 </CardContent>
               </Card>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useParams } from 'next/navigation'
 import Header from '@/components/Header'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -38,7 +39,10 @@ interface Review {
   verified: boolean
 }
 
-export default function VendorDetailPage({ params }: { params: { id: string } }) {
+export default function VendorDetailPage() {
+  const params = useParams()
+  const vendorId = params?.id as string
+  
   const [vendor, setVendor] = useState<Vendor | null>(null)
   const [loading, setLoading] = useState(true)
   const [selectedImage, setSelectedImage] = useState(0)
@@ -53,6 +57,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
   })
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState('')
 
   // Mock reviews data
   const reviews: Review[] = [
@@ -83,9 +88,11 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
   ]
 
   useEffect(() => {
+    if (!vendorId) return
+    
     const fetchVendor = async () => {
       try {
-        const response = await fetch(`/api/vendors/${params.id}`)
+        const response = await fetch(`/api/vendors/${vendorId}`)
         if (response.ok) {
           const data = await response.json()
           setVendor(data)
@@ -98,45 +105,71 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
     }
 
     fetchVendor()
-  }, [params.id])
+  }, [vendorId])
 
   const handleSubmitBooking = async (e: React.FormEvent) => {
     e.preventDefault()
     setSubmitting(true)
+    setError('')
+
+    // Validate required fields
+    if (!bookingForm.fullName || !bookingForm.email) {
+      setError('Please fill in all required fields')
+      setSubmitting(false)
+      return
+    }
+
+    if (!vendorId) {
+      setError('Vendor ID is missing. Please refresh the page and try again.')
+      setSubmitting(false)
+      return
+    }
 
     try {
+      const inquiryData = {
+        vendorId: vendorId,
+        name: bookingForm.fullName,
+        email: bookingForm.email,
+        message: `Booking Request:
+Event Date: ${bookingForm.eventDate || 'Not specified'}
+Event Time: ${bookingForm.eventTime || 'Not specified'}
+Number of Guests: ${bookingForm.numberOfGuests || 'Not specified'}
+Phone: ${bookingForm.phone || 'Not provided'}
+Additional Information: ${bookingForm.additionalInfo || 'None'}`,
+      }
+
+      console.log('Submitting inquiry:', inquiryData)
+
       const response = await fetch('/api/inquiries', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          vendorId: params.id,
-          name: bookingForm.fullName,
-          email: bookingForm.email,
-          message: `Booking Request:
-Event Date: ${bookingForm.eventDate}
-Event Time: ${bookingForm.eventTime}
-Number of Guests: ${bookingForm.numberOfGuests}
-Phone: ${bookingForm.phone}
-Additional Information: ${bookingForm.additionalInfo}`,
-        }),
+        body: JSON.stringify(inquiryData),
       })
 
-      if (response.ok) {
-        setSubmitted(true)
-        setBookingForm({
-          fullName: '',
-          email: '',
-          phone: '',
-          eventDate: '',
-          eventTime: '',
-          numberOfGuests: '',
-          additionalInfo: '',
-        })
+      const data = await response.json()
+
+      if (!response.ok) {
+        console.error('Inquiry submission failed:', data)
+        setError(data.error || 'Failed to submit inquiry. Please try again.')
+        return
       }
+
+      console.log('Inquiry submitted successfully:', data)
+      setSubmitted(true)
+      setBookingForm({
+        fullName: '',
+        email: '',
+        phone: '',
+        eventDate: '',
+        eventTime: '',
+        numberOfGuests: '',
+        additionalInfo: '',
+      })
     } catch (error) {
       console.error('Error submitting booking:', error)
+      setError('An error occurred. Please check your connection and try again.')
     } finally {
       setSubmitting(false)
     }
@@ -458,6 +491,11 @@ Additional Information: ${bookingForm.additionalInfo}`,
                   </div>
                 ) : (
                   <form onSubmit={handleSubmitBooking} className="space-y-6">
+                    {error && (
+                      <div className="p-4 bg-red-50 border border-red-200 rounded-md text-red-700">
+                        {error}
+                      </div>
+                    )}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="fullName">Full Name</Label>

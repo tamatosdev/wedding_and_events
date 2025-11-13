@@ -4,24 +4,31 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useHomepageCMS } from "@/hooks/useHomepageCMS";
+
+// Default banners fallback
+const defaultBanners = [
+  {
+    id: 1,
+    image: "/uploads/MCT Google ads Banner - R2-01.png",
+    alt: "MCT Google ads Banner - Visit MCT Business",
+    link: "https://mctbusiness.com/insurance/",
+  },
+  {
+    id: 2,
+    image: "/uploads/MCT Google ads Banner 02.png",
+    alt: "MCT Google ads Banner 02 - Visit MCT Business",
+    link: "https://mctbusiness.com/insurance/",
+  },
+];
 
 export function BannerSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { data: cmsData } = useHomepageCMS();
 
-  const banners = [
-    {
-      id: 1,
-      image: "/uploads/MCT Google ads Banner - R2-01.png",
-      alt: "MCT Google ads Banner - Visit MCT Business",
-      link: "https://mctbusiness.com/insurance/",
-    },
-    {
-      id: 2,
-      image: "/uploads/MCT Google ads Banner 02.png",
-      alt: "MCT Google ads Banner 02 - Visit MCT Business",
-      link: "https://mctbusiness.com/insurance/",
-    },
-  ];
+  // Get banner content from CMS or use defaults
+  const bannerContent = cmsData?.content?.banner;
+  const banners = bannerContent?.content?.items || defaultBanners;
 
   // Auto-slide functionality
   useEffect(() => {

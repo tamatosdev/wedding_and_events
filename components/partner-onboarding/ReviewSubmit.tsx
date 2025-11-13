@@ -29,7 +29,11 @@ export default function ReviewSubmit() {
           <CardTitle className="text-lg text-[#2E2E2E]" style={{ fontFamily: 'DM Sans, sans-serif' }}>{title}</CardTitle>
         </CardHeader>
         <CardContent>
-          {fields.map((field) => renderField(field.label, formData[field.key]))}
+          {fields.map((field) => (
+            <div key={field.key}>
+              {renderField(field.label, formData[field.key])}
+            </div>
+          ))}
         </CardContent>
       </Card>
     )

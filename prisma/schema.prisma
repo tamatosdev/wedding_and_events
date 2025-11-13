@@ -125,6 +125,24 @@ model HomepageSection {
   updatedAt   DateTime @updatedAt
 }
 
+model HomepageContent {
+  id          String   @id @default(cuid())
+  section     String   @unique // 'hero', 'categories', 'banner', 'testimonials', 'faq', 'cta', etc.
+  title       String?
+  subtitle    String?
+  description String?  @db.Text
+  content     Json?    // Flexible JSON for section-specific data
+  images      String[] // Array of image URLs
+  visible     Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@index([section])
+  @@index([visible])
+  @@index([order])
+}
+
 model FeaturedVendor {
   id        String   @id @default(cuid())
   vendorId  String
