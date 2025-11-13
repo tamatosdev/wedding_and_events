@@ -45,7 +45,7 @@ export default function FAQ() {
 
   // Get FAQ content from CMS or use defaults
   const faqContent = cmsData?.content?.faq;
-  const faqs = faqContent?.content?.items || defaultFaqs;
+  const faqs: FAQItem[] = (faqContent?.content?.items as FAQItem[]) || defaultFaqs;
   const title = faqContent?.title || "Frequently Asked Questions";
   const subtitle = faqContent?.subtitle || "Find answers to common questions about our services";
 
@@ -66,7 +66,7 @@ export default function FAQ() {
         </div>
 
         <div className="space-y-4">
-          {faqs.map((faq, index) => (
+          {faqs.map((faq: FAQItem, index: number) => (
             <Card
               key={faq.id}
               className="rounded-2xl shadow-lg hover:shadow-xl transition-shadow"

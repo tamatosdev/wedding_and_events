@@ -28,6 +28,89 @@ interface Vendor {
     name: string | null
     email: string
   }
+  // Owner Details
+  ownerName?: string | null
+  ownerMobile1?: string | null
+  ownerMobile2?: string | null
+  ownerLandline?: string | null
+  ownerEmail?: string | null
+  // Manager Details
+  managerName?: string | null
+  managerMobile1?: string | null
+  managerMobile2?: string | null
+  managerLandline?: string | null
+  managerEmail?: string | null
+  // Business Details
+  area?: string | null
+  completeAddress?: string | null
+  website?: string | null
+  businessEmail?: string | null
+  // Bank Details
+  bankName?: string | null
+  branchCity?: string | null
+  accountNumber?: string | null
+  ibanNumber?: string | null
+  // Common Fields
+  businessDuration?: string | null
+  numberOfBranches?: string | null
+  cancellationPolicy?: string | null
+  fireInsurance?: string | null
+  weArrangeInsurance?: string | null
+  wheelchairAccessible?: string | null
+  // Venue specific
+  venueType?: string | null
+  guestCapacity?: string | null
+  venuePricingRange?: string | null
+  cateringAvailable?: string | null
+  outsideCateringAllowed?: string | null
+  parkingCapacity?: string | null
+  parkingType?: string | null
+  amenities?: string | null
+  bridalSuite?: string | null
+  namazAreaMen?: string | null
+  namazAreaLadies?: string | null
+  // Boutique specific
+  dressType?: string | null
+  designOrResell?: string | null
+  fabrics?: string | null
+  priceRange?: string | null
+  customization?: string | null
+  rentalPolicy?: string | null
+  delivery?: string | null
+  // Salon specific
+  servicesList?: string | null
+  packages?: string | null
+  operatingHours?: string | null
+  brandsUsed?: string | null
+  staffExpertise?: string | null
+  bridalTrials?: string | null
+  salonPricing?: string | null
+  promotions?: string | null
+  hygiene?: string | null
+  // Décor specific
+  decorType?: string | null
+  decorStyle?: string | null
+  eventTypes?: string | null
+  decorPricingRange?: string | null
+  setupTime?: string | null
+  equipmentProvided?: string | null
+  customDesign?: string | null
+  themesAvailable?: string | null
+  floralsIncluded?: string | null
+  lightingServices?: string | null
+  // Catering specific
+  cuisineType?: string | null
+  menuStyle?: string | null
+  servingStyle?: string | null
+  minimumGuests?: string | null
+  maximumGuests?: string | null
+  cateringPricingRange?: string | null
+  halalCertified?: string | null
+  vegetarianOptions?: string | null
+  dietaryAccommodations?: string | null
+  setupService?: string | null
+  servingStaff?: string | null
+  equipmentRental?: string | null
 }
 
 interface Review {
@@ -348,41 +431,47 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
-                    </svg>
+                {vendor.cancellationPolicy && (
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
+                      <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Cancellation Policy</p>
+                      <p className="font-semibold text-xs line-clamp-1">{vendor.cancellationPolicy}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Cancellation Policy</p>
-                    <p className="font-semibold">Partially Refundable</p>
-                  </div>
-                </div>
+                )}
 
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                {vendor.cateringAvailable && vendor.category === 'Venue' && (
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
+                      <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Catering</p>
+                      <p className="font-semibold">{vendor.cateringAvailable}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Catering</p>
-                    <p className="font-semibold">Internal Available</p>
-                  </div>
-                </div>
+                )}
 
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z" clipRule="evenodd" />
-                    </svg>
+                {vendor.wheelchairAccessible && (
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
+                      <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Wheelchair Accessibility</p>
+                      <p className="font-semibold">{vendor.wheelchairAccessible}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Wheelchair Accessibility</p>
-                    <p className="font-semibold">Available</p>
-                  </div>
-                </div>
+                )}
 
                 <div className="flex items-center space-x-3">
                   <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
@@ -430,20 +519,491 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
           <div className="lg:col-span-2 space-y-8">
             {/* About Section */}
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">About This Venue</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">About This {vendor.category}</h2>
               <div className="space-y-4 text-gray-700">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
-                <p>
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
+                <p>{vendor.description}</p>
               </div>
 
-              <h3 className="text-xl font-semibold text-gray-900 mt-6 mb-3">Additional Information</h3>
-              <p className="text-gray-700">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-              </p>
+              {/* Contact Information */}
+              {(vendor.ownerMobile1 || vendor.managerMobile1 || vendor.ownerEmail || vendor.businessEmail) && (
+                <Card className="mt-6">
+                  <CardHeader>
+                    <CardTitle>Contact Information</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {vendor.ownerName && (
+                      <div>
+                        <p className="text-sm text-gray-600">Owner</p>
+                        <p className="font-semibold">{vendor.ownerName}</p>
+                        {vendor.ownerMobile1 && <p className="text-sm text-gray-700">📱 {vendor.ownerMobile1}</p>}
+                        {vendor.ownerMobile2 && <p className="text-sm text-gray-700">📱 {vendor.ownerMobile2}</p>}
+                        {vendor.ownerLandline && <p className="text-sm text-gray-700">☎️ {vendor.ownerLandline}</p>}
+                        {vendor.ownerEmail && <p className="text-sm text-gray-700">✉️ {vendor.ownerEmail}</p>}
+                      </div>
+                    )}
+                    {vendor.managerName && (
+                      <div>
+                        <p className="text-sm text-gray-600">Manager</p>
+                        <p className="font-semibold">{vendor.managerName}</p>
+                        {vendor.managerMobile1 && <p className="text-sm text-gray-700">📱 {vendor.managerMobile1}</p>}
+                        {vendor.managerMobile2 && <p className="text-sm text-gray-700">📱 {vendor.managerMobile2}</p>}
+                        {vendor.managerLandline && <p className="text-sm text-gray-700">☎️ {vendor.managerLandline}</p>}
+                        {vendor.managerEmail && <p className="text-sm text-gray-700">✉️ {vendor.managerEmail}</p>}
+                      </div>
+                    )}
+                    {vendor.businessEmail && (
+                      <div>
+                        <p className="text-sm text-gray-600">Business Email</p>
+                        <p className="text-sm text-gray-700">✉️ {vendor.businessEmail}</p>
+                      </div>
+                    )}
+                    {vendor.website && (
+                      <div>
+                        <p className="text-sm text-gray-600">Website</p>
+                        <a href={vendor.website} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">
+                          {vendor.website}
+                        </a>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Location Details */}
+              {(vendor.area || vendor.completeAddress) && (
+                <Card className="mt-6">
+                  <CardHeader>
+                    <CardTitle>Location Details</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    {vendor.area && (
+                      <div className="mb-2">
+                        <p className="text-sm text-gray-600">Area</p>
+                        <p className="font-semibold">{vendor.area}</p>
+                      </div>
+                    )}
+                    {vendor.completeAddress && (
+                      <div>
+                        <p className="text-sm text-gray-600">Complete Address</p>
+                        <p className="text-gray-700">{vendor.completeAddress}</p>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Business Information */}
+              {(vendor.businessDuration || vendor.numberOfBranches) && (
+                <Card className="mt-6">
+                  <CardHeader>
+                    <CardTitle>Business Information</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    {vendor.businessDuration && (
+                      <div>
+                        <p className="text-sm text-gray-600">Business Duration</p>
+                        <p className="font-semibold">{vendor.businessDuration}</p>
+                      </div>
+                    )}
+                    {vendor.numberOfBranches && (
+                      <div>
+                        <p className="text-sm text-gray-600">Number of Branches</p>
+                        <p className="font-semibold">{vendor.numberOfBranches}</p>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Policies & Additional Information */}
+              {(vendor.cancellationPolicy || vendor.fireInsurance || vendor.weArrangeInsurance || vendor.wheelchairAccessible) && (
+                <Card className="mt-6">
+                  <CardHeader>
+                    <CardTitle>Policies & Additional Information</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    {vendor.cancellationPolicy && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Cancellation Policy</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.cancellationPolicy}</p>
+                      </div>
+                    )}
+                    {vendor.fireInsurance && (
+                      <div>
+                        <p className="text-sm text-gray-600">Fire Insurance</p>
+                        <p className="font-semibold">{vendor.fireInsurance}</p>
+                      </div>
+                    )}
+                    {vendor.weArrangeInsurance && (
+                      <div>
+                        <p className="text-sm text-gray-600">We Arrange Insurance</p>
+                        <p className="font-semibold">{vendor.weArrangeInsurance}</p>
+                      </div>
+                    )}
+                    {vendor.wheelchairAccessible && (
+                      <div>
+                        <p className="text-sm text-gray-600">Wheelchair Accessible</p>
+                        <p className="font-semibold">{vendor.wheelchairAccessible}</p>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Category-Specific Information */}
+              {vendor.category === 'Venue' && (
+                <Card className="mt-6">
+                  <CardHeader>
+                    <CardTitle>Venue Details</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    {vendor.venueType && (
+                      <div>
+                        <p className="text-sm text-gray-600">Venue Type</p>
+                        <p className="font-semibold">{vendor.venueType}</p>
+                      </div>
+                    )}
+                    {vendor.guestCapacity && (
+                      <div>
+                        <p className="text-sm text-gray-600">Guest Capacity</p>
+                        <p className="font-semibold">{vendor.guestCapacity}</p>
+                      </div>
+                    )}
+                    {vendor.venuePricingRange && (
+                      <div>
+                        <p className="text-sm text-gray-600">Pricing Range</p>
+                        <p className="font-semibold">{vendor.venuePricingRange}</p>
+                      </div>
+                    )}
+                    {vendor.cateringAvailable && (
+                      <div>
+                        <p className="text-sm text-gray-600">Catering Available</p>
+                        <p className="font-semibold">{vendor.cateringAvailable}</p>
+                      </div>
+                    )}
+                    {vendor.outsideCateringAllowed && (
+                      <div>
+                        <p className="text-sm text-gray-600">Outside Catering Allowed</p>
+                        <p className="font-semibold">{vendor.outsideCateringAllowed}</p>
+                      </div>
+                    )}
+                    {vendor.parkingCapacity && (
+                      <div>
+                        <p className="text-sm text-gray-600">Parking Capacity</p>
+                        <p className="font-semibold">{vendor.parkingCapacity}</p>
+                      </div>
+                    )}
+                    {vendor.parkingType && (
+                      <div>
+                        <p className="text-sm text-gray-600">Parking Type</p>
+                        <p className="font-semibold">{vendor.parkingType}</p>
+                      </div>
+                    )}
+                    {vendor.amenities && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Amenities</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.amenities}</p>
+                      </div>
+                    )}
+                    <div className="grid grid-cols-3 gap-4 pt-2">
+                      {vendor.bridalSuite && (
+                        <div>
+                          <p className="text-sm text-gray-600">Bridal Suite</p>
+                          <p className="font-semibold">{vendor.bridalSuite}</p>
+                        </div>
+                      )}
+                      {vendor.namazAreaMen && (
+                        <div>
+                          <p className="text-sm text-gray-600">Namaz Area (Men)</p>
+                          <p className="font-semibold">{vendor.namazAreaMen}</p>
+                        </div>
+                      )}
+                      {vendor.namazAreaLadies && (
+                        <div>
+                          <p className="text-sm text-gray-600">Namaz Area (Ladies)</p>
+                          <p className="font-semibold">{vendor.namazAreaLadies}</p>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {vendor.category === 'Boutiques' && (
+                <Card className="mt-6">
+                  <CardHeader>
+                    <CardTitle>Boutique Details</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    {vendor.dressType && (
+                      <div>
+                        <p className="text-sm text-gray-600">Dress Type</p>
+                        <p className="font-semibold">{vendor.dressType}</p>
+                      </div>
+                    )}
+                    {vendor.designOrResell && (
+                      <div>
+                        <p className="text-sm text-gray-600">Design or Resell</p>
+                        <p className="font-semibold">{vendor.designOrResell}</p>
+                      </div>
+                    )}
+                    {vendor.fabrics && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Fabrics</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.fabrics}</p>
+                      </div>
+                    )}
+                    {vendor.priceRange && (
+                      <div>
+                        <p className="text-sm text-gray-600">Price Range</p>
+                        <p className="font-semibold">{vendor.priceRange}</p>
+                      </div>
+                    )}
+                    {vendor.customization && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Customization</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.customization}</p>
+                      </div>
+                    )}
+                    {vendor.rentalPolicy && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Rental Policy</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.rentalPolicy}</p>
+                      </div>
+                    )}
+                    {vendor.delivery && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Delivery</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.delivery}</p>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
+
+              {vendor.category === 'Beauty Parlor' && (
+                <Card className="mt-6">
+                  <CardHeader>
+                    <CardTitle>Salon Details</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    {vendor.servicesList && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Services Offered</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.servicesList}</p>
+                      </div>
+                    )}
+                    {vendor.packages && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Packages & Pricing</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.packages}</p>
+                      </div>
+                    )}
+                    {vendor.operatingHours && (
+                      <div>
+                        <p className="text-sm text-gray-600">Operating Hours</p>
+                        <p className="font-semibold">{vendor.operatingHours}</p>
+                      </div>
+                    )}
+                    {vendor.brandsUsed && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Brands & Products Used</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.brandsUsed}</p>
+                      </div>
+                    )}
+                    {vendor.staffExpertise && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Staff Expertise</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.staffExpertise}</p>
+                      </div>
+                    )}
+                    {vendor.bridalTrials && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Bridal Trials</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.bridalTrials}</p>
+                      </div>
+                    )}
+                    {vendor.salonPricing && (
+                      <div>
+                        <p className="text-sm text-gray-600">Salon Pricing</p>
+                        <p className="font-semibold">{vendor.salonPricing}</p>
+                      </div>
+                    )}
+                    {vendor.promotions && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Promotions</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.promotions}</p>
+                      </div>
+                    )}
+                    {vendor.hygiene && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Hygiene Standards</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.hygiene}</p>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
+
+              {vendor.category === 'Décor' && (
+                <Card className="mt-6">
+                  <CardHeader>
+                    <CardTitle>Décor Details</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    {vendor.decorType && (
+                      <div>
+                        <p className="text-sm text-gray-600">Décor Type</p>
+                        <p className="font-semibold">{vendor.decorType}</p>
+                      </div>
+                    )}
+                    {vendor.decorStyle && (
+                      <div>
+                        <p className="text-sm text-gray-600">Décor Style</p>
+                        <p className="font-semibold">{vendor.decorStyle}</p>
+                      </div>
+                    )}
+                    {vendor.eventTypes && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Event Types</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.eventTypes}</p>
+                      </div>
+                    )}
+                    {vendor.decorPricingRange && (
+                      <div>
+                        <p className="text-sm text-gray-600">Pricing Range</p>
+                        <p className="font-semibold">{vendor.decorPricingRange}</p>
+                      </div>
+                    )}
+                    {vendor.setupTime && (
+                      <div>
+                        <p className="text-sm text-gray-600">Setup Time</p>
+                        <p className="font-semibold">{vendor.setupTime}</p>
+                      </div>
+                    )}
+                    {vendor.equipmentProvided && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Equipment Provided</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.equipmentProvided}</p>
+                      </div>
+                    )}
+                    <div className="grid grid-cols-2 gap-4 pt-2">
+                      {vendor.customDesign && (
+                        <div>
+                          <p className="text-sm text-gray-600">Custom Design</p>
+                          <p className="font-semibold">{vendor.customDesign}</p>
+                        </div>
+                      )}
+                      {vendor.floralsIncluded && (
+                        <div>
+                          <p className="text-sm text-gray-600">Florals Included</p>
+                          <p className="font-semibold">{vendor.floralsIncluded}</p>
+                        </div>
+                      )}
+                    </div>
+                    {vendor.themesAvailable && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Themes Available</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.themesAvailable}</p>
+                      </div>
+                    )}
+                    {vendor.lightingServices && (
+                      <div>
+                        <p className="text-sm text-gray-600">Lighting Services</p>
+                        <p className="font-semibold">{vendor.lightingServices}</p>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
+
+              {vendor.category === 'Catering' && (
+                <Card className="mt-6">
+                  <CardHeader>
+                    <CardTitle>Catering Details</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    {vendor.cuisineType && (
+                      <div>
+                        <p className="text-sm text-gray-600">Cuisine Type</p>
+                        <p className="font-semibold">{vendor.cuisineType}</p>
+                      </div>
+                    )}
+                    {vendor.menuStyle && (
+                      <div>
+                        <p className="text-sm text-gray-600">Menu Style</p>
+                        <p className="font-semibold">{vendor.menuStyle}</p>
+                      </div>
+                    )}
+                    {vendor.servingStyle && (
+                      <div>
+                        <p className="text-sm text-gray-600">Serving Style</p>
+                        <p className="font-semibold">{vendor.servingStyle}</p>
+                      </div>
+                    )}
+                    <div className="grid grid-cols-2 gap-4">
+                      {vendor.minimumGuests && (
+                        <div>
+                          <p className="text-sm text-gray-600">Minimum Guests</p>
+                          <p className="font-semibold">{vendor.minimumGuests}</p>
+                        </div>
+                      )}
+                      {vendor.maximumGuests && (
+                        <div>
+                          <p className="text-sm text-gray-600">Maximum Guests</p>
+                          <p className="font-semibold">{vendor.maximumGuests}</p>
+                        </div>
+                      )}
+                    </div>
+                    {vendor.cateringPricingRange && (
+                      <div>
+                        <p className="text-sm text-gray-600">Pricing Range</p>
+                        <p className="font-semibold">{vendor.cateringPricingRange}</p>
+                      </div>
+                    )}
+                    <div className="grid grid-cols-2 gap-4">
+                      {vendor.halalCertified && (
+                        <div>
+                          <p className="text-sm text-gray-600">Halal Certified</p>
+                          <p className="font-semibold">{vendor.halalCertified}</p>
+                        </div>
+                      )}
+                      {vendor.vegetarianOptions && (
+                        <div>
+                          <p className="text-sm text-gray-600">Vegetarian Options</p>
+                          <p className="font-semibold">{vendor.vegetarianOptions}</p>
+                        </div>
+                      )}
+                    </div>
+                    {vendor.dietaryAccommodations && (
+                      <div>
+                        <p className="text-sm font-semibold text-gray-700 mb-1">Dietary Accommodations</p>
+                        <p className="text-gray-700 whitespace-pre-line">{vendor.dietaryAccommodations}</p>
+                      </div>
+                    )}
+                    <div className="grid grid-cols-3 gap-4 pt-2">
+                      {vendor.setupService && (
+                        <div>
+                          <p className="text-sm text-gray-600">Setup Service</p>
+                          <p className="font-semibold">{vendor.setupService}</p>
+                        </div>
+                      )}
+                      {vendor.servingStaff && (
+                        <div>
+                          <p className="text-sm text-gray-600">Serving Staff</p>
+                          <p className="font-semibold">{vendor.servingStaff}</p>
+                        </div>
+                      )}
+                      {vendor.equipmentRental && (
+                        <div>
+                          <p className="text-sm text-gray-600">Equipment Rental</p>
+                          <p className="font-semibold">{vendor.equipmentRental}</p>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
 
               <div className="mt-6">
                 <p className="text-2xl font-bold text-red-600 mb-4">
@@ -457,12 +1017,20 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
                     </svg>
                     <span>Send a Message</span>
                   </Button>
-                  <Button className="bg-red-600 hover:bg-red-700 text-white flex items-center space-x-2">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    <span>Call Now +92 XXX XXXXXXX</span>
-                  </Button>
+                  {(vendor.ownerMobile1 || vendor.managerMobile1) && (
+                    <Button 
+                      className="bg-red-600 hover:bg-red-700 text-white flex items-center space-x-2"
+                      onClick={() => {
+                        const phone = vendor.ownerMobile1 || vendor.managerMobile1 || ''
+                        window.location.href = `tel:${phone.replace(/[^0-9+]/g, '')}`
+                      }}
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                      <span>Call Now {vendor.ownerMobile1 || vendor.managerMobile1}</span>
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
