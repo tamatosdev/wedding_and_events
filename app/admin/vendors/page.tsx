@@ -29,6 +29,7 @@ import { ImageUpload } from '@/components/ui/image-upload'
 import { Switch } from '@/components/ui/switch'
 import Link from 'next/link'
 import Image from 'next/image'
+import { VendorFormTabs } from './vendor-form-tabs'
 
 interface Vendor {
   id: string
@@ -101,6 +102,7 @@ export default function AdminVendorsPage() {
   const [searchQuery, setSearchQuery] = useState('')
 
   const [formData, setFormData] = useState({
+    // Basic Info
     name: '',
     category: 'Venue',
     city: 'Karachi',
@@ -112,6 +114,100 @@ export default function AdminVendorsPage() {
     rating: 0,
     reviews: 0,
     approved: true,
+    
+    // Owner Details
+    ownerName: '',
+    ownerMobile1: '',
+    ownerMobile2: '',
+    ownerLandline: '',
+    ownerEmail: '',
+    
+    // Manager Details
+    managerName: '',
+    managerMobile1: '',
+    managerMobile2: '',
+    managerLandline: '',
+    managerEmail: '',
+    
+    // Business Details
+    area: '',
+    completeAddress: '',
+    website: '',
+    businessEmail: '',
+    
+    // Bank Details
+    bankName: '',
+    branchCity: '',
+    accountNumber: '',
+    ibanNumber: '',
+    
+    // Common Fields
+    businessDuration: '',
+    numberOfBranches: '',
+    cancellationPolicy: '',
+    fireInsurance: '',
+    weArrangeInsurance: '',
+    wheelchairAccessible: '',
+    fileUrls: [] as string[],
+    
+    // Venue specific
+    venueType: '',
+    guestCapacity: '',
+    venuePricingRange: '',
+    cateringAvailable: '',
+    outsideCateringAllowed: '',
+    parkingCapacity: '',
+    parkingType: '',
+    amenities: '',
+    bridalSuite: '',
+    namazAreaMen: '',
+    namazAreaLadies: '',
+    
+    // Boutique specific
+    dressType: '',
+    designOrResell: '',
+    fabrics: '',
+    priceRange: '',
+    customization: '',
+    rentalPolicy: '',
+    delivery: '',
+    
+    // Salon specific
+    servicesList: '',
+    packages: '',
+    operatingHours: '',
+    brandsUsed: '',
+    staffExpertise: '',
+    bridalTrials: '',
+    salonPricing: '',
+    promotions: '',
+    hygiene: '',
+    
+    // Décor specific
+    decorType: '',
+    decorStyle: '',
+    eventTypes: '',
+    decorPricingRange: '',
+    setupTime: '',
+    equipmentProvided: '',
+    customDesign: '',
+    themesAvailable: '',
+    floralsIncluded: '',
+    lightingServices: '',
+    
+    // Catering specific
+    cuisineType: '',
+    menuStyle: '',
+    servingStyle: '',
+    minimumGuests: '',
+    maximumGuests: '',
+    cateringPricingRange: '',
+    halalCertified: '',
+    vegetarianOptions: '',
+    dietaryAccommodations: '',
+    setupService: '',
+    servingStaff: '',
+    equipmentRental: '',
   })
 
   useEffect(() => {
@@ -147,17 +243,112 @@ export default function AdminVendorsPage() {
     if (vendor) {
       setEditingVendor(vendor)
       setFormData({
-        name: vendor.name,
-        category: vendor.category,
-        city: vendor.city,
-        pricing: vendor.pricing,
-        description: vendor.description,
+        // Basic Info
+        name: vendor.name || '',
+        category: vendor.category || 'Venue',
+        city: vendor.city || 'Karachi',
+        pricing: vendor.pricing || '',
+        description: vendor.description || '',
         images: vendor.images || [],
         capacity: vendor.capacity || '',
         type: vendor.type || '',
         rating: vendor.rating || 0,
         reviews: vendor.reviews || 0,
         approved: vendor.approved,
+        
+        // Owner Details
+        ownerName: (vendor as any).ownerName || '',
+        ownerMobile1: (vendor as any).ownerMobile1 || '',
+        ownerMobile2: (vendor as any).ownerMobile2 || '',
+        ownerLandline: (vendor as any).ownerLandline || '',
+        ownerEmail: (vendor as any).ownerEmail || '',
+        
+        // Manager Details
+        managerName: (vendor as any).managerName || '',
+        managerMobile1: (vendor as any).managerMobile1 || '',
+        managerMobile2: (vendor as any).managerMobile2 || '',
+        managerLandline: (vendor as any).managerLandline || '',
+        managerEmail: (vendor as any).managerEmail || '',
+        
+        // Business Details
+        area: (vendor as any).area || '',
+        completeAddress: (vendor as any).completeAddress || '',
+        website: (vendor as any).website || '',
+        businessEmail: (vendor as any).businessEmail || '',
+        
+        // Bank Details
+        bankName: (vendor as any).bankName || '',
+        branchCity: (vendor as any).branchCity || '',
+        accountNumber: (vendor as any).accountNumber || '',
+        ibanNumber: (vendor as any).ibanNumber || '',
+        
+        // Common Fields
+        businessDuration: (vendor as any).businessDuration || '',
+        numberOfBranches: (vendor as any).numberOfBranches || '',
+        cancellationPolicy: (vendor as any).cancellationPolicy || '',
+        fireInsurance: (vendor as any).fireInsurance || '',
+        weArrangeInsurance: (vendor as any).weArrangeInsurance || '',
+        wheelchairAccessible: (vendor as any).wheelchairAccessible || '',
+        fileUrls: (vendor as any).fileUrls || [],
+        
+        // Venue specific
+        venueType: (vendor as any).venueType || '',
+        guestCapacity: (vendor as any).guestCapacity || '',
+        venuePricingRange: (vendor as any).venuePricingRange || '',
+        cateringAvailable: (vendor as any).cateringAvailable || '',
+        outsideCateringAllowed: (vendor as any).outsideCateringAllowed || '',
+        parkingCapacity: (vendor as any).parkingCapacity || '',
+        parkingType: (vendor as any).parkingType || '',
+        amenities: (vendor as any).amenities || '',
+        bridalSuite: (vendor as any).bridalSuite || '',
+        namazAreaMen: (vendor as any).namazAreaMen || '',
+        namazAreaLadies: (vendor as any).namazAreaLadies || '',
+        
+        // Boutique specific
+        dressType: (vendor as any).dressType || '',
+        designOrResell: (vendor as any).designOrResell || '',
+        fabrics: (vendor as any).fabrics || '',
+        priceRange: (vendor as any).priceRange || '',
+        customization: (vendor as any).customization || '',
+        rentalPolicy: (vendor as any).rentalPolicy || '',
+        delivery: (vendor as any).delivery || '',
+        
+        // Salon specific
+        servicesList: (vendor as any).servicesList || '',
+        packages: (vendor as any).packages || '',
+        operatingHours: (vendor as any).operatingHours || '',
+        brandsUsed: (vendor as any).brandsUsed || '',
+        staffExpertise: (vendor as any).staffExpertise || '',
+        bridalTrials: (vendor as any).bridalTrials || '',
+        salonPricing: (vendor as any).salonPricing || '',
+        promotions: (vendor as any).promotions || '',
+        hygiene: (vendor as any).hygiene || '',
+        
+        // Décor specific
+        decorType: (vendor as any).decorType || '',
+        decorStyle: (vendor as any).decorStyle || '',
+        eventTypes: (vendor as any).eventTypes || '',
+        decorPricingRange: (vendor as any).decorPricingRange || '',
+        setupTime: (vendor as any).setupTime || '',
+        equipmentProvided: (vendor as any).equipmentProvided || '',
+        customDesign: (vendor as any).customDesign || '',
+        themesAvailable: (vendor as any).themesAvailable || '',
+        floralsIncluded: (vendor as any).floralsIncluded || '',
+        lightingServices: (vendor as any).lightingServices || '',
+        
+        // Catering specific
+        cuisineType: (vendor as any).cuisineType || '',
+        menuStyle: (vendor as any).menuStyle || '',
+        servingStyle: (vendor as any).servingStyle || '',
+        minimumGuests: (vendor as any).minimumGuests || '',
+        maximumGuests: (vendor as any).maximumGuests || '',
+        cateringPricingRange: (vendor as any).cateringPricingRange || '',
+        halalCertified: (vendor as any).halalCertified || '',
+        vegetarianOptions: (vendor as any).vegetarianOptions || '',
+        dietaryAccommodations: (vendor as any).dietaryAccommodations || '',
+        setupService: (vendor as any).setupService || '',
+        servingStaff: (vendor as any).servingStaff || '',
+        equipmentRental: (vendor as any).equipmentRental || '',
       })
     } else {
       setEditingVendor(null)
@@ -173,6 +364,80 @@ export default function AdminVendorsPage() {
         rating: 0,
         reviews: 0,
         approved: true,
+        ownerName: '',
+        ownerMobile1: '',
+        ownerMobile2: '',
+        ownerLandline: '',
+        ownerEmail: '',
+        managerName: '',
+        managerMobile1: '',
+        managerMobile2: '',
+        managerLandline: '',
+        managerEmail: '',
+        area: '',
+        completeAddress: '',
+        website: '',
+        businessEmail: '',
+        bankName: '',
+        branchCity: '',
+        accountNumber: '',
+        ibanNumber: '',
+        businessDuration: '',
+        numberOfBranches: '',
+        cancellationPolicy: '',
+        fireInsurance: '',
+        weArrangeInsurance: '',
+        wheelchairAccessible: '',
+        fileUrls: [],
+        venueType: '',
+        guestCapacity: '',
+        venuePricingRange: '',
+        cateringAvailable: '',
+        outsideCateringAllowed: '',
+        parkingCapacity: '',
+        parkingType: '',
+        amenities: '',
+        bridalSuite: '',
+        namazAreaMen: '',
+        namazAreaLadies: '',
+        dressType: '',
+        designOrResell: '',
+        fabrics: '',
+        priceRange: '',
+        customization: '',
+        rentalPolicy: '',
+        delivery: '',
+        servicesList: '',
+        packages: '',
+        operatingHours: '',
+        brandsUsed: '',
+        staffExpertise: '',
+        bridalTrials: '',
+        salonPricing: '',
+        promotions: '',
+        hygiene: '',
+        decorType: '',
+        decorStyle: '',
+        eventTypes: '',
+        decorPricingRange: '',
+        setupTime: '',
+        equipmentProvided: '',
+        customDesign: '',
+        themesAvailable: '',
+        floralsIncluded: '',
+        lightingServices: '',
+        cuisineType: '',
+        menuStyle: '',
+        servingStyle: '',
+        minimumGuests: '',
+        maximumGuests: '',
+        cateringPricingRange: '',
+        halalCertified: '',
+        vegetarianOptions: '',
+        dietaryAccommodations: '',
+        setupService: '',
+        servingStaff: '',
+        equipmentRental: '',
       })
     }
     setError('')
@@ -434,176 +699,9 @@ export default function AdminVendorsPage() {
                 </div>
               )}
 
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="name">Vendor Name *</Label>
-                  <Input
-                    id="name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    required
-                    placeholder="e.g., Grand Wedding Hall"
-                  />
-                </div>
+              <VendorFormTabs formData={formData} setFormData={setFormData} />
 
-                <div>
-                  <Label htmlFor="category">Category *</Label>
-                  <Select
-                    value={formData.category}
-                    onValueChange={(value) => setFormData({ ...formData, category: value })}
-                  >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {CATEGORIES.map((cat) => (
-                        <SelectItem key={cat} value={cat}>
-                          {cat}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="city">City *</Label>
-                  <Select
-                    value={formData.city}
-                    onValueChange={(value) => setFormData({ ...formData, city: value })}
-                  >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {CITIES.map((city) => (
-                        <SelectItem key={city} value={city}>
-                          {city}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <Label htmlFor="pricing">Pricing</Label>
-                  <Input
-                    id="pricing"
-                    value={formData.pricing}
-                    onChange={(e) => setFormData({ ...formData, pricing: e.target.value })}
-                    placeholder="e.g., Starting from Rs. 50,000"
-                  />
-                </div>
-              </div>
-
-              {formData.category === 'Venue' && (
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="capacity">Capacity</Label>
-                    <Select
-                      value={formData.capacity}
-                      onValueChange={(value) => setFormData({ ...formData, capacity: value })}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select capacity range" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {CAPACITY_RANGES.map((cap) => (
-                          <SelectItem key={cap} value={cap}>
-                            {cap} guests
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div>
-                    <Label htmlFor="type">Venue Type</Label>
-                    <Select
-                      value={formData.type}
-                      onValueChange={(value) => setFormData({ ...formData, type: value })}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select venue type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {VENUE_TYPES.map((t) => (
-                          <SelectItem key={t} value={t}>
-                            {t}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-              )}
-
-              <div>
-                <Label htmlFor="description">Description *</Label>
-                <Textarea
-                  id="description"
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  required
-                  rows={4}
-                  placeholder="Describe the vendor, services, features, etc."
-                />
-              </div>
-
-              <div>
-                <Label>Images</Label>
-                <ImageUpload
-                  images={formData.images || []}
-                  onImagesChange={(images) => setFormData({ ...formData, images })}
-                  maxImages={10}
-                />
-              </div>
-
-              <div className="grid grid-cols-3 gap-4">
-                <div>
-                  <Label htmlFor="rating">Rating (0-5)</Label>
-                  <Input
-                    id="rating"
-                    type="number"
-                    min="0"
-                    max="5"
-                    step="0.1"
-                    value={formData.rating}
-                    onChange={(e) =>
-                      setFormData({ ...formData, rating: parseFloat(e.target.value) || 0 })
-                    }
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="reviews">Number of Reviews</Label>
-                  <Input
-                    id="reviews"
-                    type="number"
-                    min="0"
-                    value={formData.reviews}
-                    onChange={(e) =>
-                      setFormData({ ...formData, reviews: parseInt(e.target.value) || 0 })
-                    }
-                  />
-                </div>
-
-                <div className="flex items-center space-x-2 pt-8">
-                  <Switch
-                    id="approved"
-                    checked={formData.approved}
-                    onCheckedChange={(checked) =>
-                      setFormData({ ...formData, approved: checked })
-                    }
-                  />
-                  <Label htmlFor="approved" className="cursor-pointer">
-                    Approved
-                  </Label>
-                </div>
-              </div>
-
-              <div className="flex justify-end gap-3 pt-4">
+              <div className="flex justify-end gap-3 pt-4 border-t">
                 <Button type="button" variant="outline" onClick={handleCloseDialog}>
                   Cancel
                 </Button>

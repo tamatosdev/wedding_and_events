@@ -53,6 +53,7 @@ model User {
   accounts Account[]
   sessions Session[]
   vendors  Vendor[]
+  blogs Blog[]
 }
 
 model VerificationToken {
@@ -79,6 +80,100 @@ model Vendor {
   reviews     Int?     @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  // Owner Details (from partner onboarding)
+  ownerName             String?
+  ownerMobile1         String?
+  ownerMobile2         String?
+  ownerLandline         String?
+  ownerEmail            String?
+  
+  // Manager Details
+  managerName           String?
+  managerMobile1       String?
+  managerMobile2        String?
+  managerLandline       String?
+  managerEmail          String?
+  
+  // Business Details
+  area                  String?
+  completeAddress       String?  @db.Text
+  website               String?
+  businessEmail         String?
+  
+  // Bank Details
+  bankName              String?
+  branchCity            String?
+  accountNumber         String?
+  ibanNumber            String?
+  
+  // Common Fields
+  businessDuration      String?
+  numberOfBranches      String?
+  cancellationPolicy    String?  @db.Text
+  fireInsurance         String?
+  weArrangeInsurance    String?
+  wheelchairAccessible  String?
+  fileUrls              String[]
+  
+  // Venue specific fields
+  venueType             String?
+  guestCapacity         String?
+  venuePricingRange     String?
+  cateringAvailable     String?
+  outsideCateringAllowed String?
+  parkingCapacity       String?
+  parkingType           String?
+  amenities             String?  @db.Text
+  bridalSuite           String?
+  namazAreaMen          String?
+  namazAreaLadies       String?
+  
+  // Boutique specific fields
+  dressType             String?
+  designOrResell        String?
+  fabrics               String?  @db.Text
+  priceRange            String?
+  customization         String?  @db.Text
+  rentalPolicy          String?  @db.Text
+  delivery              String?  @db.Text
+  
+  // Salon specific fields
+  servicesList          String?  @db.Text
+  packages              String?  @db.Text
+  operatingHours        String?
+  brandsUsed            String?  @db.Text
+  staffExpertise        String?  @db.Text
+  bridalTrials          String?  @db.Text
+  salonPricing          String?
+  promotions            String?  @db.Text
+  hygiene               String?  @db.Text
+  
+  // Décor specific fields
+  decorType             String?
+  decorStyle            String?
+  eventTypes            String?  @db.Text
+  decorPricingRange     String?
+  setupTime             String?
+  equipmentProvided      String?  @db.Text
+  customDesign          String?
+  themesAvailable       String?  @db.Text
+  floralsIncluded       String?
+  lightingServices      String?
+  
+  // Catering specific fields
+  cuisineType           String?
+  menuStyle             String?
+  servingStyle          String?
+  minimumGuests         String?
+  maximumGuests         String?
+  cateringPricingRange  String?
+  halalCertified        String?
+  vegetarianOptions     String?
+  dietaryAccommodations String?  @db.Text
+  setupService          String?
+  servingStaff          String?
+  equipmentRental       String?
 
   user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   inquiries Inquiry[]
@@ -431,4 +526,31 @@ model PartnerOnboardingSubmission {
   @@index([businessType])
   @@index([city])
   @@index([ownerEmail])
+}
+
+model Blog {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String?  @db.Text
+  content     String   @db.Text
+  featuredImage String?
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  published   Boolean  @default(false)
+  publishedAt DateTime?
+  views       Int      @default(0)
+  tags        String[]
+  category    String?
+  seoTitle    String?
+  seoDescription String? @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slug])
+  @@index([published])
+  @@index([publishedAt])
+  @@index([authorId])
+  @@index([category])
+  @@index([createdAt])
 }

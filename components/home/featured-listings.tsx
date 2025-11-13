@@ -4,52 +4,104 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
-import { demoPartners, getPartnersByType, DemoPartner } from '@/lib/data/demoPartners'
+import { useHomepageCMS } from '@/hooks/useHomepageCMS'
 
-// Map business types to display categories
-const categoryMapping: Record<string, { title: string; type: DemoPartner['businessType'] }> = {
-  'Wedding': { title: 'Find Best Wedding Venues', type: 'wedding' },
-  'Catering': { title: 'Find Best Catering Services', type: 'catering' },
-  'Beauty Parlor': { title: 'Find Best Beauty Parlors', type: 'beauty-parlor' },
-  'Boutiques': { title: 'Find Best Boutiques', type: 'boutiques' },
-  'Decoration': { title: 'Find Best Decor Services', type: 'decor' },
+interface Vendor {
+  id: string
+  name: string
+  category: string
+  city: string
+  pricing: string
+  description: string
+  images: string[]
+  rating: number
+  reviews: number
 }
 
-const categories = [
-  { title: 'Find Best Wedding Venues', category: 'Wedding', type: 'wedding' as DemoPartner['businessType'] },
-  { title: 'Find Best Catering Services', category: 'Catering', type: 'catering' as DemoPartner['businessType'] },
-  { title: 'Find Best Beauty Parlors', category: 'Beauty Parlor', type: 'beauty-parlor' as DemoPartner['businessType'] },
-  { title: 'Find Best Boutiques', category: 'Boutiques', type: 'boutiques' as DemoPartner['businessType'] },
-  { title: 'Find Best Decor Services', category: 'Decoration', type: 'decor' as DemoPartner['businessType'] },
-]
+// Map business types to vendor categories
+const categoryMapping: Record<string, { title: string; category: string; link: string }> = {
+  'Wedding': { title: 'Find Best Wedding Venues', category: 'Venue', link: '/venues' },
+  'Catering': { title: 'Find Best Catering Services', category: 'Catering', link: '/vendors?category=Catering' },
+  'Beauty Parlor': { title: 'Find Best Beauty Parlors', category: 'Beauty Parlor', link: '/vendors?category=Beauty Parlor' },
+  'Boutiques': { title: 'Find Best Boutiques', category: 'Boutiques', link: '/vendors?category=Boutiques' },
+  'Decoration': { title: 'Find Best Decor Services', category: 'Decoration', link: '/vendors?category=Decoration' },
+}
+
+// Get categories from CMS or use defaults
+function getCategories() {
+  // This will be set from CMS data
+  return [
+    { title: 'Find Best Wedding Venues', category: 'Wedding', vendorCategory: 'Venue', link: '/venues' },
+    { title: 'Find Best Catering Services', category: 'Catering', vendorCategory: 'Catering', link: '/vendors?category=Catering' },
+    { title: 'Find Best Beauty Parlors', category: 'Beauty Parlor', vendorCategory: 'Beauty Parlor', link: '/vendors?category=Beauty Parlor' },
+    { title: 'Find Best Boutiques', category: 'Boutiques', vendorCategory: 'Boutiques', link: '/vendors?category=Boutiques' },
+    { title: 'Find Best Decor Services', category: 'Decoration', vendorCategory: 'Decoration', link: '/vendors?category=Decoration' },
+  ]
+}
 
 export function FeaturedListings() {
+  const { data: cmsData } = useHomepageCMS()
+  
+  // Get categories from CMS or use defaults
+  const categoriesContent = cmsData?.content?.categories
+  const categories = categoriesContent?.content?.items || getCategories()
+
   return (
     <div className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {categories.map((categoryData, categoryIndex) => (
-          <CategorySection 
-            key={categoryIndex} 
-            title={categoryData.title} 
-            category={categoryData.category}
-            businessType={categoryData.type}
-          />
-        ))}
+        {categories.map((categoryData: any, categoryIndex: number) => {
+          // Map category to vendor category
+          const vendorCategory = categoryData.vendorCategory || categoryMapping[categoryData.category]?.category || categoryData.category
+          const link = categoryData.link || categoryMapping[categoryData.category]?.link || `/vendors?category=${vendorCategory}`
+          
+          return (
+            <CategorySection 
+              key={categoryIndex} 
+              title={categoryData.title || categoryData.name || `Find Best ${categoryData.category}`}
+              category={categoryData.category}
+              vendorCategory={vendorCategory}
+              link={link}
+            />
+          )
+        })}
       </div>
     </div>
   )
 }
 
-function CategorySection({ title, category, businessType }: { title: string; category: string; businessType: DemoPartner['businessType'] }) {
-  const [partners, setPartners] = useState<DemoPartner[]>([])
+function CategorySection({ title, category, vendorCategory, link }: { title: string; category: string; vendorCategory: string; link: string }) {
+  const [vendors, setVendors] = useState<Vendor[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Fetch partners from demo data
-    const fetchedPartners = getPartnersByType(businessType)
-    setPartners(fetchedPartners.slice(0, 8)) // Show max 8 per category
-    setLoading(false)
-  }, [businessType])
+    async function fetchVendors() {
+      try {
+        setLoading(true)
+        // Fetch vendors from database API
+        const params = new URLSearchParams({
+          category: vendorCategory,
+          limit: '8', // Show max 8 per category
+          sort: 'rating_desc', // Sort by rating
+        })
+        
+        const response = await fetch(`/api/vendors?${params}`)
+        if (response.ok) {
+          const data = await response.json()
+          setVendors(data?.vendors || [])
+        } else {
+          console.error('Failed to fetch vendors:', response.status)
+          setVendors([])
+        }
+      } catch (error) {
+        console.error('Error fetching vendors:', error)
+        setVendors([])
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchVendors()
+  }, [vendorCategory])
 
   if (loading) {
     return (
@@ -66,7 +118,7 @@ function CategorySection({ title, category, businessType }: { title: string; cat
     )
   }
 
-  if (partners.length === 0) {
+  if (vendors.length === 0) {
     return null // Don't show empty categories
   }
 
@@ -76,22 +128,22 @@ function CategorySection({ title, category, businessType }: { title: string; cat
         <h2 className="text-3xl font-bold text-gray-900" style={{ fontFamily: 'DM Sans, sans-serif' }}>
           {title}
         </h2>
-        <Link href={`/partners?type=${businessType}`}>
+        <Link href={link}>
           <Button variant="outline" className="text-[#D13F43] border-[#D13F43] hover:bg-[#F7E9DB]">
             View All
           </Button>
         </Link>
       </div>
 
-      <PartnerCarousel partners={partners} />
+      <VendorCarousel vendors={vendors} />
     </div>
   )
 }
 
-function PartnerCarousel({ partners }: { partners: DemoPartner[] }) {
+function VendorCarousel({ vendors }: { vendors: Vendor[] }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const itemsPerView = 4
-  const maxIndex = Math.max(0, partners.length - itemsPerView)
+  const maxIndex = Math.max(0, vendors.length - itemsPerView)
 
   const nextSlide = () => {
     setCurrentIndex(prev => Math.min(prev + 1, maxIndex))
@@ -101,7 +153,7 @@ function PartnerCarousel({ partners }: { partners: DemoPartner[] }) {
     setCurrentIndex(prev => Math.max(prev - 1, 0))
   }
 
-  if (partners.length === 0) {
+  if (vendors.length === 0) {
     return null
   }
 
@@ -113,14 +165,14 @@ function PartnerCarousel({ partners }: { partners: DemoPartner[] }) {
           className="flex transition-transform duration-300 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
         >
-          {partners.map((partner) => (
-            <div key={partner.id} className="w-1/4 flex-shrink-0 px-3">
+          {vendors.map((vendor) => (
+            <div key={vendor.id} className="w-1/4 flex-shrink-0 px-3">
               <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-[#DD374033]">
                 <div className="relative h-48 bg-gradient-to-br from-[#F7E9DB] to-[#F7E9DB]/50">
-                  {(partner.image && (partner.image.startsWith('/uploads/') || partner.image.startsWith('/assets/')) ) ? (
+                  {vendor.images && vendor.images.length > 0 && vendor.images[0] ? (
                     <Image
-                      src={partner.image}
-                      alt={partner.name}
+                      src={vendor.images[0]}
+                      alt={vendor.name}
                       fill
                       style={{ objectFit: 'cover' }}
                       className="rounded-t-xl"
@@ -130,27 +182,21 @@ function PartnerCarousel({ partners }: { partners: DemoPartner[] }) {
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-[#D13F43] text-4xl font-bold" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                        {partner.name.charAt(0)}
+                        {vendor.name.charAt(0)}
                       </div>
                     </div>
                   )}
-                  {/* Demo Badge */}
-                  {/* <div className="absolute top-2 right-2">
-                    <span className="px-2 py-1 rounded-full text-xs font-semibold bg-white/90 text-[#2E2E2E]">
-                      Demo
-                    </span>
-                  </div> */}
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold text-[#2E2E2E] mb-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>{partner.name}</h3>
+                  <h3 className="font-semibold text-[#2E2E2E] mb-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>{vendor.name}</h3>
                   <div className="flex items-center mb-2">
-                    {partner.rating && (
+                    {vendor.rating && (
                       <div className="flex items-center">
                         {[...Array(5)].map((_, i) => (
                           <svg
                             key={i}
                             className={`w-4 h-4 ${
-                              i < Math.floor(partner.rating || 0) ? 'text-yellow-400' : 'text-gray-300'
+                              i < Math.floor(vendor.rating || 0) ? 'text-yellow-400' : 'text-gray-300'
                             }`}
                             fill="currentColor"
                             viewBox="0 0 20 20"
@@ -161,14 +207,14 @@ function PartnerCarousel({ partners }: { partners: DemoPartner[] }) {
                       </div>
                     )}
                     <span className="text-sm text-[#666666] ml-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                      {partner.rating?.toFixed(1) || '0.0'}
+                      {vendor.rating?.toFixed(1) || '0.0'} ({vendor.reviews || 0})
                     </span>
                   </div>
-                  <p className="text-sm text-[#666666] mb-3 line-clamp-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>{partner.description}</p>
-                  {partner.pricing && (
-                    <p className="text-sm font-semibold text-[#D13F43] mb-3" style={{ fontFamily: 'DM Sans, sans-serif' }}>{partner.pricing}</p>
+                  <p className="text-sm text-[#666666] mb-3 line-clamp-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>{vendor.description}</p>
+                  {vendor.pricing && (
+                    <p className="text-sm font-semibold text-[#D13F43] mb-3" style={{ fontFamily: 'DM Sans, sans-serif' }}>{vendor.pricing}</p>
                   )}
-                  <Link href={`/partners#${partner.id}`}>
+                  <Link href={`/vendors/${vendor.id}`}>
                     <Button className="w-full bg-[#D13F43] hover:bg-[#b82f33] text-white" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                       View Details
                     </Button>
@@ -181,7 +227,7 @@ function PartnerCarousel({ partners }: { partners: DemoPartner[] }) {
       </div>
 
       {/* Navigation Arrows */}
-      {partners.length > itemsPerView && (
+      {vendors.length > itemsPerView && (
         <div className="flex justify-center mt-6 space-x-4">
           <button
             onClick={prevSlide}

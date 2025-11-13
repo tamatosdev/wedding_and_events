@@ -265,6 +265,11 @@ export default function AdminDashboard() {
                   </Button>
                 </Link>
               )}
+              <Link href="/admin/blogs">
+                <Button variant="outline" className="bg-teal-600 hover:bg-teal-700 text-white border-teal-600">
+                  Blog Management
+                </Button>
+              </Link>
               <Button 
                 variant="outline" 
                 onClick={() => signOut({ callbackUrl: '/auth/signin' })}
