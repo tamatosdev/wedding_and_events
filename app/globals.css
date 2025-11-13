@@ -403,22 +403,6 @@
   position: relative;
 }
 
-.banner-section .slider-arrow {
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.banner-section:hover .slider-arrow {
-  opacity: 1;
-}
-
-.banner-section .slider-dots {
-  backdrop-filter: blur(10px);
-  padding: 8px 12px;
-  border-radius: 20px;
-  background: rgba(0, 0, 0, 0.2);
-}
-
 /* Catering Services Section */
 .catering-services-section {
   background-color: #6B2C38;

@@ -47,9 +47,18 @@ export function BannerSection() {
   return (
     <section className="relative w-full banner-section">
       <div className="container-main px-4">
-        <div className="flex justify-center">
-          <div className="w-full max-w-6xl relative">
-            {/* Banner Slider Container */}
+        <div className="flex justify-center items-center">
+          {/* Left Arrow - Outside Banner */}
+          <button
+            onClick={goToPrevious}
+            className="bg-[#D13F43] hover:bg-[#B8363A] text-white rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110 mr-6"
+            aria-label="Previous banner"
+          >
+            <ChevronLeft size={24} strokeWidth={2.5} />
+          </button>
+
+          {/* Banner Slider Container */}
+          <div className="w-full max-w-6xl">
             <div className="relative overflow-hidden rounded-lg slider-container">
               <div 
                 className="flex transition-transform duration-500 ease-in-out"
@@ -75,41 +84,17 @@ export function BannerSection() {
                   </div>
                 ))}
               </div>
-
-              {/* Navigation Arrows */}
-              <button
-                onClick={goToPrevious}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110 slider-arrow"
-                aria-label="Previous banner"
-              >
-                <ChevronLeft size={24} />
-              </button>
-
-              <button
-                onClick={goToNext}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110 slider-arrow"
-                aria-label="Next banner"
-              >
-                <ChevronRight size={24} />
-              </button>
-
-              {/* Dots Indicator */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 slider-dots">
-                {banners.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToSlide(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                      index === currentSlide
-                        ? "bg-[#D13F43] scale-110"
-                        : "bg-white/60 hover:bg-white/80"
-                    }`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
-              </div>
             </div>
           </div>
+
+          {/* Right Arrow - Outside Banner */}
+          <button
+            onClick={goToNext}
+            className="bg-[#D13F43] hover:bg-[#B8363A] text-white rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110 ml-6"
+            aria-label="Next banner"
+          >
+            <ChevronRight size={24} strokeWidth={2.5} />
+          </button>
         </div>
       </div>
     </section>
