@@ -2,58 +2,74 @@
 
 import Link from "next/link";
 import Image from "next/image";
-// import { Building2, Shirt, Sparkles, Palette, UtensilsCrossed } from 'lucide-react'
+import { useHomepageCMS } from "@/hooks/useHomepageCMS";
 
-const categories = [
+interface Category {
+  name: string;
+  category: string;
+  image: string;
+  link: string;
+}
+
+// Default categories fallback
+const defaultCategories: Category[] = [
   { 
     name: "Wedding Halls/Venues", 
     category: "Wedding", 
     image: "/uploads/Vendor-1.png",
-   
     link: "/partners?type=wedding"
   },
   { 
     name: "Catering", 
     category: "Catering", 
     image: "/uploads/Vendor-2.png",
-    
     link: "/partners?type=catering"
   },
   { 
     name: "Decoration", 
     category: "Decoration", 
     image: "/uploads/Vendor-5.png",
-    
     link: "/partners?type=decor"
   },
   { 
     name: "Beauty Parlor", 
     category: "Beauty Parlor", 
     image: "/uploads/Vendor-3.png",
-    
     link: "/partners?type=beauty-parlor"
   },
   { 
     name: "Boutiques", 
     category: "Boutiques", 
     image: "/uploads/Vendor-4.png",
-   
     link: "/partners?type=boutiques"
   }
 ];
 
 export function CategoriesSection() {
+  const { data: cmsData, loading } = useHomepageCMS();
+  
+  // Get categories content from CMS or use defaults
+  const categoriesContent = cmsData?.content?.categories;
+  const categories: Category[] = (categoriesContent?.content?.items as Category[]) || defaultCategories;
+  const title = categoriesContent?.title || "Find Every Vendor\nYou Need";
+  const leftFloral = categoriesContent?.images?.[0] || "/uploads/Flower-1.png";
+  const rightFloral = categoriesContent?.images?.[1] || "/uploads/Flower-2.png";
+
   return (
     <section className="relative flex items-center mt-10">
       <div className="px-4 relative z-10 container-main Find-Every-Vendor">
         <div className="text-center mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold mb-8 h2eading">
-            Find Every Vendor
-            <br /> You Need
+            {title.split('\n').map((line, i) => (
+              <span key={i}>
+                {line}
+                {i < title.split('\n').length - 1 && <br />}
+              </span>
+            ))}
           </h1>
           {/* Featured Categories with Icons */}
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-12 Venues-cart">
-            {categories.map((cat) => {
+            {categories.map((cat: Category) => {
             
               return (
                 <Link 
@@ -86,7 +102,7 @@ export function CategoriesSection() {
       {/* Floral Decorations */}
       <div className="Left-Floral">
         <Image
-          src="/uploads/Flower-1.png"
+          src={leftFloral}
           alt="Left Floral"
           width={200}
           height={600}
@@ -94,7 +110,7 @@ export function CategoriesSection() {
       </div>
       <div className="Right-Floral">
         <Image
-          src="/uploads/Flower-2.png"
+          src={rightFloral}
           alt="Right Floral"
           width={400}
           height={800}

@@ -24,6 +24,23 @@ export async function GET(request: NextRequest) {
         orderBy: { order: 'asc' },
       })
       return NextResponse.json(sections)
+    } else if (type === 'content') {
+      const content = await prisma.homepageContent.findMany({
+        orderBy: { order: 'asc' },
+      })
+      return NextResponse.json(content)
+    } else if (type === 'contentItem') {
+      const section = searchParams.get('section')
+      if (!section) {
+        return NextResponse.json({ error: 'Section is required' }, { status: 400 })
+      }
+      const contentItem = await prisma.homepageContent.findUnique({
+        where: { section },
+      })
+      if (!contentItem) {
+        return NextResponse.json({ error: 'Content not found' }, { status: 404 })
+      }
+      return NextResponse.json(contentItem)
     } else if (type === 'featuredVendors') {
       const featuredVendors = await prisma.featuredVendor.findMany({
         include: {
@@ -143,6 +160,34 @@ export async function PUT(request: NextRequest) {
         },
       })
       return NextResponse.json(updatedSection)
+    } else if (type === 'content') {
+      const { section, title, subtitle, description, content, images, visible, order } = body
+      if (!section) {
+        return NextResponse.json({ error: 'Section is required' }, { status: 400 })
+      }
+      const updatedContent = await prisma.homepageContent.upsert({
+        where: { section },
+        update: {
+          title,
+          subtitle,
+          description,
+          content,
+          images,
+          visible,
+          order,
+        },
+        create: {
+          section,
+          title,
+          subtitle,
+          description,
+          content,
+          images,
+          visible: visible !== undefined ? visible : true,
+          order: order !== undefined ? order : 0,
+        },
+      })
+      return NextResponse.json(updatedContent)
     } else if (type === 'featuredVendors') {
       const { order } = body
       const updatedFeatured = await prisma.featuredVendor.update({

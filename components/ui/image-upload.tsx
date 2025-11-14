@@ -13,7 +13,7 @@ interface ImageUploadProps {
 }
 
 export function ImageUpload({ 
-  images, 
+  images = [], 
   onImagesChange, 
   maxImages = 10,
   className = '' 
@@ -22,11 +22,14 @@ export function ImageUpload({
   const [dragOver, setDragOver] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
+  // Ensure images is always an array
+  const imagesArray = Array.isArray(images) ? images : []
+
   const handleFileUpload = async (files: FileList) => {
     if (files.length === 0) return
     
     const filesArray = Array.from(files)
-    const remainingSlots = maxImages - images.length
+    const remainingSlots = maxImages - imagesArray.length
     
     if (filesArray.length > remainingSlots) {
       alert(`You can only upload ${remainingSlots} more images`)
@@ -54,7 +57,7 @@ export function ImageUpload({
       })
       
       const uploadedUrls = await Promise.all(uploadPromises)
-      onImagesChange([...images, ...uploadedUrls])
+      onImagesChange([...imagesArray, ...uploadedUrls])
     } catch (error) {
       console.error('Error uploading images:', error)
       alert('Failed to upload images. Please try again.')
@@ -89,12 +92,12 @@ export function ImageUpload({
   }
 
   const removeImage = (index: number) => {
-    const newImages = images.filter((_, i) => i !== index)
+    const newImages = imagesArray.filter((_, i) => i !== index)
     onImagesChange(newImages)
   }
 
   const moveImage = (fromIndex: number, toIndex: number) => {
-    const newImages = [...images]
+    const newImages = [...imagesArray]
     const [movedImage] = newImages.splice(fromIndex, 1)
     newImages.splice(toIndex, 0, movedImage)
     onImagesChange(newImages)
@@ -130,14 +133,14 @@ export function ImageUpload({
                   Drag and drop images here, or click to select files
                 </p>
                 <p className="text-sm text-gray-500 mt-1">
-                  {images.length} / {maxImages} images uploaded
+                  {imagesArray.length} / {maxImages} images uploaded
                 </p>
               </div>
               
               <div className="flex justify-center space-x-4">
                 <Button
                   onClick={() => fileInputRef.current?.click()}
-                  disabled={uploading || images.length >= maxImages}
+                  disabled={uploading || imagesArray.length >= maxImages}
                   className="bg-red-600 hover:bg-red-700 text-white"
                 >
                   {uploading ? 'Uploading...' : 'Choose Files'}
@@ -162,15 +165,15 @@ export function ImageUpload({
       </Card>
 
       {/* Image Grid */}
-      {images.length > 0 && (
+      {imagesArray.length > 0 && (
         <Card>
           <CardContent className="p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              Uploaded Images ({images.length})
+              Uploaded Images ({imagesArray.length})
             </h3>
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {images.map((image, index) => (
+              {imagesArray.map((image, index) => (
                 <div key={index} className="relative group">
                   <div className="relative h-32 rounded-lg overflow-hidden">
                     <Image
@@ -197,7 +200,7 @@ export function ImageUpload({
                         )}
                         
                         {/* Move Down */}
-                        {index < images.length - 1 && (
+                        {index < imagesArray.length - 1 && (
                           <button
                             onClick={() => moveImage(index, index + 1)}
                             className="w-8 h-8 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full flex items-center justify-center"

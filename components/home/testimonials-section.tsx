@@ -5,9 +5,50 @@ import { Autoplay, FreeMode } from "swiper/modules";
 import { useRef, useEffect } from "react";
 import "swiper/css";
 import Image from "next/image";
+import { useHomepageCMS } from "@/hooks/useHomepageCMS";
+
+// Default testimonials fallback
+const defaultTestimonials = [
+  {
+    id: 1,
+    quote: "The catering service we booked through this portal was absolutely amazing. Our guests are still talking about the food!",
+    author: "Fatima & Ahmed",
+    image: "/uploads/Testimonial-0.png",
+  },
+  {
+    id: 2,
+    quote: "From photography to decorations, we found all our vendors in one place. Saved us so much time and effort.",
+    author: "Ayesha & Hassan",
+    image: "/uploads/Testimonial-2.png",
+  },
+  {
+    id: 3,
+    quote: "The vendor quality is outstanding. Every single vendor exceeded our expectations. Highly recommended!",
+    author: "Zara & Usman",
+    image: "/uploads/Testimonial-3.png",
+  },
+  {
+    id: 4,
+    quote: "We found our Dream Venue in Just Two Days! The Portal Made Everything So Simple And Stress-Free.",
+    author: "Sarah & Ali",
+    image: "/uploads/Testimonial-4.png",
+  },
+  {
+    id: 5,
+    quote: "Excellent experience — responsive vendors and fair prices. Highly recommend this portal for wedding planning.",
+    author: "Noor & Bilal",
+    image: "/uploads/Testimonials-1.png",
+  },
+];
 
 export default function TestimonialsSection() {
   const swiperRef = useRef<any>(null);
+  const { data: cmsData } = useHomepageCMS();
+
+  // Get testimonials content from CMS or use defaults
+  const testimonialsContent = cmsData?.content?.testimonials;
+  const testimonials = testimonialsContent?.content?.items || defaultTestimonials;
+  const title = testimonialsContent?.title || "What Our Customers Say?";
 
   // Ensure autoplay continues after user interaction
   useEffect(() => {
@@ -28,48 +69,10 @@ export default function TestimonialsSection() {
     };
   }, []);
 
-  const testimonials = [
-    {
-      id: 1,
-      quote:
-        "The catering service we booked through this portal was absolutely amazing. Our guests are still talking about the food!",
-      author: "Fatima & Ahmed",
-      image: "/uploads/Testimonial-0.png",
-    },
-    {
-      id: 2,
-      quote:
-        "From photography to decorations, we found all our vendors in one place. Saved us so much time and effort.",
-      author: "Ayesha & Hassan",
-      image: "/uploads/Testimonial-2.png",
-    },
-    {
-      id: 3,
-      quote:
-        "The vendor quality is outstanding. Every single vendor exceeded our expectations. Highly recommended!",
-      author: "Zara & Usman",
-      image: "/uploads/Testimonial-3.png",
-    },
-    {
-      id: 4,
-      quote:
-        "We found our Dream Venue in Just Two Days! The Portal Made Everything So Simple And Stress-Free.",
-      author: "Sarah & Ali",
-      image: "/uploads/Testimonial-4.png",
-    },
-    {
-      id: 5,
-      quote:
-        "Excellent experience — responsive vendors and fair prices. Highly recommend this portal for wedding planning.",
-      author: "Noor & Bilal",
-      image: "/uploads/Testimonials-1.png",
-    },
-  ];
-
   return (
     <section className="py-16 bg-gray-50 overflow-hidden">
       <div className="container-main px-4">
-        <h2 className="text-4xl md:text-6xl text-center font-bold mb-12 h2eading">What Our Customers Say?</h2>
+        <h2 className="text-4xl md:text-6xl text-center font-bold mb-12 h2eading">{title}</h2>
         
         {/* Full Width Marquee Slider */}
         <Swiper

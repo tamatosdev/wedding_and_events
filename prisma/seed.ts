@@ -117,6 +117,152 @@ async function main() {
   })
   console.log('✅ Site settings created')
 
+  // Create homepage content blocks
+  console.log('📝 Creating homepage content blocks...')
+  
+  const homepageContent = [
+    {
+      section: 'hero',
+      title: 'Your Perfect\nEvent Starts Here!',
+      images: [
+        '/uploads/venues-1.png',
+        '/uploads/catering-new.png',
+        '/uploads/decor-1.png',
+        '/uploads/bridal-1.jpg'
+      ],
+      content: {
+        categories: ['Venues', 'Catering', 'Decoration', 'Beauty Parlor', 'Boutiques'],
+        cities: ['Karachi']
+      },
+      visible: true,
+      order: 0,
+    },
+    {
+      section: 'categories',
+      title: 'Find Every Vendor\nYou Need',
+      images: [
+        '/uploads/Flower-1.png',
+        '/uploads/Flower-2.png'
+      ],
+      content: {
+        items: [
+          { name: 'Wedding Halls/Venues', category: 'Wedding', image: '/uploads/Vendor-1.png', link: '/partners?type=wedding' },
+          { name: 'Catering', category: 'Catering', image: '/uploads/Vendor-2.png', link: '/partners?type=catering' },
+          { name: 'Decoration', category: 'Decoration', image: '/uploads/Vendor-5.png', link: '/partners?type=decor' },
+          { name: 'Beauty Parlor', category: 'Beauty Parlor', image: '/uploads/Vendor-3.png', link: '/partners?type=beauty-parlor' },
+          { name: 'Boutiques', category: 'Boutiques', image: '/uploads/Vendor-4.png', link: '/partners?type=boutiques' }
+        ]
+      },
+      visible: true,
+      order: 1,
+    },
+    {
+      section: 'banner',
+      content: {
+        items: [
+          { id: 1, image: '/uploads/MCT Google ads Banner - R2-01.png', alt: 'MCT Google ads Banner - Visit MCT Business', link: 'https://mctbusiness.com/insurance/' },
+          { id: 2, image: '/uploads/MCT Google ads Banner 02.png', alt: 'MCT Google ads Banner 02 - Visit MCT Business', link: 'https://mctbusiness.com/insurance/' }
+        ]
+      },
+      visible: true,
+      order: 2,
+    },
+    {
+      section: 'process',
+      title: 'Simple. Seamless. Stress-Free.',
+      images: [
+        '/uploads/Flower-4.png',
+        '/uploads/Flower-5.png'
+      ],
+      content: {
+        steps: [
+          { step: 'STEP 01', title: 'Discover', description: 'Browse trusted venues and wedding vendors across major cities.' },
+          { step: 'STEP 02', title: 'Compare & Shortlist', description: 'Check photos, pricing, and reviews. Save your favorites for later.' },
+          { step: 'STEP 03', title: 'Connect & Inquire', description: 'Send inquiries, check availability, or request a quote directly.' },
+          { step: 'STEP 04', title: 'Book & Celebrate', description: 'Finalize your bookings and enjoy a stress-free wedding journey.' }
+        ]
+      },
+      visible: true,
+      order: 3,
+    },
+    {
+      section: 'testimonials',
+      title: 'What Our Customers Say?',
+      content: {
+        items: [
+          { id: 1, quote: 'The catering service we booked through this portal was absolutely amazing. Our guests are still talking about the food!', author: 'Fatima & Ahmed', image: '/uploads/Testimonial-0.png' },
+          { id: 2, quote: 'From photography to decorations, we found all our vendors in one place. Saved us so much time and effort.', author: 'Ayesha & Hassan', image: '/uploads/Testimonial-2.png' },
+          { id: 3, quote: 'The vendor quality is outstanding. Every single vendor exceeded our expectations. Highly recommended!', author: 'Zara & Usman', image: '/uploads/Testimonial-3.png' },
+          { id: 4, quote: 'We found our Dream Venue in Just Two Days! The Portal Made Everything So Simple And Stress-Free.', author: 'Sarah & Ali', image: '/uploads/Testimonial-4.png' },
+          { id: 5, quote: 'Excellent experience — responsive vendors and fair prices. Highly recommend this portal for wedding planning.', author: 'Noor & Bilal', image: '/uploads/Testimonials-1.png' }
+        ]
+      },
+      visible: true,
+      order: 4,
+    },
+    {
+      section: 'faq',
+      title: 'Frequently Asked Questions',
+      subtitle: 'Find answers to common questions about our services',
+      content: {
+        items: [
+          { id: 1, question: 'How do I book a venue through Wedding & Events?', answer: 'Browse our venue listings, compare options, and click "Inquire" to send a message to the venue owner. They will respond with availability and pricing details.' },
+          { id: 2, question: 'What types of venues are available?', answer: 'We offer a wide range of venues including wedding halls, outdoor spaces, marquees, hotels, and traditional banquet halls. Filter by type to find exactly what you need.' },
+          { id: 3, question: 'Can I see venue photos before booking?', answer: 'Yes! Each venue listing includes multiple photos, descriptions, capacity information, and pricing details. You can also read reviews from previous customers.' },
+          { id: 4, question: 'How do I contact vendors?', answer: 'Use the contact form on each vendor page or click the WhatsApp button to message them directly. Our platform makes it easy to connect with vendors.' },
+          { id: 5, question: 'Is there a booking fee?', answer: 'Wedding & Events is free to browse. Venue pricing varies by location and venue type. Contact venues directly for detailed pricing and booking information.' }
+        ]
+      },
+      visible: true,
+      order: 5,
+    },
+    {
+      section: 'cta',
+      title: 'Ready to make your dream\nevent a reality?',
+      description: 'Explore beautiful venues, connect with the right vendors, and let us make your planning journey effortless and exciting.',
+      images: [
+        '/uploads/Find Your Venue flower-2.png',
+        '/uploads/Find Your Venue flower-1.png'
+      ],
+      content: {
+        buttons: [
+          { text: 'Find Your Venue', link: '/venues', variant: 'primary' },
+          { text: 'Join as a Vendor', link: '/list-business', variant: 'outline' }
+        ]
+      },
+      visible: true,
+      order: 6,
+    },
+    {
+      section: 'planning',
+      title: 'Because Planning Your Wedding Should Feel Like a Celebration',
+      images: [
+        '/uploads/WeddingPlanning.png',
+        '/uploads/Flower-7.png',
+        '/uploads/Flower-6.png'
+      ],
+      content: {
+        paragraphs: [
+          'Your wedding is a celebration of love and joy - and planning it should feel just as special. At The Wedding and Event, we bring trusted venues, reliable vendors, and creative ideas together in one seamless space, making every step easy, exciting, and full of heart.',
+          'Because when planning feels joyful, you can focus on what truly matters - celebrating your love story, your way.'
+        ],
+        buttonText: 'About Us',
+        buttonLink: '/venues'
+      },
+      visible: true,
+      order: 7,
+    },
+  ]
+
+  for (const contentData of homepageContent) {
+    await prisma.homepageContent.upsert({
+      where: { section: contentData.section },
+      update: {},
+      create: contentData,
+    })
+    console.log(`✅ Homepage content created: ${contentData.section}`)
+  }
+
   // Create sample vendors
   const vendors = [
     {

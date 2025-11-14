@@ -43,7 +43,7 @@ export default function NavigationButtons({ onSubmit, isSubmitting = false, onNe
       <Button
         type="submit"
         disabled={submitting}
-        className="flex items-center gap-2 bg-[#D13F43] hover:bg-[#b82f33] text-white shadow-lg disabled:opacity-50"
+        className="flex items-center gap-2 bg-[#D13F43] hover:bg-[#b82f33] text-white shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
         style={{ fontFamily: 'DM Sans, sans-serif' }}
       >
         {submitting ? 'Submitting...' : 'Submit Application'}

@@ -4,24 +4,38 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useHomepageCMS } from "@/hooks/useHomepageCMS";
+
+interface Banner {
+  id: number | string;
+  image: string;
+  alt: string;
+  link: string;
+}
+
+// Default banners fallback
+const defaultBanners: Banner[] = [
+  {
+    id: 1,
+    image: "/uploads/MCT Google ads Banner - R2-01.png",
+    alt: "MCT Google ads Banner - Visit MCT Business",
+    link: "https://mctbusiness.com/insurance/",
+  },
+  {
+    id: 2,
+    image: "/uploads/MCT Google ads Banner 02.png",
+    alt: "MCT Google ads Banner 02 - Visit MCT Business",
+    link: "https://mctbusiness.com/insurance/",
+  },
+];
 
 export function BannerSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { data: cmsData } = useHomepageCMS();
 
-  const banners = [
-    {
-      id: 1,
-      image: "/uploads/MCT Google ads Banner - R2-01.png",
-      alt: "MCT Google ads Banner - Visit MCT Business",
-      link: "https://mctbusiness.com/insurance/",
-    },
-    {
-      id: 2,
-      image: "/uploads/MCT Google ads Banner 02.png",
-      alt: "MCT Google ads Banner 02 - Visit MCT Business",
-      link: "https://mctbusiness.com/insurance/",
-    },
-  ];
+  // Get banner content from CMS or use defaults
+  const bannerContent = cmsData?.content?.banner;
+  const banners: Banner[] = (bannerContent?.content?.items as Banner[]) || defaultBanners;
 
   // Auto-slide functionality
   useEffect(() => {
@@ -64,7 +78,7 @@ export function BannerSection() {
                 className="flex transition-transform duration-500 ease-in-out"
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               >
-                {banners.map((banner, index) => (
+                {banners.map((banner: Banner, index: number) => (
                   <div key={banner.id} className="w-full flex-shrink-0">
                     <Link 
                       href={banner.link}

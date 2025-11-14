@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
+import { useHomepageCMS } from '@/hooks/useHomepageCMS'
 
 interface FAQItem {
   id: number
@@ -9,8 +10,8 @@ interface FAQItem {
   answer: string
 }
 
-// TODO: Replace with real FAQ content once provided by content team
-const faqs: FAQItem[] = [
+// Default FAQs fallback
+const defaultFaqs: FAQItem[] = [
   {
     id: 1,
     question: 'How do I book a venue through Wedding & Events?',
@@ -40,6 +41,13 @@ const faqs: FAQItem[] = [
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const { data: cmsData } = useHomepageCMS()
+
+  // Get FAQ content from CMS or use defaults
+  const faqContent = cmsData?.content?.faq;
+  const faqs: FAQItem[] = (faqContent?.content?.items as FAQItem[]) || defaultFaqs;
+  const title = faqContent?.title || "Frequently Asked Questions";
+  const subtitle = faqContent?.subtitle || "Find answers to common questions about our services";
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index)
@@ -50,16 +58,15 @@ export default function FAQ() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Frequently Asked Questions
+            {title}
           </h2>
           <p className="text-lg text-gray-600">
-            {/* TODO: Awaiting SEO-optimized content */}
-            Find answers to common questions about our services
+            {subtitle}
           </p>
         </div>
 
         <div className="space-y-4">
-          {faqs.map((faq, index) => (
+          {faqs.map((faq: FAQItem, index: number) => (
             <Card
               key={faq.id}
               className="rounded-2xl shadow-lg hover:shadow-xl transition-shadow"

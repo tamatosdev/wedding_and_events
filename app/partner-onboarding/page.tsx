@@ -130,28 +130,27 @@ function PartnerOnboardingForm() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentStep])
 
-  const handleSubmit = async () => {
-    console.log('handleSubmit called');
-    setDebug('Submit button clicked')
-    const isValid = await form.trigger()
-    setDebug('Validation result: ' + isValid)
-    if (!isValid) {
-      // Scroll to first error
-      const firstError = Object.keys(form.formState.errors)[0]
-      const element = document.querySelector(`[name="${firstError}"]`)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' })
-      }
-      return
-    }
+  const handleSubmit = async (formData: any) => {
+    console.log('handleSubmit called', { formData, currentStep, totalSteps, businessType });
+    setDebug('Submit button clicked - Form validated successfully')
+    
+    // form.handleSubmit only calls this if validation passes
+    // Use the validated formData from react-hook-form
+    const formValues = formData || form.getValues()
 
     // Sync form state to context on submit
-    updateFormData(form.getValues() as any)
+    updateFormData(formValues as any)
 
     setIsSubmitting(true)
     try {
-      const data = form.getValues()
+      // Ensure businessType is included in submission data
+      const data = {
+        ...formValues,
+        businessType: businessType || formValues.businessType || '',
+      }
       setDebug('Submitting data: ' + JSON.stringify(data))
+      console.log('Submitting partner onboarding form:', data)
+      
       const response = await fetch('/api/partner-onboarding', {
         method: 'POST',
         headers: {
@@ -168,7 +167,8 @@ function PartnerOnboardingForm() {
       }
 
       const result = await response.json()
-      setDebug('Success!')
+      setDebug('Success! Submission ID: ' + result.id)
+      console.log('Submission successful:', result)
       setIsSubmitted(true)
       resetForm()
     } catch (error) {
