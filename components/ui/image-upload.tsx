@@ -147,9 +147,14 @@ export function ImageUpload({
                 </p>
               </div>
               
-              <div className="flex justify-center space-x-4">
+              <div className="flex justify-center space-x-4" onClick={(e) => e.stopPropagation()}>
                 <Button
-                  onClick={() => fileInputRef.current?.click()}
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    fileInputRef.current?.click()
+                  }}
                   disabled={uploading || imagesArray.length >= maxImages}
                   className="bg-red-600 hover:bg-red-700 text-white"
                 >
@@ -162,6 +167,9 @@ export function ImageUpload({
                   multiple
                   accept="image/*"
                   onChange={handleFileInputChange}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                  }}
                   className="hidden"
                 />
               </div>
