@@ -4,6 +4,7 @@ import './globals.css'
 import { Providers } from './providers'
 import WhatsAppButton from '@/components/whatsapp-button'
 import WelcomePopup from '@/components/WelcomePopup'
+import { WelcomePopupProvider } from '@/contexts/WelcomePopupContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,9 +23,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <WelcomePopup />
-          {children}
-          <WhatsAppButton />
+          <WelcomePopupProvider>
+            <WelcomePopup />
+            {children}
+            <WhatsAppButton />
+          </WelcomePopupProvider>
         </Providers>
       </body>
     </html>

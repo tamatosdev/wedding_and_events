@@ -3,10 +3,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useWelcomePopup } from "@/contexts/WelcomePopupContext";
 
 export default function Header() {
   const pathname = usePathname();
   const [logoError, setLogoError] = useState(false);
+  const { openPopup } = useWelcomePopup();
 
   return (
     <header className="bg-[#fff] border-b border-gray-300 py-4">
@@ -83,13 +85,24 @@ export default function Header() {
               About Us
             </Link>
           </li>
+          <li>
+            <Link
+              href="/contact"
+              className={`main-header-nav${pathname === "/about" ? " active" : ""}`}
+            >
+              contact Us
+            </Link>
+          </li>
         </ul>
         {/* Actions */}
         <div className="flex items-center space-x-4">
-          {/* Contact Us Button */}
-          <Link href="/contact#contact" className="px-6 py-3 border-2 border-gray-900 rounded-full font-semibold text-gray-900 hover:bg-gray-100 transition fontSize">
-            Contact Us
-          </Link>
+          {/* Updates and Discounts Button */}
+          <button 
+            onClick={openPopup}
+            className="px-6 py-3 border-2 border-gray-900 rounded-full font-semibold text-gray-900 hover:bg-gray-100 transition fontSize"
+          >
+            Updates & Discounts
+          </button>
           {/* Partner Onboarding Button */}
           <Link href="/partner-onboarding" className="px-6 py-3 rounded-full font-semibold text-white bg-[#d13f43] hover:bg-[#b82f33] transition fontSize">
             Partner Onboarding

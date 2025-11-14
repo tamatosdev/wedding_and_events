@@ -5,9 +5,11 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import { useWelcomePopup } from '@/contexts/WelcomePopupContext';
 
 export default function WelcomePopup() {
-  const [open, setOpen] = useState(false);
+  const { isOpen, closePopup } = useWelcomePopup();
+  const [shouldAutoOpen, setShouldAutoOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -20,8 +22,24 @@ export default function WelcomePopup() {
   });
 
   useEffect(() => {
-    setTimeout(() => setOpen(true), 500); // Show popup after 0.5s
+    // Check if popup has been shown in this session
+    const hasSeenPopup = sessionStorage.getItem('hasSeenWelcomePopup');
+    
+    if (!hasSeenPopup) {
+      const timer = setTimeout(() => {
+        setShouldAutoOpen(true);
+      }, 500); // Show popup after 0.5s
+      
+      return () => clearTimeout(timer);
+    }
   }, []);
+
+  // Auto-open effect
+  useEffect(() => {
+    if (shouldAutoOpen) {
+      // This will be handled by the dialog's open state
+    }
+  }, [shouldAutoOpen]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -74,7 +92,7 @@ export default function WelcomePopup() {
 
       // Close popup after 2 seconds
       setTimeout(() => {
-        setOpen(false);
+        closePopup();
         setSuccess(false);
       }, 2000);
     } catch (err) {
@@ -86,7 +104,10 @@ export default function WelcomePopup() {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={isOpen || shouldAutoOpen} onOpenChange={() => {
+      setShouldAutoOpen(false);
+      closePopup();
+    }}>
       <DialogContent>
         <DialogTitle className="text-2xl font-bold mb-4 text-center">
           For updates and exclusive discounts, sign&nbsp;up&nbsp;now
