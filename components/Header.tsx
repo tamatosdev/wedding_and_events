@@ -89,7 +89,7 @@ export default function Header() {
             onClick={openPopup}
             className="px-6 py-3 border-2 border-gray-900 rounded-full font-semibold text-gray-900 hover:bg-gray-100 transition fontSize"
           >
-            Update and Discounts
+            Updates & Discounts
           </button>
           {/* Partner Onboarding Button */}
           <Link href="/partner-onboarding" className="px-6 py-3 rounded-full font-semibold text-white bg-[#d13f43] hover:bg-[#b82f33] transition fontSize">
