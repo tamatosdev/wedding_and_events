@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { ImageUpload } from '@/components/ui/image-upload-local'
+import { ImageUpload } from '@/components/ui/image-upload'
 import Image from 'next/image'
 import { canAccessAdmin } from '@/lib/auth-helpers-client'
 

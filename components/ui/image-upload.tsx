@@ -41,7 +41,8 @@ export function ImageUpload({
     try {
       const uploadPromises = filesArray.map(async (file) => {
         const formData = new FormData()
-        formData.append('file', file)
+        // Use "image" field name as required by the API
+        formData.append('image', file)
         
         const response = await fetch('/api/upload', {
           method: 'POST',
@@ -49,7 +50,8 @@ export function ImageUpload({
         })
         
         if (!response.ok) {
-          throw new Error('Upload failed')
+          const errorData = await response.json().catch(() => ({}))
+          throw new Error(errorData.error || 'Upload failed')
         }
         
         const data = await response.json()

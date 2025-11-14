@@ -14,15 +14,27 @@ export default function Header() {
         {/* Logo and Title */}
         <div className="flex items-center space-x-3">
           <Link href="/" passHref className="flex items-center space-x-2">
-            <Image 
-              src={logoError ? "/uploads/The-Wedding-and-event-logo.png" : "/assets/logo-new.png"} 
-              alt="Wedding & Events - Your Wedding, Your Way" 
-              width={300} 
-              height={96} 
-              priority 
-              className="h-24 w-auto"
-              onError={() => setLogoError(true)}
-            />
+            {logoError ? (
+              <Image 
+                src="/uploads/The-Wedding-and-event-logo.png" 
+                alt="Wedding & Events - Your Wedding, Your Way" 
+                width={300} 
+                height={96} 
+                priority 
+                className="h-24 w-auto"
+              />
+            ) : (
+              <Image 
+                src="/assets/logo-new.png" 
+                alt="Wedding & Events - Your Wedding, Your Way" 
+                width={300} 
+                height={96} 
+                priority 
+                className="h-24 w-auto"
+                onError={() => setLogoError(true)}
+                unoptimized
+              />
+            )}
             {/* TODO: Replace /assets/logo-new.png with actual logo image - Currently falls back to existing logo */}
             {/* <span className="text-sm text-gray-600 font-medium hidden md:block">
               Your Wedding, Your Way
