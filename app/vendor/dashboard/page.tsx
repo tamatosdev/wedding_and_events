@@ -272,7 +272,7 @@ export default function VendorDashboard() {
                   />
                 </div>
                 
-                {/* Image Upload Section */}
+                {/* Image Upload Section - Clean TypeScript Implementation */}
                 <div>
                   <Label>Images</Label>
                   <ImageUpload

@@ -19,25 +19,25 @@ const defaultTestimonials = [
     id: 2,
     quote: "From photography to decorations, we found all our vendors in one place. Saved us so much time and effort.",
     author: "Ayesha & Hassan",
-    image: "/uploads/Testimonial-2.png",
+    image: "/uploads/Testimonial-decor.png",
   },
   {
     id: 3,
     quote: "The vendor quality is outstanding. Every single vendor exceeded our expectations. Highly recommended!",
     author: "Zara & Usman",
-    image: "/uploads/Testimonial-3.png",
+    image: "/uploads/Testimonial-venues.png",
   },
   {
     id: 4,
     quote: "We found our Dream Venue in Just Two Days! The Portal Made Everything So Simple And Stress-Free.",
     author: "Sarah & Ali",
-    image: "/uploads/Testimonial-4.png",
+    image: "/uploads/Testimonial-dream-venues.png",
   },
   {
     id: 5,
     quote: "Excellent experience — responsive vendors and fair prices. Highly recommend this portal for wedding planning.",
     author: "Noor & Bilal",
-    image: "/uploads/Testimonials-1.png",
+    image: "/uploads/Testimonial-wedding-portal.png",
   },
 ];
 

@@ -8,11 +8,11 @@ export default function WhatsAppFloating() {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/923141113007', '_blank')
+    window.open('https://wa.me/+923141113007', '_blank')
   }
 
   const handleCall = () => {
-    window.location.href = 'tel:03141113007'
+    window.location.href = 'tel:+923141113007'
   }
 
   const handleEmail = () => {
@@ -88,7 +88,7 @@ export default function WhatsAppFloating() {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-gray-900">WhatsApp</p>
-                    <p className="text-xs text-gray-600">03141113007</p>
+                    <p className="text-xs text-gray-600">+923141113007</p>
                   </div>
                 </button>
 
@@ -101,7 +101,7 @@ export default function WhatsAppFloating() {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-gray-900">Call</p>
-                    <p className="text-xs text-gray-600">03141113007</p>
+                    <p className="text-xs text-gray-600">+923141113007</p>
                   </div>
                 </button>
 

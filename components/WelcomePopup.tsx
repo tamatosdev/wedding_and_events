@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { Dialog, DialogClose, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { useWelcomePopup } from '@/contexts/WelcomePopupContext';
@@ -18,7 +17,7 @@ export default function WelcomePopup() {
     email: '',
     phone: '',
     city: '',
-    message: '',
+    preferenceType: '',
   });
 
   useEffect(() => {
@@ -41,7 +40,7 @@ export default function WelcomePopup() {
     }
   }, [shouldAutoOpen]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setError(''); // Clear error on input change
   };
@@ -53,11 +52,6 @@ export default function WelcomePopup() {
     setSuccess(false);
 
     try {
-      // Prepare data for API - use city as subject or include in message
-      const messageWithCity = form.city 
-        ? `${form.message}\n\nCity: ${form.city}`
-        : form.message;
-
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -67,8 +61,8 @@ export default function WelcomePopup() {
           name: form.name,
           email: form.email,
           phone: form.phone || undefined,
-          subject: form.city ? `Newsletter Signup - ${form.city}` : 'Newsletter Signup',
-          message: messageWithCity,
+          subject: `Newsletter Signup - ${form.preferenceType} - ${form.city || 'No City'}`,
+          message: `Preference Type: ${form.preferenceType}\nCity: ${form.city || 'Not specified'}`,
         }),
       });
 
@@ -87,7 +81,7 @@ export default function WelcomePopup() {
         email: '',
         phone: '',
         city: '',
-        message: '',
+        preferenceType: '',
       });
 
       // Close popup after 2 seconds
@@ -170,22 +164,28 @@ export default function WelcomePopup() {
             />
           </div>
           <div>
-            <Label htmlFor="message">Message</Label>
-            <Textarea 
-              id="message" 
-              name="message" 
-              value={form.message} 
+            <Label htmlFor="preferenceType">Preference Type</Label>
+            <select 
+              id="preferenceType" 
+              name="preferenceType" 
+              value={form.preferenceType} 
               onChange={handleChange} 
               required 
               disabled={loading || success}
-            />
+              className="mt-2 flex h-10 w-full rounded-md border border-gray-300 bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <option value="">Select preference type</option>
+              <option value="Men">Men</option>
+              <option value="Women">Women</option>
+              <option value="Business Entity">Business Entity</option>
+            </select>
           </div>
           <Button 
             type="submit" 
             className="w-full bg-[#D13F43] text-white hover:bg-[#b82f33] disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={loading || success}
           >
-            {loading ? 'Submitting...' : success ? 'Submitted!' : 'Submit'}
+            {loading ? 'Signing up...' : success ? 'Signed up!' : 'Signup'}
           </Button>
         </form>
       </DialogContent>
