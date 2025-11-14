@@ -8,6 +8,8 @@ import { Input } from '@/components/ui/input'
 import { Card, CardContent } from '@/components/ui/card'
 import Link from 'next/link'
 import Image from 'next/image'
+import CategoryFAQ from '@/components/CategoryFAQ'
+import Footer from '@/components/footer'
 
 interface Vendor {
   id: string
@@ -193,7 +195,18 @@ export default function VendorsPage() {
           <div className="flex items-center space-x-2 text-sm text-gray-600">
             <Link href="/" className="hover:text-red-600">Home</Link>
             <span>/</span>
-            <span className="text-gray-900">Venues</span>
+            <Link href="/services" className="hover:text-red-600">Services</Link>
+            <span>/</span>
+            <span className="text-gray-900">
+              {filters.category ? (
+                filters.category === 'Venue' ? 'Venues' :
+                filters.category === 'Decoration' ? 'Decoration' :
+                filters.category === 'Catering' ? 'Catering' :
+                filters.category === 'Photography' ? 'Photography' :
+                filters.category === 'Fashion' ? 'Fashion' :
+                filters.category
+              ) : 'Vendors'}
+            </span>
           </div>
         </nav>
 
@@ -208,10 +221,24 @@ export default function VendorsPage() {
           
           <div className="relative z-10">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Top Event Venues
+              {filters.category ? (
+                filters.category === 'Venue' ? 'Top Event Venues' :
+                filters.category === 'Decoration' ? 'Best Decoration Services' :
+                filters.category === 'Catering' ? 'Premium Catering Services' :
+                filters.category === 'Photography' ? 'Professional Photography Services' :
+                filters.category === 'Fashion' ? 'Bridal Fashion & Couture' :
+                `Top ${filters.category} Services`
+              ) : 'Top Event Venues'}
             </h1>
             <p className="text-lg text-gray-600 max-w-3xl">
-              Browse verified venues across your city. Filter by location, price and capacity to find your dream space.
+              {filters.category ? (
+                filters.category === 'Venue' ? 'Browse verified venues across your city. Filter by location, price and capacity to find your dream space.' :
+                filters.category === 'Decoration' ? 'Discover stunning decoration services to transform your special day. Find the perfect decor that matches your vision and style.' :
+                filters.category === 'Catering' ? 'Explore premium catering services offering authentic flavors and exceptional dining experiences for your celebration.' :
+                filters.category === 'Photography' ? 'Find professional photographers and videographers to capture every precious moment of your special day.' :
+                filters.category === 'Fashion' ? 'Browse exclusive bridal wear collections and fashion services to make you look stunning on your big day.' :
+                `Find the best ${filters.category.toLowerCase()} services for your special day. Compare options and choose what fits your needs perfectly.`
+              ) : 'Browse verified venues across your city. Filter by location, price and capacity to find your dream space.'}
             </p>
           </div>
         </div>
@@ -528,6 +555,11 @@ export default function VendorsPage() {
           </div>
         </div>
       </div>
+
+      {/* Category-specific FAQ Section */}
+      <CategoryFAQ category={filters.category} />
+      
+      <Footer />
     </div>
   )
 }

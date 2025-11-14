@@ -2,10 +2,8 @@
 
 import Link from 'next/link'
 
-// TODO: Replace with actual WhatsApp number
-// Format: country code + number (e.g., 923001234567 for Pakistan)
-// For international: remove leading zeros, use country code (e.g., 923001234567)
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '00000000000'
+// WhatsApp number from environment variable
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '923141113007'
 
 export default function WhatsAppButton() {
   return (

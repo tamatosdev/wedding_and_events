@@ -53,14 +53,14 @@ export default function Header() {
               Home
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               href="/venues"  
               className={`main-header-nav${pathname === "/venues" ? " active" : ""}`}
             >   
               Venues 
             </Link>
-          </li> 
+          </li>  */}
           <li>
             <Link
               href="/services"
