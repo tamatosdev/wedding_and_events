@@ -39,7 +39,7 @@ const contactInfo = [
       </svg>
     ),
     title: 'Visit Us',
-    content: 'Plot No.25-C, 4th Floor, Al-Murtaza Commercial Lane 4, Phase 8, DHA.',
+    content: 'Plot No.25-C, 4th Floor, Al-Murtaza Commercial Lane 4, Phase 8, DHA Karachi, Pakistan',
     link: '#',
   },
 ]

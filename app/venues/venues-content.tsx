@@ -8,7 +8,6 @@ import { Input } from '@/components/ui/input'
 import { Card, CardContent } from '@/components/ui/card'
 import Link from 'next/link'
 import Image from 'next/image'
-import Footer from '@/components/footer'
 
 interface Vendor {
   id: string
@@ -184,7 +183,7 @@ export default function VenuesContent() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white">
       <Header />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -509,8 +508,6 @@ export default function VenuesContent() {
           </div>
         </div>
       </div>
-      
-      <Footer />
     </div>
   )
 }

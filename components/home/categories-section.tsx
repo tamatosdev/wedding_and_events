@@ -15,33 +15,33 @@ interface Category {
 const defaultCategories: Category[] = [
   { 
     name: "Wedding Halls/Venues", 
-    category: "Wedding", 
+    category: "Venue", 
     image: "/uploads/Vendor-1.png",
-    link: "/partners?type=wedding"
+    link: "/vendors?category=Venue"
   },
   { 
     name: "Catering", 
     category: "Catering", 
     image: "/uploads/Vendor-2.png",
-    link: "/partners?type=catering"
+    link: "/vendors?category=Catering"
   },
   { 
     name: "Decoration", 
     category: "Decoration", 
     image: "/uploads/Vendor-5.png",
-    link: "/partners?type=decor"
+    link: "/vendors?category=Decoration"
   },
   { 
     name: "Beauty Parlor", 
     category: "Beauty Parlor", 
     image: "/uploads/Vendor-3.png",
-    link: "/partners?type=beauty-parlor"
+    link: "/vendors?category=Beauty%20Parlor"
   },
   { 
     name: "Boutiques", 
     category: "Boutiques", 
     image: "/uploads/Vendor-4.png",
-    link: "/partners?type=boutiques"
+    link: "/vendors?category=Boutiques"
   }
 ];
 

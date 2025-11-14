@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 const services = [
   {
     id: 1,
-    name: 'Wedding Halls & Venues',
+    name: 'Wedding Halls/Venues',
     category: 'Venue',
     description: 'Discover stunning wedding halls and event spaces designed to make your special day unforgettable. From cozy gatherings to grand celebrations, find the perfect venue that matches your vision.',
     image: '/uploads/Vendor-1.png',
@@ -15,7 +15,7 @@ const services = [
   },
   {
     id: 2,
-    name: 'Catering Services',
+    name: 'Catering',
     category: 'Catering',
     description: 'Experience premium catering that delights every palate. From authentic Pakistani flavors to elegant continental cuisine, our expert chefs and professional staff ensure every meal is served with perfection and care.',
     image: '/uploads/Vendor-2.png',
@@ -23,15 +23,15 @@ const services = [
   },
   {
     id: 3,
-    name: 'Photography & Videography',
-    category: 'Photography',
-    description: 'Capture every emotion, smile, and moment with our professional wedding photography and videography services. Blending creativity with expertise, we turn your special day into timeless memories.',
-    image: '/uploads/photography.png',
-    features: ['Pre-Wedding Shoots', 'Full Wedding Coverage', 'Drone Cinematography', 'Expert Video Editing']
+    name: 'Decoration',
+    category: 'Decoration',
+    description: 'Bring your dream wedding to life with breathtaking décor. From enchanting floral arrangements to stunning stage designs, we create an ambiance that leaves a lasting impression.',
+    image: '/uploads/Vendor-5.png',
+    features: ['Exquisite Floral Arrangements', 'Elegant Stage Décor', 'Customized Lighting Setups', 'Themed Event Decorations']
   },
   {
     id: 4,
-    name: 'Beauty & Salon Services',
+    name: 'Beauty Parlor',
     category: 'Beauty',
     description: 'Step into the spotlight with our professional bridal beauty and salon services -  where every look is crafted to make you feel radiant on your big day. From flawless makeup to elegant hairstyles, we ensure you shine with confidence and grace.',
     image: '/uploads/Vendor-3.png',
@@ -39,20 +39,13 @@ const services = [
   },
   {
     id: 5,
-    name: 'Bridal Couture & Fashion',
+    name: 'Boutiques',
     category: 'Fashion',
     description: 'Explore an exclusive bridal wear collection that blends timeless tradition with modern elegance. From designer ensembles to custom-tailored creations, find the perfect look to make your special day truly unforgettable.',
     image: '/uploads/Vendor-4.png',
     features: ['Designer Bridal Collections', 'Custom Tailoring Services', 'Traditional & Contemporary Styles', 'Elegant Accessories']
   },
-  {
-    id: 6,
-    name: 'Decoration & Styling',
-    category: 'Decoration',
-    description: 'Bring your dream wedding to life with breathtaking décor. From enchanting floral arrangements to stunning stage designs, we create an ambiance that leaves a lasting impression.',
-    image: '/uploads/Vendor-5.png',
-    features: ['Exquisite Floral Arrangements', 'Elegant Stage Décor', 'Customized Lighting Setups', 'Themed Event Decorations']
-  }
+  
 ]
 
 export default function ServicesPage() {
