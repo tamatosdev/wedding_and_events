@@ -40,29 +40,37 @@ export function ImageUpload({
     
     try {
       const uploadPromises = filesArray.map(async (file) => {
+        console.log('Starting upload for file:', file.name, file.size, file.type)
         const formData = new FormData()
         // Use "image" field name as required by the API
         formData.append('image', file)
         
+        console.log('Sending request to /api/upload')
         const response = await fetch('/api/upload', {
           method: 'POST',
           body: formData,
         })
         
+        console.log('Upload response status:', response.status, response.statusText)
+        
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}))
-          throw new Error(errorData.error || 'Upload failed')
+          console.error('Upload failed:', errorData)
+          throw new Error(errorData.error || errorData.details || `Upload failed: ${response.status} ${response.statusText}`)
         }
         
         const data = await response.json()
+        console.log('Upload successful, URL:', data.url)
         return data.url
       })
       
       const uploadedUrls = await Promise.all(uploadPromises)
+      console.log('All uploads complete, URLs:', uploadedUrls)
       onImagesChange([...imagesArray, ...uploadedUrls])
     } catch (error) {
       console.error('Error uploading images:', error)
-      alert('Failed to upload images. Please try again.')
+      const errorMessage = error instanceof Error ? error.message : 'Failed to upload images. Please try again.'
+      alert(errorMessage)
     } finally {
       setUploading(false)
     }
