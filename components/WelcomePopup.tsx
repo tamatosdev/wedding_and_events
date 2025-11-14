@@ -5,9 +5,11 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import { useWelcomePopup } from '@/contexts/WelcomePopupContext';
 
 export default function WelcomePopup() {
-  const [open, setOpen] = useState(false);
+  const { isOpen, closePopup } = useWelcomePopup();
+  const [shouldAutoOpen, setShouldAutoOpen] = useState(false);
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -17,8 +19,24 @@ export default function WelcomePopup() {
   });
 
   useEffect(() => {
-    setTimeout(() => setOpen(true), 500); // Show popup after 0.5s
+    // Check if popup has been shown in this session
+    const hasSeenPopup = sessionStorage.getItem('hasSeenWelcomePopup');
+    
+    if (!hasSeenPopup) {
+      const timer = setTimeout(() => {
+        setShouldAutoOpen(true);
+      }, 500); // Show popup after 0.5s
+      
+      return () => clearTimeout(timer);
+    }
   }, []);
+
+  // Auto-open effect
+  useEffect(() => {
+    if (shouldAutoOpen) {
+      // This will be handled by the dialog's open state
+    }
+  }, [shouldAutoOpen]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -27,12 +45,15 @@ export default function WelcomePopup() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // TODO: handle form submission (API call or email)
-    setOpen(false);
+    closePopup();
     alert('Thank you for your message!');
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={isOpen || shouldAutoOpen} onOpenChange={() => {
+      setShouldAutoOpen(false);
+      closePopup();
+    }}>
       <DialogContent>
   <h2 className="text-2xl font-bold mb-4 text-center">For updates and exclusive discounts, sign&nbsp;up&nbsp;now</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
