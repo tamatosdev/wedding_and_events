@@ -76,11 +76,11 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
     notFound()
   }
 
-  // Format date
-  const formatDate = (dateString: string | null) => {
-    if (!dateString) return 'No date'
-    const date = new Date(dateString)
-    return date.toLocaleDateString('en-US', { 
+  // Format date - accepts Date object or string
+  const formatDate = (date: Date | string | null) => {
+    if (!date) return 'No date'
+    const dateObj = date instanceof Date ? date : new Date(date)
+    return dateObj.toLocaleDateString('en-US', { 
       year: 'numeric', 
       month: 'long', 
       day: 'numeric' 
@@ -168,7 +168,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
             <div className="mt-8 pt-8 border-t">
               <h3 className="text-sm font-semibold text-gray-700 mb-3">Tags:</h3>
               <div className="flex flex-wrap gap-2">
-                {blog.tags.map((tag) => (
+                {blog.tags.map((tag: string) => (
                   <span
                     key={tag}
                     className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
