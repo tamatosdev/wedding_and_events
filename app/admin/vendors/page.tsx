@@ -12,24 +12,14 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from '@/components/ui/dialog'
-import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { ImageUpload } from '@/components/ui/image-upload'
-import { Switch } from '@/components/ui/switch'
 import Link from 'next/link'
 import Image from 'next/image'
-import { VendorFormTabs } from './vendor-form-tabs'
 
 interface Vendor {
   id: string
@@ -94,121 +84,11 @@ export default function AdminVendorsPage() {
   const router = useRouter()
   const [vendors, setVendors] = useState<Vendor[]>([])
   const [loading, setLoading] = useState(true)
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [editingVendor, setEditingVendor] = useState<Vendor | null>(null)
-  const [saving, setSaving] = useState(false)
-  const [error, setError] = useState('')
+  // Removed saving and error states - handled in separate pages
   const [categoryFilter, setCategoryFilter] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
 
-  const [formData, setFormData] = useState({
-    // Basic Info
-    name: '',
-    category: 'Venue',
-    city: 'Karachi',
-    pricing: '',
-    description: '',
-    images: [] as string[],
-    capacity: '',
-    type: '',
-    rating: 0,
-    reviews: 0,
-    approved: true,
-    
-    // Owner Details
-    ownerName: '',
-    ownerMobile1: '',
-    ownerMobile2: '',
-    ownerLandline: '',
-    ownerEmail: '',
-    
-    // Manager Details
-    managerName: '',
-    managerMobile1: '',
-    managerMobile2: '',
-    managerLandline: '',
-    managerEmail: '',
-    
-    // Business Details
-    area: '',
-    completeAddress: '',
-    website: '',
-    businessEmail: '',
-    
-    // Bank Details
-    bankName: '',
-    branchCity: '',
-    accountNumber: '',
-    ibanNumber: '',
-    
-    // Common Fields
-    businessDuration: '',
-    numberOfBranches: '',
-    cancellationPolicy: '',
-    fireInsurance: '',
-    weArrangeInsurance: '',
-    wheelchairAccessible: '',
-    fileUrls: [] as string[],
-    
-    // Venue specific
-    venueType: '',
-    guestCapacity: '',
-    venuePricingRange: '',
-    cateringAvailable: '',
-    outsideCateringAllowed: '',
-    parkingCapacity: '',
-    parkingType: '',
-    amenities: '',
-    bridalSuite: '',
-    namazAreaMen: '',
-    namazAreaLadies: '',
-    
-    // Boutique specific
-    dressType: '',
-    designOrResell: '',
-    fabrics: '',
-    priceRange: '',
-    customization: '',
-    rentalPolicy: '',
-    delivery: '',
-    
-    // Salon specific
-    servicesList: '',
-    packages: '',
-    operatingHours: '',
-    brandsUsed: '',
-    staffExpertise: '',
-    bridalTrials: '',
-    salonPricing: '',
-    promotions: '',
-    hygiene: '',
-    
-    // Décor specific
-    decorType: '',
-    decorStyle: '',
-    eventTypes: '',
-    decorPricingRange: '',
-    setupTime: '',
-    equipmentProvided: '',
-    customDesign: '',
-    themesAvailable: '',
-    floralsIncluded: '',
-    lightingServices: '',
-    
-    // Catering specific
-    cuisineType: '',
-    menuStyle: '',
-    servingStyle: '',
-    minimumGuests: '',
-    maximumGuests: '',
-    cateringPricingRange: '',
-    halalCertified: '',
-    vegetarianOptions: '',
-    dietaryAccommodations: '',
-    setupService: '',
-    servingStaff: '',
-    equipmentRental: '',
-  })
+  // Dialog and form state removed - now handled in separate pages
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -239,264 +119,7 @@ export default function AdminVendorsPage() {
     }
   }, [])
 
-  const handleOpenDialog = (vendor?: Vendor) => {
-    if (vendor) {
-      setEditingVendor(vendor)
-      setFormData({
-        // Basic Info
-        name: vendor.name || '',
-        category: vendor.category || 'Venue',
-        city: vendor.city || 'Karachi',
-        pricing: vendor.pricing || '',
-        description: vendor.description || '',
-        images: vendor.images || [],
-        capacity: vendor.capacity || '',
-        type: vendor.type || '',
-        rating: vendor.rating || 0,
-        reviews: vendor.reviews || 0,
-        approved: vendor.approved,
-        
-        // Owner Details
-        ownerName: (vendor as any).ownerName || '',
-        ownerMobile1: (vendor as any).ownerMobile1 || '',
-        ownerMobile2: (vendor as any).ownerMobile2 || '',
-        ownerLandline: (vendor as any).ownerLandline || '',
-        ownerEmail: (vendor as any).ownerEmail || '',
-        
-        // Manager Details
-        managerName: (vendor as any).managerName || '',
-        managerMobile1: (vendor as any).managerMobile1 || '',
-        managerMobile2: (vendor as any).managerMobile2 || '',
-        managerLandline: (vendor as any).managerLandline || '',
-        managerEmail: (vendor as any).managerEmail || '',
-        
-        // Business Details
-        area: (vendor as any).area || '',
-        completeAddress: (vendor as any).completeAddress || '',
-        website: (vendor as any).website || '',
-        businessEmail: (vendor as any).businessEmail || '',
-        
-        // Bank Details
-        bankName: (vendor as any).bankName || '',
-        branchCity: (vendor as any).branchCity || '',
-        accountNumber: (vendor as any).accountNumber || '',
-        ibanNumber: (vendor as any).ibanNumber || '',
-        
-        // Common Fields
-        businessDuration: (vendor as any).businessDuration || '',
-        numberOfBranches: (vendor as any).numberOfBranches || '',
-        cancellationPolicy: (vendor as any).cancellationPolicy || '',
-        fireInsurance: (vendor as any).fireInsurance || '',
-        weArrangeInsurance: (vendor as any).weArrangeInsurance || '',
-        wheelchairAccessible: (vendor as any).wheelchairAccessible || '',
-        fileUrls: (vendor as any).fileUrls || [],
-        
-        // Venue specific
-        venueType: (vendor as any).venueType || '',
-        guestCapacity: (vendor as any).guestCapacity || '',
-        venuePricingRange: (vendor as any).venuePricingRange || '',
-        cateringAvailable: (vendor as any).cateringAvailable || '',
-        outsideCateringAllowed: (vendor as any).outsideCateringAllowed || '',
-        parkingCapacity: (vendor as any).parkingCapacity || '',
-        parkingType: (vendor as any).parkingType || '',
-        amenities: (vendor as any).amenities || '',
-        bridalSuite: (vendor as any).bridalSuite || '',
-        namazAreaMen: (vendor as any).namazAreaMen || '',
-        namazAreaLadies: (vendor as any).namazAreaLadies || '',
-        
-        // Boutique specific
-        dressType: (vendor as any).dressType || '',
-        designOrResell: (vendor as any).designOrResell || '',
-        fabrics: (vendor as any).fabrics || '',
-        priceRange: (vendor as any).priceRange || '',
-        customization: (vendor as any).customization || '',
-        rentalPolicy: (vendor as any).rentalPolicy || '',
-        delivery: (vendor as any).delivery || '',
-        
-        // Salon specific
-        servicesList: (vendor as any).servicesList || '',
-        packages: (vendor as any).packages || '',
-        operatingHours: (vendor as any).operatingHours || '',
-        brandsUsed: (vendor as any).brandsUsed || '',
-        staffExpertise: (vendor as any).staffExpertise || '',
-        bridalTrials: (vendor as any).bridalTrials || '',
-        salonPricing: (vendor as any).salonPricing || '',
-        promotions: (vendor as any).promotions || '',
-        hygiene: (vendor as any).hygiene || '',
-        
-        // Décor specific
-        decorType: (vendor as any).decorType || '',
-        decorStyle: (vendor as any).decorStyle || '',
-        eventTypes: (vendor as any).eventTypes || '',
-        decorPricingRange: (vendor as any).decorPricingRange || '',
-        setupTime: (vendor as any).setupTime || '',
-        equipmentProvided: (vendor as any).equipmentProvided || '',
-        customDesign: (vendor as any).customDesign || '',
-        themesAvailable: (vendor as any).themesAvailable || '',
-        floralsIncluded: (vendor as any).floralsIncluded || '',
-        lightingServices: (vendor as any).lightingServices || '',
-        
-        // Catering specific
-        cuisineType: (vendor as any).cuisineType || '',
-        menuStyle: (vendor as any).menuStyle || '',
-        servingStyle: (vendor as any).servingStyle || '',
-        minimumGuests: (vendor as any).minimumGuests || '',
-        maximumGuests: (vendor as any).maximumGuests || '',
-        cateringPricingRange: (vendor as any).cateringPricingRange || '',
-        halalCertified: (vendor as any).halalCertified || '',
-        vegetarianOptions: (vendor as any).vegetarianOptions || '',
-        dietaryAccommodations: (vendor as any).dietaryAccommodations || '',
-        setupService: (vendor as any).setupService || '',
-        servingStaff: (vendor as any).servingStaff || '',
-        equipmentRental: (vendor as any).equipmentRental || '',
-      })
-    } else {
-      setEditingVendor(null)
-      setFormData({
-        name: '',
-        category: 'Venue',
-        city: 'Karachi',
-        pricing: '',
-        description: '',
-        images: [],
-        capacity: '',
-        type: '',
-        rating: 0,
-        reviews: 0,
-        approved: true,
-        ownerName: '',
-        ownerMobile1: '',
-        ownerMobile2: '',
-        ownerLandline: '',
-        ownerEmail: '',
-        managerName: '',
-        managerMobile1: '',
-        managerMobile2: '',
-        managerLandline: '',
-        managerEmail: '',
-        area: '',
-        completeAddress: '',
-        website: '',
-        businessEmail: '',
-        bankName: '',
-        branchCity: '',
-        accountNumber: '',
-        ibanNumber: '',
-        businessDuration: '',
-        numberOfBranches: '',
-        cancellationPolicy: '',
-        fireInsurance: '',
-        weArrangeInsurance: '',
-        wheelchairAccessible: '',
-        fileUrls: [],
-        venueType: '',
-        guestCapacity: '',
-        venuePricingRange: '',
-        cateringAvailable: '',
-        outsideCateringAllowed: '',
-        parkingCapacity: '',
-        parkingType: '',
-        amenities: '',
-        bridalSuite: '',
-        namazAreaMen: '',
-        namazAreaLadies: '',
-        dressType: '',
-        designOrResell: '',
-        fabrics: '',
-        priceRange: '',
-        customization: '',
-        rentalPolicy: '',
-        delivery: '',
-        servicesList: '',
-        packages: '',
-        operatingHours: '',
-        brandsUsed: '',
-        staffExpertise: '',
-        bridalTrials: '',
-        salonPricing: '',
-        promotions: '',
-        hygiene: '',
-        decorType: '',
-        decorStyle: '',
-        eventTypes: '',
-        decorPricingRange: '',
-        setupTime: '',
-        equipmentProvided: '',
-        customDesign: '',
-        themesAvailable: '',
-        floralsIncluded: '',
-        lightingServices: '',
-        cuisineType: '',
-        menuStyle: '',
-        servingStyle: '',
-        minimumGuests: '',
-        maximumGuests: '',
-        cateringPricingRange: '',
-        halalCertified: '',
-        vegetarianOptions: '',
-        dietaryAccommodations: '',
-        setupService: '',
-        servingStaff: '',
-        equipmentRental: '',
-      })
-    }
-    setError('')
-    setIsDialogOpen(true)
-  }
-
-  const handleCloseDialog = () => {
-    setIsDialogOpen(false)
-    setEditingVendor(null)
-    setError('')
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setSaving(true)
-    setError('')
-
-    try {
-      const payload = {
-        ...formData,
-        capacity: formData.capacity || null,
-        type: formData.type || null,
-        rating: formData.rating || 0,
-        reviews: formData.reviews || 0,
-      }
-
-      let response
-      if (editingVendor) {
-        // Update existing vendor
-        response = await fetch(`/api/admin/vendors/${editingVendor.id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        })
-      } else {
-        // Create new vendor
-        response = await fetch('/api/admin/vendors', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        })
-      }
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        setError(data.error || 'Failed to save vendor')
-        return
-      }
-
-      handleCloseDialog()
-      fetchVendors()
-    } catch (err) {
-      setError('An error occurred. Please try again.')
-      console.error('Error saving vendor:', err)
-    } finally {
-      setSaving(false)
-    }
-  }
+  // Dialog handlers removed - now using separate pages
 
   const handleDelete = async (vendorId: string) => {
     if (!confirm('Are you sure you want to delete this vendor? This action cannot be undone.')) {
@@ -551,9 +174,11 @@ export default function AdminVendorsPage() {
             <p className="text-gray-600">Add, edit, and manage vendors for all categories</p>
           </div>
           <div className="flex space-x-2">
-            <Button onClick={() => handleOpenDialog()} className="bg-[#d13f43] hover:bg-[#b82f33]">
-              + Add New Vendor
-            </Button>
+            <Link href="/admin/vendors/new">
+              <Button className="bg-[#d13f43] hover:bg-[#b82f33]">
+                + Add New Vendor
+              </Button>
+            </Link>
             <Link href="/admin">
               <Button variant="outline">Back to Dashboard</Button>
             </Link>
@@ -658,7 +283,7 @@ export default function AdminVendorsPage() {
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => handleOpenDialog(vendor)}
+                          onClick={() => router.push(`/admin/vendors/${vendor.id}/edit`)}
                         >
                           Edit
                         </Button>
@@ -678,40 +303,6 @@ export default function AdminVendorsPage() {
           </CardContent>
         </Card>
 
-        {/* Add/Edit Dialog */}
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>
-                {editingVendor ? 'Edit Vendor' : 'Add New Vendor'}
-              </DialogTitle>
-              <DialogDescription>
-                {editingVendor
-                  ? 'Update vendor information and details'
-                  : 'Create a new vendor listing with all details'}
-              </DialogDescription>
-            </DialogHeader>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {error && (
-                <div className="p-3 bg-red-50 border border-red-200 rounded-md text-red-700 text-sm">
-                  {error}
-                </div>
-              )}
-
-              <VendorFormTabs formData={formData} setFormData={setFormData} />
-
-              <div className="flex justify-end gap-3 pt-4 border-t">
-                <Button type="button" variant="outline" onClick={handleCloseDialog}>
-                  Cancel
-                </Button>
-                <Button type="submit" disabled={saving} className="bg-[#d13f43] hover:bg-[#b82f33]">
-                  {saving ? 'Saving...' : editingVendor ? 'Update Vendor' : 'Create Vendor'}
-                </Button>
-              </div>
-            </form>
-          </DialogContent>
-        </Dialog>
       </div>
     </div>
   )
