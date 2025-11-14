@@ -279,7 +279,6 @@ export default function VendorDashboard() {
                     images={formData.images}
                     onImagesChange={(images) => setFormData({ ...formData, images })}
                     maxImages={10}
-                    useLocalStorage={true}
                   />
                 </div>
                 
