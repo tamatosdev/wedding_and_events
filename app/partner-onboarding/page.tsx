@@ -107,6 +107,7 @@ function PartnerOnboardingForm() {
     resolver: zodResolver(baseFormSchema),
     defaultValues: formData,
     mode: 'onChange',
+    shouldUnregister: false, // Keep all field values even when not visible
   })
 
   // Ref to expose form for NavigationButtons
@@ -130,23 +131,14 @@ function PartnerOnboardingForm() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentStep])
 
-  const handleSubmit = async (formData: any) => {
-    console.log('handleSubmit called', { formData, currentStep, totalSteps, businessType });
-    setDebug('Submit button clicked - Form validated successfully')
-    
-    // form.handleSubmit only calls this if validation passes
-    // Use the validated formData from react-hook-form
-    const formValues = formData || form.getValues()
-
-    // Sync form state to context on submit
-    updateFormData(formValues as any)
-
+  // Internal submit function that does the actual submission
+  const performSubmission = async (submissionData: any) => {
     setIsSubmitting(true)
     try {
       // Ensure businessType is included in submission data
       const data = {
-        ...formValues,
-        businessType: businessType || formValues.businessType || '',
+        ...submissionData,
+        businessType: businessType || submissionData.businessType || '',
       }
       setDebug('Submitting data: ' + JSON.stringify(data))
       console.log('Submitting partner onboarding form:', data)
@@ -177,6 +169,50 @@ function PartnerOnboardingForm() {
       alert(error instanceof Error ? error.message : 'Failed to submit form. Please try again.')
     } finally {
       setIsSubmitting(false)
+    }
+  }
+
+  const handleSubmit = async (formData: any) => {
+    console.log('handleSubmit called', { formData, currentStep, totalSteps, businessType });
+    setDebug('Submit button clicked - Form validated successfully')
+    
+    // Sync form state to context on submit (get latest values)
+    const formValues = form.getValues()
+    updateFormData(formValues as any)
+
+    // Use formData from validation if available, otherwise use form values
+    const submissionData = formData || formValues
+
+    await performSubmission(submissionData)
+  }
+
+  // Handle form validation errors
+  const handleSubmitError = (errors: any) => {
+    console.error('Form validation errors:', errors)
+    const errorMessages = Object.entries(errors)
+      .map(([field, error]: [string, any]) => `${field}: ${error?.message || 'Invalid'}`)
+      .join(', ')
+    setDebug('Validation errors: ' + errorMessages)
+    
+    // On review step, try to submit anyway with available data
+    if (currentStep === totalSteps) {
+      console.warn('Validation failed on review step, attempting submission with available data')
+      setDebug('Validation failed but attempting submission with available data')
+      
+      // Get all form values and context data
+      const allFormValues = form.getValues()
+      const contextData = formData || {}
+      const combinedData = { ...contextData, ...allFormValues }
+      
+      // Sync to context
+      updateFormData(combinedData as any)
+      
+      // Manually trigger submission
+      performSubmission(combinedData).catch(err => {
+        console.error('Manual submission failed:', err)
+      })
+    } else {
+      alert('Please fill in all required fields. Check the form for errors.')
     }
   }
 
@@ -337,7 +373,7 @@ function PartnerOnboardingForm() {
 
           <StepWrapper stepKey={currentStep}>
             <FormProvider {...form}>
-              <form onSubmit={form.handleSubmit(handleSubmit)} className="bg-white rounded-lg shadow-lg p-8 border border-[#DD374033]">
+              <form onSubmit={form.handleSubmit(handleSubmit, handleSubmitError)} className="bg-white rounded-lg shadow-lg p-8 border border-[#DD374033]">
                 {debug && (
                   <div className="mb-4 p-2 bg-yellow-100 border border-yellow-300 rounded text-yellow-800">
                     Debug: {debug}

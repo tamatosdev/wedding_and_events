@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { Dialog, DialogClose, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogClose, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -106,6 +106,9 @@ export default function WelcomePopup() {
         <DialogTitle className="text-2xl font-bold mb-4 text-center">
           For updates and exclusive discounts, sign&nbsp;up&nbsp;now
         </DialogTitle>
+        <DialogDescription className="text-center mb-4">
+          Join our newsletter to receive exclusive offers and updates
+        </DialogDescription>
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
             <div className="p-3 bg-red-50 border border-red-200 rounded-md text-red-700 text-sm">
@@ -129,9 +132,9 @@ export default function WelcomePopup() {
             />
           </div>
           <div>
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="welcome-email">Email</Label>
             <Input 
-              id="email" 
+              id="welcome-email" 
               name="email" 
               type="email" 
               value={form.email} 
