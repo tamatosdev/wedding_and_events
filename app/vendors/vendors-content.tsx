@@ -463,7 +463,7 @@ export default function VendorsPage() {
                             <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm0 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z" clipRule="evenodd" />
                             </svg>
-                            {vendor.capacity || '500-1000'}
+                            Capacity: {vendor.capacity || '500-1000'}
                           </span>
                         </div>
 
@@ -492,9 +492,7 @@ export default function VendorsPage() {
                         </p>
 
                         <div className="flex justify-between items-center">
-                          <span className="text-lg font-semibold text-red-600">
-                            Starting At {vendor.pricing}
-                          </span>
+
                           <Link href={`/vendors/${vendor.id}`}>
                             <Button size="sm" className="bg-red-600 hover:bg-red-700 text-white">
                               View Details

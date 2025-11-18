@@ -138,6 +138,17 @@ async function main() {
       order: 0,
     },
     {
+      section: 'featured',
+      title: 'Featured Vendors',
+      subtitle: 'Handpicked vendors for your special day',
+      content: {
+        description: 'Discover our top-rated and most popular wedding vendors, carefully selected to make your event unforgettable.',
+        featuredVendorIds: [], // You can update this to include specific vendor IDs if needed
+      },
+      visible: true,
+      order: 2,
+    },
+    {
       section: 'categories',
       title: 'Find Every Vendor\nYou Need',
       images: [
@@ -149,7 +160,7 @@ async function main() {
           { name: 'Wedding Halls/Venues', category: 'Wedding', image: '/uploads/Vendor-1.png', link: '/partners?type=wedding' },
           { name: 'Catering', category: 'Catering', image: '/uploads/Vendor-2.png', link: '/partners?type=catering' },
           { name: 'Decoration', category: 'Decoration', image: '/uploads/Vendor-5.png', link: '/partners?type=decor' },
-          { name: 'Beauty Parlor', category: 'Beauty Parlor', image: '/uploads/Vendor-3.png', link: '/partners?type=beauty-parlor' },
+          { name: 'Beauty Parlour', category: 'Beauty Parlour', image: '/uploads/Vendor-3.png', link: '/partners?type=beauty-parlour' },
           { name: 'Boutiques', category: 'Boutiques', image: '/uploads/Vendor-4.png', link: '/partners?type=boutiques' }
         ]
       },

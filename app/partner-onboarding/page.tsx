@@ -68,7 +68,22 @@ import ReviewSubmit from '@/components/partner-onboarding/ReviewSubmit'
 import WhatsAppFloating from '@/components/whatsapp-floating'
 
 import { useRef } from 'react'
-
+import Step1OwnerBusiness from '@/components/partner-onboarding/BeautyParlour/Step1OwnerBusiness';
+import Step2ManagerPOC from '@/components/partner-onboarding/BeautyParlour/Step2ManagerPOC';
+import Step3BankPayment from '@/components/partner-onboarding/BeautyParlour/Step3BankPayment';
+import Step4ProfileExperience from '@/components/partner-onboarding/BeautyParlour/Step4ProfileExperience';
+import Step5ServicesStaff from '@/components/partner-onboarding/BeautyParlour/Step5ServicesStaff';
+import Step6PortfolioMarketing from '@/components/partner-onboarding/BeautyParlour/Step6PortfolioMarketing';
+import Step7PricingBooking from '@/components/partner-onboarding/BeautyParlour/Step7PricingBooking';
+import Step8FinalDeclaration from '@/components/partner-onboarding/BeautyParlour/Step8FinalDeclaration';
+import BoutiqueStep1OwnerBusiness from '@/components/partner-onboarding/Boutique/Step1OwnerBusiness';
+import BoutiqueStep2ManagerPOC from '@/components/partner-onboarding/Boutique/Step2ManagerPOC';
+import BoutiqueStep3BankPayment from '@/components/partner-onboarding/Boutique/Step3BankPayment';
+import BoutiqueStep4ProfileProduct from '@/components/partner-onboarding/Boutique/Step4ProfileProduct';
+import BoutiqueStep5ProductRentalLogistics from '@/components/partner-onboarding/Boutique/Step5ProductRentalLogistics';
+import BoutiqueStep6CustomerPolicies from '@/components/partner-onboarding/Boutique/Step6CustomerPolicies';
+import BoutiqueStep7MarketingPromotion from '@/components/partner-onboarding/Boutique/Step7MarketingPromotion';
+import BoutiqueStep8FinalDeclaration from '@/components/partner-onboarding/Boutique/Step8FinalDeclaration';
 
 function PartnerOnboardingForm() {
   console.log('PartnerOnboardingForm rendered');
@@ -93,7 +108,7 @@ function PartnerOnboardingForm() {
     if (typeParam && !businessType) {
       // Map legacy 'venue' to 'wedding' if needed
       const mappedType = typeParam === 'venue' ? 'wedding' : typeParam
-      if (['wedding', 'boutiques', 'beauty-parlor', 'decor', 'catering'].includes(mappedType)) {
+      if (['wedding', 'boutiques', 'beauty-parlour', 'decor', 'catering'].includes(mappedType)) {
         setBusinessType(mappedType as any)
       }
     }
@@ -230,6 +245,40 @@ function PartnerOnboardingForm() {
     switch (stepId) {
       case 'business-type':
         return <StepSelector />
+      // Beauty Parlour 8-step custom flow
+      case 'beautyparlour-step1':
+        return <Step1OwnerBusiness form={form} />;
+      case 'beautyparlour-step2':
+        return <Step2ManagerPOC form={form} />;
+      case 'beautyparlour-step3':
+        return <Step3BankPayment form={form} />;
+      case 'beautyparlour-step4':
+        return <Step4ProfileExperience form={form} />;
+      case 'beautyparlour-step5':
+        return <Step5ServicesStaff form={form} />;
+      case 'beautyparlour-step6':
+        return <Step6PortfolioMarketing form={form} />;
+      case 'beautyparlour-step7':
+        return <Step7PricingBooking form={form} />;
+      case 'beautyparlour-step8':
+        return <Step8FinalDeclaration form={form} />;
+      // Boutique 8-step custom flow
+      case 'boutique-step1':
+        return <BoutiqueStep1OwnerBusiness form={form} />;
+      case 'boutique-step2':
+        return <BoutiqueStep2ManagerPOC form={form} />;
+      case 'boutique-step3':
+        return <BoutiqueStep3BankPayment form={form} />;
+      case 'boutique-step4':
+        return <BoutiqueStep4ProfileProduct form={form} />;
+      case 'boutique-step5':
+        return <BoutiqueStep5ProductRentalLogistics form={form} />;
+      case 'boutique-step6':
+        return <BoutiqueStep6CustomerPolicies form={form} />;
+      case 'boutique-step7':
+        return <BoutiqueStep7MarketingPromotion form={form} />;
+      case 'boutique-step8':
+        return <BoutiqueStep8FinalDeclaration form={form} />;
       // New Venue Steps
       case 'owner-business-details':
         if (businessType === 'wedding') return <VenueOwnerBusinessDetails />
@@ -273,11 +322,11 @@ function PartnerOnboardingForm() {
         return <BoutiqueProducts />
       case 'boutiques-policies':
         return <BoutiquePolicies />
-      case 'beauty-parlor-details':
+      case 'beauty-parlour-details':
         return <SalonDetails />
-      case 'beauty-parlor-services':
+      case 'beauty-parlour-services':
         return <SalonServices />
-      case 'beauty-parlor-policies':
+      case 'beauty-parlour-policies':
         return <SalonPolicies />
       case 'decor-details':
         return <DecorDetails />

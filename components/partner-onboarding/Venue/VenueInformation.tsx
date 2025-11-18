@@ -1,8 +1,9 @@
+'use client'
+
 import { usePartnerForm } from '@/contexts/PartnerFormContext'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const venueTypes = ['Banquet', 'Marquee', 'Lawn', 'Roof top', 'Other']
 const yesNoOptions = ['Yes', 'No']
@@ -13,12 +14,9 @@ export default function VenueInformation() {
     updateFormData({ [field]: value } as any)
   }
   return (
-    <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>Venue Information</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
+    <div className="max-w-3xl mx-auto bg-white/80 rounded-2xl shadow-xl p-8 border border-[#F7E9DB] space-y-8">
+      <h2 className="text-3xl font-extrabold text-[#D13F43] mb-2 tracking-tight text-center" style={{fontFamily:'DM Sans, sans-serif'}}>Venue Information</h2>
+      <div className="space-y-8">
           <div>
             <Label>What is your venue type? *</Label>
             <select 
@@ -107,8 +105,7 @@ export default function VenueInformation() {
               rows={4}
             />
           </div>
-        </CardContent>
-      </Card>
+      </div>
     </div>
   )
 }

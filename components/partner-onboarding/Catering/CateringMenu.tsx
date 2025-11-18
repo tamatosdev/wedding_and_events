@@ -15,11 +15,9 @@ export default function CateringMenu() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="max-w-3xl mx-auto bg-white/80 rounded-2xl shadow-xl p-8 border border-[#F7E9DB] space-y-8">
       <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-[#2E2E2E] mb-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-          Menu & Packages
-        </h2>
+        <h2 className="text-3xl font-extrabold text-[#D13F43] mb-2 tracking-tight text-center" style={{fontFamily:'DM Sans, sans-serif'}}>Menu & Packages</h2>
         <p className="text-[#666666]">Describe your menu offerings, packages, and services</p>
       </div>
 
@@ -27,7 +25,7 @@ export default function CateringMenu() {
         <CardHeader>
           <CardTitle className="text-lg text-[#2E2E2E]">Menu Information</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-8">
           <div>
             <Label htmlFor="dietaryAccommodations" className="text-[#2E2E2E]">
               Dietary Accommodations

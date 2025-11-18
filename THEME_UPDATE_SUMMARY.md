@@ -4,7 +4,7 @@
 
 ### 1. Business Types Updated
 - ✅ Changed from: `venue`, `boutique`, `salon`, `decor`, `catering`
-- ✅ Changed to: `wedding`, `boutiques`, `beauty-parlor`, `decor`, `catering`
+- ✅ Changed to: `wedding`, `boutiques`, `beauty-parlour`, `decor`, `catering`
 - ✅ Updated in: `formConfig.ts`, `validationSchemas.ts`, `Prisma schema`, `API routes`, `demoPartners.ts`
 
 ### 2. City Selection Updated

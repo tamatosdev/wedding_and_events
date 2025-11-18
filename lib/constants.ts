@@ -10,7 +10,7 @@ export const BUSINESS_TYPES = {
   WEDDING: 'wedding', // Venue/Wedding Halls
   CATERING: 'catering',
   DECOR: 'decor',
-  BEAUTY_PARLOR: 'beauty-parlor',
+  BEAUTY_PARLOR: 'beauty-parlour',
   BOUTIQUES: 'boutiques',
 } as const
 

@@ -6,7 +6,7 @@
 export interface DemoPartner {
   id: string
   name: string
-  businessType: 'wedding' | 'boutiques' | 'beauty-parlor' | 'decor' | 'catering'
+  businessType: 'wedding' | 'boutiques' | 'beauty-parlour' | 'decor' | 'catering'
   city: string
   area: string
   description: string
@@ -234,7 +234,7 @@ export const demoPartners: DemoPartner[] = [
   {
     id: 'salon-1',
     name: 'Glamour Studio',
-    businessType: 'beauty-parlor',
+    businessType: 'beauty-parlour',
     city: 'Karachi',
     area: 'Clifton',
     description: 'Professional bridal makeup and hair styling. Uses premium international brands. Expert team with 10+ years experience.',
@@ -251,7 +251,7 @@ export const demoPartners: DemoPartner[] = [
   {
     id: 'salon-2',
     name: 'Beauty & Beyond',
-    businessType: 'beauty-parlor',
+    businessType: 'beauty-parlour',
     city: 'Karachi',
     area: 'Gulberg',
     description: 'Complete beauty services including makeup, hair, mehndi, and nail art. Bridal packages available.',
@@ -268,7 +268,7 @@ export const demoPartners: DemoPartner[] = [
   {
     id: 'salon-3',
     name: 'Elite Bridal Salon',
-    businessType: 'beauty-parlor',
+    businessType: 'beauty-parlour',
     city: 'Karachi',
     area: 'F-7',
     description: 'Luxury bridal salon offering premium makeup and hair services. Certified makeup artists.',

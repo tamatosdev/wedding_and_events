@@ -20,7 +20,7 @@
 **Changed throughout entire project:**
 - ✅ `venue` → `wedding` (Wedding Halls/Venues)
 - ✅ `boutique` → `boutiques` (Boutiques)
-- ✅ `salon` → `beauty-parlor` (Beauty Parlor)
+- ✅ `salon` → `beauty-parlour` (Beauty Parlour)
 - ✅ `decor` → `decor` (unchanged)
 - ✅ `catering` → `catering` (unchanged)
 

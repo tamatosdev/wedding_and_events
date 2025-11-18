@@ -120,7 +120,7 @@ export default function PartnersCMS() {
     const labels: Record<string, string> = {
       WEDDING: 'Wedding Venue',
       BOUTIQUES: 'Boutiques',
-      'BEAUTY-PARLOR': 'Beauty Parlor',
+      'BEAUTY-PARLOUR': 'Beauty Parlour',
       DECOR: 'Decoration',
       CATERING: 'Catering',
     }
@@ -205,7 +205,7 @@ export default function PartnersCMS() {
                   <SelectItem value="all">All Types</SelectItem>
                   <SelectItem value="wedding">Wedding Venues</SelectItem>
                   <SelectItem value="boutiques">Boutiques</SelectItem>
-                  <SelectItem value="beauty-parlor">Beauty Parlor</SelectItem>
+                  <SelectItem value="beauty-parlour">Beauty Parlour</SelectItem>
                   <SelectItem value="decor">Decoration</SelectItem>
                   <SelectItem value="catering">Catering</SelectItem>
                 </SelectContent>

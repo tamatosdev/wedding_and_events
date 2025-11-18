@@ -7,10 +7,10 @@ import { getStepsForBusinessType } from '@/lib/partner-onboarding/formConfig'
 import { usePartnerForm } from '@/contexts/PartnerFormContext'
 
 export default function ProgressBar() {
-  const { currentStep, totalSteps, getProgress } = useFormSteps()
-  const { businessType } = usePartnerForm()
-  const steps = getStepsForBusinessType(businessType)
-  const progress = getProgress()
+  const { currentStep, totalSteps, getProgress, goToStep } = useFormSteps();
+  const { businessType } = usePartnerForm();
+  const steps = getStepsForBusinessType(businessType);
+  const progress = getProgress();
 
   return (
     <div className="mb-8">
@@ -35,45 +35,63 @@ export default function ProgressBar() {
       </div>
 
       {/* Step Indicators */}
-      <div className="flex justify-between items-center mt-4 overflow-x-auto pb-2">
+      <div className="flex justify-between items-center mt-8 overflow-x-auto scrollbar-hide pb-4 relative min-h-[90px]" style={{ WebkitOverflowScrolling: 'touch', overflowY: 'visible' }}>
         {steps.map((step, index) => {
-          const stepNum = index + 1
-          const isActive = stepNum === currentStep
-          const isCompleted = stepNum < currentStep
-          
+          const stepNum = index + 1;
+          const isActive = stepNum === currentStep;
+          const isCompleted = stepNum < currentStep;
+          const handleClick = () => {
+            if (stepNum !== currentStep) {
+              goToStep(stepNum);
+            }
+          };
           return (
-            <div
-              key={step.id}
-              className={`flex flex-col items-center min-w-[80px] transition-colors ${
-                isCompleted
-                  ? 'text-green-600'
-                  : isActive
-                  ? 'text-[#D13F43]'
-                  : 'text-gray-400'
-              }`}
-            >
-              <motion.div
-                className={`w-8 h-8 rounded-full flex items-center justify-center font-semibold text-sm transition-all ${
+            <div key={step.id} className="relative flex-1 flex flex-col items-center min-w-[80px]" style={{paddingTop: '8px', paddingBottom: '8px'}}>
+              {/* Connecting line (except last step) */}
+              {index < steps.length - 1 && (
+                <div className="absolute top-1/2 left-full w-full h-1 -translate-y-1/2 z-0 pointer-events-none">
+                  <div className="h-full w-full bg-gradient-to-r from-[#F7E9DB] to-[#D13F43] opacity-40 rounded-full"></div>
+                </div>
+              )}
+              <button
+                type="button"
+                onClick={handleClick}
+                className={`relative z-10 flex flex-col items-center focus:outline-none group ${
                   isCompleted
-                    ? 'bg-green-100 text-green-600'
+                    ? 'text-green-600 cursor-pointer'
                     : isActive
-                    ? 'bg-[#F7E9DB] text-[#D13F43] ring-2 ring-[#D13F43]'
-                    : 'bg-gray-100 text-gray-400'
+                    ? 'text-[#D13F43] cursor-pointer'
+                    : 'text-gray-400 cursor-pointer'
                 }`}
-                whileHover={{ scale: 1.1 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                tabIndex={0}
+                aria-current={isActive ? 'step' : undefined}
+                style={{marginTop: '0', marginBottom: '0'}}
               >
-                {isCompleted ? (
-                  <CheckCircle2 className="w-5 h-5" />
-                ) : (
-                  stepNum
-                )}
-              </motion.div>
-              <span className="text-xs mt-1 text-center hidden md:block max-w-[80px] truncate" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                {step.title}
-              </span>
+                <motion.div
+                  className={`w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg transition-all border-2 border-transparent shadow-sm group-focus:border-[#D13F43] group-hover:border-[#D13F43] group-hover:shadow-lg ${
+                    isCompleted
+                      ? 'bg-green-100 text-green-600 border-green-200'
+                      : isActive
+                      ? 'bg-gradient-to-br from-[#F7E9DB] to-[#D13F43] text-[#D13F43] ring-4 ring-[#D13F43]/30 border-[#D13F43] shadow-lg'
+                      : 'bg-gray-100 text-gray-400 border-gray-200'
+                  }`}
+                  whileHover={{ scale: 1.13 }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  style={{boxShadow: isActive ? '0 4px 16px 0 #D13F4340' : undefined}}
+                >
+                  {isCompleted ? (
+                    <CheckCircle2 className="w-5 h-5" />
+                  ) : (
+                    stepNum
+                  )}
+                </motion.div>
+                <span className="text-xs mt-3 text-center hidden md:block max-w-[100px] truncate font-medium tracking-wide" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                  {step.title}
+                </span>
+              </button>
             </div>
-          )
+          );
         })}
       </div>
     </div>

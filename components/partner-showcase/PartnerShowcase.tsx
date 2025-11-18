@@ -10,7 +10,7 @@ const businessTypes = [
   { id: 'all' as const, label: 'All Partners', icon: null },
   { id: 'wedding' as const, label: 'Wedding Venues', icon: Building2 },
   { id: 'boutiques' as const, label: 'Boutiques', icon: Shirt },
-  { id: 'beauty-parlor' as const, label: 'Beauty Parlors', icon: Sparkles },
+  { id: 'beauty-parlour' as const, label: 'Beauty Parlours', icon: Sparkles },
   { id: 'decor' as const, label: 'Decoration', icon: Palette },
   { id: 'catering' as const, label: 'Catering', icon: UtensilsCrossed },
 ] as const

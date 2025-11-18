@@ -3,7 +3,7 @@
  * Defines which steps are shown for each partner type
  */
 
-export type BusinessType = 'wedding' | 'boutiques' | 'beauty-parlor' | 'decor' | 'catering'
+export type BusinessType = 'wedding' | 'boutiques' | 'beauty-parlour' | 'decor' | 'catering'
 
 export interface StepConfig {
   id: string
@@ -26,29 +26,25 @@ export const formSteps: Record<BusinessType, StepConfig[]> = {
   ],
   boutiques: [
     { id: 'business-type', title: 'Business Type', component: 'StepSelector', required: true, validationFields: ['businessType'] },
-    { id: 'owner-details', title: 'Owner Details', component: 'OwnerDetails', required: true, validationFields: ['ownerName', 'ownerMobile1', 'ownerEmail'] },
-    { id: 'manager-details', title: 'Manager Details', component: 'ManagerDetails', required: true, validationFields: ['managerName', 'managerMobile1', 'managerEmail'] },
-    { id: 'business-info', title: 'Business Info', component: 'BusinessInfo', required: true, validationFields: ['businessName', 'city', 'area', 'completeAddress'] },
-    { id: 'bank-details', title: 'Bank Details', component: 'BankDetails', required: false },
-    { id: 'boutiques-details', title: 'Boutique Details', component: 'BoutiquesDetails', required: false },
-    { id: 'boutiques-products', title: 'Products & Services', component: 'BoutiquesProducts', required: false },
-    { id: 'boutiques-policies', title: 'Boutique Policies', component: 'BoutiquesPolicies', required: true, validationFields: ['cancellationPolicy'] },
-    { id: 'general-questions', title: 'General Questions', component: 'GeneralQuestions', required: false },
-    { id: 'upload-summary', title: 'Upload & Summary', component: 'UploadSummary', required: false },
-    { id: 'review-submit', title: 'Review & Submit', component: 'ReviewSubmit', required: false },
+    { id: 'boutique-step1', title: 'Owner & Business Details', component: 'Boutique/Step1OwnerBusiness', required: true },
+    { id: 'boutique-step2', title: 'Manager/POC Details', component: 'Boutique/Step2ManagerPOC', required: true },
+    { id: 'boutique-step3', title: 'Bank & Payment Information', component: 'Boutique/Step3BankPayment', required: false },
+    { id: 'boutique-step4', title: 'Business Profile & Product Range', component: 'Boutique/Step4ProfileProduct', required: false },
+    { id: 'boutique-step5', title: 'Product, Rental & Logistics', component: 'Boutique/Step5ProductRentalLogistics', required: false },
+    { id: 'boutique-step6', title: 'Customer Service & Policies', component: 'Boutique/Step6CustomerPolicies', required: false },
+    { id: 'boutique-step7', title: 'Marketing & Promotion', component: 'Boutique/Step7MarketingPromotion', required: false },
+    { id: 'boutique-step8', title: 'Final Declarations & Submission', component: 'Boutique/Step8FinalDeclaration', required: false },
   ],
-  'beauty-parlor': [
+  'beauty-parlour': [
     { id: 'business-type', title: 'Business Type', component: 'StepSelector', required: true, validationFields: ['businessType'] },
-    { id: 'owner-details', title: 'Owner Details', component: 'OwnerDetails', required: true, validationFields: ['ownerName', 'ownerMobile1', 'ownerEmail'] },
-    { id: 'manager-details', title: 'Manager Details', component: 'ManagerDetails', required: true, validationFields: ['managerName', 'managerMobile1', 'managerEmail'] },
-    { id: 'business-info', title: 'Business Info', component: 'BusinessInfo', required: true, validationFields: ['businessName', 'city', 'area', 'completeAddress'] },
-    { id: 'bank-details', title: 'Bank Details', component: 'BankDetails', required: false },
-    { id: 'beauty-parlor-details', title: 'Beauty Parlor Details', component: 'BeautyParlorDetails', required: false },
-    { id: 'beauty-parlor-services', title: 'Services & Packages', component: 'BeautyParlorServices', required: false },
-    { id: 'beauty-parlor-policies', title: 'Beauty Parlor Policies', component: 'BeautyParlorPolicies', required: true, validationFields: ['cancellationPolicy'] },
-    { id: 'general-questions', title: 'General Questions', component: 'GeneralQuestions', required: false },
-    { id: 'upload-summary', title: 'Upload & Summary', component: 'UploadSummary', required: false },
-    { id: 'review-submit', title: 'Review & Submit', component: 'ReviewSubmit', required: false },
+    { id: 'beautyparlour-step1', title: 'Owner & Business Details', component: 'BeautyParlour/Step1OwnerBusiness', required: true },
+    { id: 'beautyparlour-step2', title: 'Manager/POC Details', component: 'BeautyParlour/Step2ManagerPOC', required: true },
+    { id: 'beautyparlour-step3', title: 'Bank & Payment Information', component: 'BeautyParlour/Step3BankPayment', required: false },
+    { id: 'beautyparlour-step4', title: 'Business Profile & Experience', component: 'BeautyParlour/Step4ProfileExperience', required: false },
+    { id: 'beautyparlour-step5', title: 'Services & Staff', component: 'BeautyParlour/Step5ServicesStaff', required: false },
+    { id: 'beautyparlour-step6', title: 'Portfolio & Marketing', component: 'BeautyParlour/Step6PortfolioMarketing', required: false },
+    { id: 'beautyparlour-step7', title: 'Pricing, Booking & Policies', component: 'BeautyParlour/Step7PricingBooking', required: false },
+    { id: 'beautyparlour-step8', title: 'Final Declarations & Submission', component: 'BeautyParlour/Step8FinalDeclaration', required: false },
   ],
   decor: [
     { id: 'business-type', title: 'Business Type', component: 'StepSelector', required: true, validationFields: ['businessType'] },

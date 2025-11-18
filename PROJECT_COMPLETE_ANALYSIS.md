@@ -423,7 +423,7 @@ wedding_and_events/
 **Status:** ✅ **FIXED** - All updated to:
 - `wedding` (was `venue`)
 - `boutiques` (was `boutique`)
-- `beauty-parlor` (was `salon`)
+- `beauty-parlour` (was `salon`)
 - `decor` (unchanged)
 - `catering` (unchanged)
 

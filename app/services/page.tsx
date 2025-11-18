@@ -90,8 +90,16 @@ export default function ServicesPage() {
               <h1 className="text-4xl md:text-6xl font-bold mb-4 text-gray-900">
                 Our Services
               </h1>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Complete wedding planning made effortless. From venues to décor, photography to catering we connect you with trusted vendors who bring your dream day to life.
+              <p className="text-lg text-gray-600 max-w-4xl mx-auto">
+                We’re here to make your BIG DAY effortless, memorable, and distinctly yours! 
+              </p>
+              <p className="text-lg text-gray-600 max-w-4xl mx-auto">
+                Complete wedding & event planning made effortless.
+              </p>
+              <p className="text-lg text-gray-600 max-w-4xl mx-auto">
+                From Venue booking, Catering, Event décor, Bridal couture, Beauty salons and other ,  
+we connect you with trusted vendors who bring your dream day to life.
+
               </p>
             </div>
           </div>
@@ -116,7 +124,7 @@ export default function ServicesPage() {
                 </div>
                 <div className="p-6">
                   <h3 className="text-2xl font-bold mb-3 text-gray-900">{service.name}</h3>
-                  <p className="text-gray-600 mb-4">{service.description}</p>
+                  <p className="text-gray-600 mb-4 service-desc">{service.description}</p>
                   <ul className="space-y-2 mb-6">
                     {service.features.map((feature, index) => (
                       <li key={index} className="flex items-center text-sm text-gray-700">
@@ -152,30 +160,78 @@ export default function ServicesPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-[#d13f43]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
+                  <Image
+                    src="/uploads/verified.png"
+                    alt="Verified Vendor"
+                    width={32}
+                    height={32}
+                  />
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-gray-900">Verified Vendors</h3>
-                <p className="text-gray-600">All our vendors are verified and trusted</p>
+                <p className="text-gray-600">A smart, reliable online platform that connects you directly with “verified” venues and vendors - ensuring convenience, quality, options, value for money, and complete peace of mind.</p>
               </div>
               <div className="text-center">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-[#d13f43]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                 <Image
+                    src="/uploads/value.png"
+                    alt="Verified Vendor"
+                    width={32}
+                    height={32}
+                  />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-900">24/7 Support</h3>
-                <p className="text-gray-600">Round-the-clock assistance for all your needs</p>
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">Value for Money</h3>
+                <p className="text-gray-600">Smart comparisons and budgeting options will make your BIG DAY a grand and stress-free one, while keeping it affordable.</p>
               </div>
               <div className="text-center">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-[#d13f43]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                  <Image
+                    src="/uploads/thumb-ups.png"
+                    alt="Verified Vendor"
+                    width={32}
+                    height={32}
+                  />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-900">Best Prices</h3>
-                <p className="text-gray-600">Competitive pricing for all services</p>
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">Complete Convenience </h3>
+                <p className="text-gray-600">Access trusted & verified venues, vendors, and services all in one place without the hassle of endless searches and visits.</p>
+              </div>
+
+               <div className="text-center">
+                <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Image
+                    src="/uploads/tool.png"
+                    alt="Verified Vendor"
+                    width={32}
+                    height={32}
+                  />
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">Smart Planning Tools  </h3>
+                <p className="text-gray-600">Enjoy a seamless experience with our easy-to-use, technology-driven platform.</p>
+              </div>
+
+               <div className="text-center">
+                <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Image
+                    src="/uploads/choice.png"
+                    alt="Verified Vendor"
+                    width={32}
+                    height={32}
+                  />
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">Endless Choices  </h3>
+                <p className="text-gray-600">Explore diverse options across every category to suit your preferences, lifestyle and budget.</p>
+              </div>
+
+              <div className="text-center">
+                <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Image
+                    src="/uploads/travel-agency.png"
+                    alt="Verified Vendor"
+                    width={32}
+                    height={32}
+                  />
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">Save on travel </h3>
+                <p className="text-gray-600">We provide all the necessities, options, and prices on a single platform, helping you avoid all the driving, parking, and traffic issues. Our site provides you with access to all of this from the comfort of your own home.</p>
               </div>
             </div>
           </div>

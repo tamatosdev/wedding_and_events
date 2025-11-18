@@ -45,7 +45,7 @@ export default function HomePage() {
         <FeaturedListings />
         <WeddingPlanning />
         <TestimonialsSection />
-        <FAQ />
+        {/* <FAQ /> */}
         <CTASection />
       </main>
 

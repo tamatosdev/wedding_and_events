@@ -20,10 +20,10 @@ export function HeroSection() {
   const heroContent = cmsData?.content?.hero;
   const heroTitle = heroContent?.title || "Your Perfect\nEvent Starts Here!";
   const heroImages = heroContent?.images || [
-    "/uploads/wedding-hall-outer.png",
+    "/uploads/wedding-hall.png",
     "/uploads/catering-new.png",
-    "/uploads/wedding-stage-new.png",
-    "/uploads/bridal-dress.png"
+    "/uploads/decoration.png",
+    "/uploads/wedding-dress.png"
   ];
   const heroCategories = heroContent?.content?.categories || ["Venues", "Catering", "Decoration", "Beauty Parlor", "Boutiques"];
   const heroCities = heroContent?.content?.cities || ["Karachi"];

@@ -35,7 +35,7 @@ const businessTypes = [
     borderColor: 'border-[#DD374033]',
   },
   {
-    id: 'beauty-parlor' as BusinessType,
+    id: 'beauty-parlour' as BusinessType,
     title: 'Beauty Parlor',
     description: 'Bridal makeup, hair styling, and beauty services',
     icon: Sparkles,

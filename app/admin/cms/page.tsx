@@ -24,14 +24,28 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 // Content Editor Component
 function ContentEditor({ content, onSave, onCancel }: { content: HomepageContent; onSave: (data: HomepageContent) => void; onCancel: () => void }) {
-  const [editedContent, setEditedContent] = useState<HomepageContent>({ ...content })
+  // Always include the id property from the original content
+  const [editedContent, setEditedContent] = useState<HomepageContent>({ ...content, id: content.id })
+
+  // Always preserve all required fields from the original content
+  const preserveRequiredFields = (updated: Partial<HomepageContent>): HomepageContent => ({
+    id: content.id,
+    section: content.section,
+    title: updated.title ?? content.title,
+    subtitle: updated.subtitle ?? content.subtitle,
+    description: updated.description ?? content.description,
+    content: updated.content ?? content.content,
+    images: updated.images ?? content.images,
+    visible: typeof updated.visible === 'boolean' ? updated.visible : content.visible,
+    order: typeof updated.order === 'number' ? updated.order : content.order,
+  })
 
   const updateField = (field: keyof HomepageContent, value: any) => {
-    setEditedContent(prev => ({ ...prev, [field]: value }))
+    setEditedContent(prev => preserveRequiredFields({ ...prev, [field]: value }))
   }
 
   const updateContentField = (field: string, value: any) => {
-    setEditedContent(prev => ({
+    setEditedContent(prev => preserveRequiredFields({
       ...prev,
       content: { ...prev.content, [field]: value }
     }))
@@ -705,7 +719,8 @@ export default function AdminCMSPage() {
 
   const handleContentUpdate = async (contentData: HomepageContent) => {
     try {
-      const response = await fetch('/api/admin/settings?type=content', {
+      // Always include the id in the URL query string for update
+      const response = await fetch(`/api/admin/settings?type=content&id=${contentData.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(contentData),

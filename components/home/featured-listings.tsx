@@ -22,7 +22,7 @@ interface Vendor {
 const categoryMapping: Record<string, { title: string; category: string; link: string }> = {
   'Wedding': { title: 'Find Best Wedding Venues', category: 'Venue', link: '/venues' },
   'Catering': { title: 'Find Best Catering Services', category: 'Catering', link: '/vendors?category=Catering' },
-  'Beauty Parlor': { title: 'Find Best Beauty Parlors', category: 'Beauty Parlor', link: '/vendors?category=Beauty Parlor' },
+  'Beauty Parlour': { title: 'Find Best Beauty Parlours', category: 'Beauty Parlour', link: '/vendors?category=Beauty Parlor' },
   'Boutiques': { title: 'Find Best Boutiques', category: 'Boutiques', link: '/vendors?category=Boutiques' },
   'Decoration': { title: 'Find Best Decor Services', category: 'Decoration', link: '/vendors?category=Decoration' },
 }
@@ -33,7 +33,7 @@ function getCategories() {
   return [
     { title: 'Find Best Wedding Venues', category: 'Wedding', vendorCategory: 'Venue', link: '/venues' },
     { title: 'Find Best Catering Services', category: 'Catering', vendorCategory: 'Catering', link: '/vendors?category=Catering' },
-    { title: 'Find Best Beauty Parlors', category: 'Beauty Parlor', vendorCategory: 'Beauty Parlor', link: '/vendors?category=Beauty Parlor' },
+    { title: 'Find Best Beauty Parlours', category: 'Beauty Parlour', vendorCategory: 'Beauty Parlor', link: '/vendors?category=Beauty Parlor' },
     { title: 'Find Best Boutiques', category: 'Boutiques', vendorCategory: 'Boutiques', link: '/vendors?category=Boutiques' },
     { title: 'Find Best Decor Services', category: 'Decoration', vendorCategory: 'Decoration', link: '/vendors?category=Decoration' },
   ]
@@ -128,7 +128,7 @@ function CategorySection({ title, category, vendorCategory, link }: { title: str
         <h2 className="text-3xl font-bold text-gray-900" style={{ fontFamily: 'DM Sans, sans-serif' }}>
           {title}
         </h2>
-        <Link href={link}>
+        <Link href={`/vendors?category=${encodeURIComponent(vendorCategory)}`}>
           <Button variant="outline" className="text-[#D13F43] border-[#D13F43] hover:bg-[#F7E9DB]">
             View All
           </Button>
@@ -211,9 +211,7 @@ function VendorCarousel({ vendors }: { vendors: Vendor[] }) {
                     </span>
                   </div>
                   <p className="text-sm text-[#666666] mb-3 line-clamp-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>{vendor.description}</p>
-                  {vendor.pricing && (
-                    <p className="text-sm font-semibold text-[#D13F43] mb-3" style={{ fontFamily: 'DM Sans, sans-serif' }}>{vendor.pricing}</p>
-                  )}
+
                   <Link href={`/vendors/${vendor.id}`}>
                     <Button className="w-full bg-[#D13F43] hover:bg-[#b82f33] text-white" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                       View Details

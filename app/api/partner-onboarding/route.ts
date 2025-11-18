@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
     const businessTypeMap: Record<string, 'WEDDING' | 'BOUTIQUES' | 'BEAUTY_PARLOR' | 'DECOR' | 'CATERING'> = {
       wedding: 'WEDDING',
       boutiques: 'BOUTIQUES',
-      'beauty-parlor': 'BEAUTY_PARLOR',
+      'beauty-parlour': 'BEAUTY_PARLOUR',
       decor: 'DECOR',
       catering: 'CATERING',
     }
@@ -201,7 +201,7 @@ export async function GET(request: NextRequest) {
       const typeMap: Record<string, 'WEDDING' | 'BOUTIQUES' | 'BEAUTY_PARLOR' | 'DECOR' | 'CATERING'> = {
         wedding: 'WEDDING',
         boutiques: 'BOUTIQUES',
-        'beauty-parlor': 'BEAUTY_PARLOR',
+        'beauty-parlour': 'BEAUTY_PARLOUR',
         decor: 'DECOR',
         catering: 'CATERING',
       }

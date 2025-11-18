@@ -1,7 +1,8 @@
+'use client'
+
 import { usePartnerForm } from '@/contexts/PartnerFormContext'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const yesNoOptions = ['Yes', 'No']
 const valetOptions = ['Valet Service', 'Self', 'Both']
@@ -12,12 +13,9 @@ export default function VenueFacilitiesAmenities() {
     updateFormData({ [field]: value } as any)
   }
   return (
-    <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>Facilities & Amenities</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
+    <div className="max-w-3xl mx-auto bg-white/80 rounded-2xl shadow-xl p-8 border border-[#F7E9DB] space-y-8">
+      <h2 className="text-3xl font-extrabold text-[#D13F43] mb-2 tracking-tight text-center" style={{fontFamily:'DM Sans, sans-serif'}}>Facilities & Amenities</h2>
+      <div className="space-y-8">
           <div>
             <Label>Available Parking Space. (For Example, 200 Cars) *</Label>
             <Input 
@@ -214,8 +212,7 @@ export default function VenueFacilitiesAmenities() {
               </label>
             </div>
           </div>
-        </CardContent>
-      </Card>
+      </div>
     </div>
   )
 }

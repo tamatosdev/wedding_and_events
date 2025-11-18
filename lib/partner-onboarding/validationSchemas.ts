@@ -28,7 +28,7 @@ export const baseFormSchema = z.object({
   otherServices: z.string().optional(),
   additionalInfo: z.string().optional(),
   // Business Type
-  businessType: z.enum(['wedding', 'boutiques', 'beauty-parlor', 'decor', 'catering'], {
+  businessType: z.enum(['wedding', 'boutiques', 'beauty-parlour', 'decor', 'catering'], {
     required_error: 'Please select a business type',
   }),
   
@@ -154,7 +154,7 @@ export type FormData = z.infer<typeof baseFormSchema>
 // Step-specific validation schemas
 export const stepSchemas = {
   'business-type': z.object({
-    businessType: z.enum(['wedding', 'boutiques', 'beauty-parlor', 'decor', 'catering'], {
+    businessType: z.enum(['wedding', 'boutiques', 'beauty-parlour', 'decor', 'catering'], {
       required_error: 'Please select a business type',
     }),
   }),
@@ -192,9 +192,9 @@ export const stepSchemas = {
     cancellationPolicy: z.string().min(1, 'Cancellation policy is required'),
   }),
   
-  'beauty-parlor-details': z.object({}), // Optional fields
-  'beauty-parlor-services': z.object({}), // Optional fields
-  'beauty-parlor-policies': z.object({
+  'beauty-parlour-details': z.object({}), // Optional fields
+  'beauty-parlour-services': z.object({}), // Optional fields
+  'beauty-parlour-policies': z.object({
     cancellationPolicy: z.string().min(1, 'Cancellation policy is required'),
   }),
   

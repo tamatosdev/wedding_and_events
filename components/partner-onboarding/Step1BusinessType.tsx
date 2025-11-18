@@ -45,17 +45,17 @@ export default function Step1BusinessType({ form }: Step1BusinessTypeProps) {
   const selectedType = watch('businessType')
 
   return (
-    <div className="space-y-6">
+    <div className="max-w-5xl mx-auto bg-white/80 rounded-2xl shadow-xl p-8 border border-[#F7E9DB] space-y-8">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-3">
+        <h2 className="text-3xl font-extrabold text-[#D13F43] mb-3 tracking-tight" style={{fontFamily:'DM Sans, sans-serif'}}>
           Select Your Business Type
         </h2>
-        <p className="text-gray-600 text-lg">
+        <p className="text-[#666666] text-lg">
           Choose the category that best describes your business
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {businessTypes.map((type, index) => {
           const Icon = type.icon
           const isSelected = selectedType === type.id
@@ -68,33 +68,33 @@ export default function Step1BusinessType({ form }: Step1BusinessTypeProps) {
               transition={{ delay: index * 0.1 }}
             >
               <Card
-                className={`cursor-pointer transition-all hover:shadow-xl ${
+                className={`cursor-pointer transition-all hover:shadow-2xl ${
                   isSelected
-                    ? `${type.bgColor} border-2 ${type.borderColor} ring-2 ring-offset-2 ring-rose-300`
-                    : 'border-gray-200 hover:border-rose-300'
+                    ? `${type.bgColor} border-2 ${type.borderColor} ring-2 ring-offset-2 ring-[#D13F43]`
+                    : 'border-gray-200 hover:border-[#D13F43]'
                 }`}
                 onClick={() => setValue('businessType', type.id as any)}
               >
-                <CardContent className="p-6">
+                <CardContent className="p-8">
                   <div className="flex flex-col items-center text-center">
                     <div
-                      className={`w-16 h-16 rounded-full bg-gradient-to-br ${type.color} flex items-center justify-center mb-4 ${
-                        isSelected ? 'ring-4 ring-rose-200' : ''
+                      className={`w-20 h-20 rounded-full bg-gradient-to-br ${type.color} flex items-center justify-center mb-5 ${
+                        isSelected ? 'ring-4 ring-[#D13F43]/30' : ''
                       }`}
                     >
-                      <Icon className="w-8 h-8 text-white" />
+                      <Icon className="w-10 h-10 text-white" />
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-bold text-[#2E2E2E] mb-3" style={{fontFamily:'DM Sans, sans-serif'}}>
                       {type.title}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-4">
+                    <p className="text-sm text-[#666666] mb-4">
                       {type.description}
                     </p>
                     {isSelected && (
                       <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
-                        className="w-6 h-6 rounded-full bg-rose-600 flex items-center justify-center"
+                        className="w-7 h-7 rounded-full bg-[#D13F43] flex items-center justify-center shadow-lg"
                       >
                         <svg
                           className="w-4 h-4 text-white"
@@ -123,9 +123,9 @@ export default function Step1BusinessType({ form }: Step1BusinessTypeProps) {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-6 p-4 bg-rose-50 border border-rose-200 rounded-lg"
+          className="mt-6 p-5 bg-[#F7E9DB]/50 border border-[#D13F43]/30 rounded-xl"
         >
-          <p className="text-sm text-rose-800 text-center">
+          <p className="text-sm text-[#D13F43] text-center font-semibold">
             <strong>Selected:</strong> {businessTypes.find(t => t.id === selectedType)?.title}
           </p>
         </motion.div>

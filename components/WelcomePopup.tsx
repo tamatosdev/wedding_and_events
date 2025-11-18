@@ -117,7 +117,8 @@ export default function WelcomePopup() {
           )}
           {success && (
             <div className="p-3 bg-green-50 border border-green-200 rounded-md text-green-700 text-sm">
-              Thank you for your message! We'll get back to you soon.
+              Thank you for signing up! 🎉<br />
+              You’re now on our list to receive the latest updates, exclusive deals, and special discounts. Stay tuned—great offers are coming your way! Meanwhile, feel free to explore our wedding &amp; event platform.
             </div>
           )}
           <div>
@@ -175,8 +176,8 @@ export default function WelcomePopup() {
               className="mt-2 flex h-10 w-full rounded-md border border-gray-300 bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <option value="">Select preference type</option>
-              <option value="Men">Men</option>
-              <option value="Women">Women</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
               <option value="Business Entity">Business Entity</option>
             </select>
           </div>

@@ -14,7 +14,7 @@ interface PartnerCardProps {
 const businessTypeColors = {
   wedding: 'border-[#DD374033] bg-[#F7E9DB]',
   boutiques: 'border-[#DD374033] bg-[#F7E9DB]',
-  'beauty-parlor': 'border-[#DD374033] bg-[#F7E9DB]',
+  'beauty-parlour': 'border-[#DD374033] bg-[#F7E9DB]',
   decor: 'border-[#DD374033] bg-[#F7E9DB]',
   catering: 'border-[#DD374033] bg-[#F7E9DB]',
 }
@@ -22,7 +22,7 @@ const businessTypeColors = {
 const businessTypeBadges = {
   wedding: 'Wedding Venue',
   boutiques: 'Boutique',
-  'beauty-parlor': 'Beauty',
+  'beauty-parlour': 'Beauty',
   decor: 'Décor',
   catering: 'Catering',
 }

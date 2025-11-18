@@ -15,7 +15,7 @@ The partner onboarding pages (`/partners` and `/partner-onboarding`) were using 
 
 ### 1. Business Types Update
 **Old**: `venue`, `boutique`, `salon`, `decor`, `catering`
-**New**: `wedding`, `boutiques`, `beauty-parlor`, `decor`, `catering`
+**New**: `wedding`, `boutiques`, `beauty-parlour`, `decor`, `catering`
 
 ### 2. City Selection
 **Change**: All city selections should only show "Karachi"

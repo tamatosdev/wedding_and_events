@@ -20,9 +20,7 @@ export default function CateringPolicies() {
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#F7E9DB] mb-4">
           <FileText className="w-8 h-8 text-[#D13F43]" />
         </div>
-        <h2 className="text-2xl font-bold text-[#2E2E2E] mb-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-          Catering Policies
-        </h2>
+          <h2 className="text-3xl font-extrabold text-[#D13F43] mb-2 tracking-tight text-center" style={{fontFamily:'DM Sans, sans-serif'}}>Policies & Compliance</h2>
         <p className="text-[#666666]">Define your catering policies and terms</p>
       </div>
 
