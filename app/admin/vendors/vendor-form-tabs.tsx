@@ -742,11 +742,11 @@ export function VendorFormTabs({ formData, setFormData }: VendorFormTabsProps) {
           </div>
         )}
 
-        {formData.category === 'Décor' && (
+        {formData.category === 'Decorations' && (
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="decorType">Décor Type</Label>
+                <Label htmlFor="decorType">Decorations Type</Label>
                 <Input
                   id="decorType"
                   value={formData.decorType}
@@ -755,7 +755,7 @@ export function VendorFormTabs({ formData, setFormData }: VendorFormTabsProps) {
                 />
               </div>
               <div>
-                <Label htmlFor="decorStyle">Décor Style</Label>
+                <Label htmlFor="decorStyle">Decorations Style</Label>
                 <Input
                   id="decorStyle"
                   value={formData.decorStyle}
@@ -966,9 +966,9 @@ export function VendorFormTabs({ formData, setFormData }: VendorFormTabsProps) {
           </div>
         )}
 
-        {!['Venue', 'Boutiques', 'Beauty Parlor', 'Décor', 'Catering'].includes(formData.category) && (
+        {!['Venue', 'Boutiques', 'Beauty Parlor', 'Decorations', 'Catering'].includes(formData.category) && (
           <div className="text-center py-8 text-gray-500">
-            Category-specific fields are available for Venue, Boutiques, Beauty Parlor, Décor, and Catering categories.
+            Category-specific fields are available for Venue, Boutiques, Beauty Parlor, Decorations, and Catering categories.
           </div>
         )}
       </TabsContent>
