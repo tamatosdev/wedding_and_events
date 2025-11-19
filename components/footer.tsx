@@ -42,7 +42,6 @@ export default function Footer() {
         <div className="md:col-span-1 useful text-left">
           <h3 className="font-semibold mb-3">Useful</h3>
           <ul className="space-y-2 text-sm">
-            <li>FAQ’s</li>
             <li><Link href="/terms-conditions">Terms &amp; Conditions</Link></li>
             <li><Link href="/privacy-policy">Privacy Policy</Link></li>
             <li>Vendor Signup</li>
