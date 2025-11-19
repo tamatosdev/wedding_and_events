@@ -2,7 +2,12 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import React from 'react';
 
-export default function RichTextEditor({ value, onChange }) {
+interface RichTextEditorProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+export default function RichTextEditor({ value, onChange }: RichTextEditorProps) {
   const editor = useEditor({
     extensions: [StarterKit],
     content: value,

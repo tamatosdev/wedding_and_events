@@ -116,7 +116,7 @@ export default function ReviewSubmit() {
           { label: 'Delivery', key: 'delivery' },
         ])}
 
-        {businessType === 'beauty-parlor' && renderSection('Beauty Parlour Details', [
+        {businessType === 'beauty-parlour' && renderSection('Beauty Parlour Details', [
           { label: 'Services List', key: 'servicesList' },
           { label: 'Packages', key: 'packages' },
           { label: 'Operating Hours', key: 'operatingHours' },
