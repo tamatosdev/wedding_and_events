@@ -41,7 +41,7 @@ export function BannerSection() {
   useEffect(() => {
     const slideInterval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % banners.length);
-    }, 5000); // Change slide every 5 seconds
+    }, 22000); // Change slide every 5 seconds
 
     return () => clearInterval(slideInterval);
   }, [banners.length]);
