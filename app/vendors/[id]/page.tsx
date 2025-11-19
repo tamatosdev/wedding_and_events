@@ -401,7 +401,7 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column - Details Card */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 order-2 lg:order-1">
             <Card className="sticky top-8">
               <CardHeader>
                 <CardTitle>Details</CardTitle>
@@ -516,7 +516,7 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
           </div>
 
           {/* Right Column - About & Booking */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-2 space-y-8 order-1 lg:order-2">
             {/* About Section */}
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">About This {vendor.category}</h2>
