@@ -35,6 +35,8 @@ export const maxDuration = 60 // Maximum execution time in seconds
 export async function POST(request: NextRequest) {
   try {
     console.log('Upload request received')
+    console.log('Content-Length:', request.headers.get('content-length'))
+    console.log('Content-Type:', request.headers.get('content-type'))
     
     // Check authentication
     const session = await getServerSession(authOptions)
@@ -62,8 +64,21 @@ export async function POST(request: NextRequest) {
     }
     console.log('Blob token exists:', !!blobToken)
 
-    // Parse multipart/form-data
-    const formData = await request.formData()
+    // Parse multipart/form-data with increased size limit
+    let formData
+    try {
+      formData = await request.formData()
+    } catch (formError: any) {
+      console.error('FormData parsing error:', formError)
+      return NextResponse.json(
+        { 
+          error: 'Failed to parse form data',
+          details: formError?.message || 'Request payload too large'
+        },
+        { status: 413 }
+      )
+    }
+
     const file = formData.get('image') as File
 
     if (!file) {
