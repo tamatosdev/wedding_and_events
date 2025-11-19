@@ -42,14 +42,26 @@ export function ImageUpload({
       const uploadPromises = filesArray.map(async (file) => {
         console.log('Starting upload for file:', file.name, file.size, file.type)
         const formData = new FormData()
-        // Use "image" field name as required by the API
+        // Use "image" field name for /api/upload (Vercel Blob)
+        // Use "file" field name for /api/upload-local (local filesystem)
         formData.append('image', file)
+        formData.append('file', file)
         
+        // Try blob upload first, fallback to local if it fails
         console.log('Sending request to /api/upload')
-        const response = await fetch('/api/upload', {
+        let response = await fetch('/api/upload', {
           method: 'POST',
           body: formData,
         })
+        
+        // If blob upload fails with 413 or 500, try local upload
+        if (!response.ok && (response.status === 413 || response.status === 500)) {
+          console.log('Blob upload failed, trying local upload')
+          response = await fetch('/api/upload-local', {
+            method: 'POST',
+            body: formData,
+          })
+        }
         
         console.log('Upload response status:', response.status, response.statusText)
         
