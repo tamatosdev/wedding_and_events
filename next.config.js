@@ -38,6 +38,12 @@ const nextConfig = {
     // Allow local images from /uploads
     domains: [],
   },
+  // Increase body size limit for file uploads
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '10mb',
+    },
+  },
   // Optimize for production
   reactStrictMode: true,
   swcMinify: true,

@@ -31,6 +31,15 @@ import { authOptions } from '@/lib/auth'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
+// Increase body size limit to 10MB for file uploads
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb',
+    },
+  },
+}
+
 export async function POST(request: NextRequest) {
   try {
     console.log('Upload request received')
