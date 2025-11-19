@@ -9,7 +9,7 @@ import { ImageUpload } from '@/components/ui/image-upload'
 import { Switch } from '@/components/ui/switch'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-const CATEGORIES = ['Venue', 'Boutiques', 'Beauty Parlor', 'Décor', 'Catering', 'Photography', 'Videography', 'DJ', 'Other']
+const CATEGORIES = ['Venue', 'Boutiques', 'Beauty Parlor', 'Decorations', 'Catering', 'Photography', 'Videography', 'DJ', 'Other']
 const CITIES = ['Karachi', 'Lahore', 'Islamabad', 'Rawalpindi', 'Faisalabad', 'Multan', 'Hyderabad', 'Peshawar', 'Quetta', 'Other']
 const CAPACITY_RANGES = ['50-100', '100-200', '200-300', '300-500', '500-1000', '1000-1500', '1500+']
 const VENUE_TYPES = ['Hall', 'Outdoor', 'Marquee', 'Garden', 'Beach', 'Hotel', 'Resort', 'Other']

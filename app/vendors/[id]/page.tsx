@@ -87,7 +87,7 @@ interface Vendor {
   salonPricing?: string | null
   promotions?: string | null
   hygiene?: string | null
-  // Décor specific
+  // Decorations specific
   decorType?: string | null
   decorStyle?: string | null
   eventTypes?: string | null
@@ -876,10 +876,10 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
                   </>
                 )}
 
-                {vendor.category === 'Décor' && (
+                {vendor.category === 'Decorations' && (
                   <>
                     <div className="pt-6 border-t">
-                      <h4 className="font-semibold mb-3 text-gray-900">Décor Details</h4>
+                      <h4 className="font-semibold mb-3 text-gray-900">Decorations Details</h4>
                       <div className="space-y-3">
                         {vendor.decorType && (
                           <div className="flex items-center space-x-3">
@@ -889,7 +889,7 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
                               </svg>
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="text-xs text-gray-600">Décor Type</p>
+                              <p className="text-xs text-gray-600">Decorations Type</p>
                               <p className="font-semibold text-sm truncate">{vendor.decorType}</p>
                             </div>
                           </div>
@@ -902,7 +902,7 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
                               </svg>
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="text-xs text-gray-600">Décor Style</p>
+                              <p className="text-xs text-gray-600">Decorations Style</p>
                               <p className="font-semibold text-sm truncate">{vendor.decorStyle}</p>
                             </div>
                           </div>
@@ -1534,21 +1534,21 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
                 </Card>
               )}
 
-              {vendor.category === 'Décor' && (
+              {vendor.category === 'Decorations' && (
                 <Card className="mt-6">
                   <CardHeader>
-                    <CardTitle>Décor Details</CardTitle>
+                    <CardTitle>Decorations Details</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     {vendor.decorType && (
                       <div>
-                        <p className="text-sm text-gray-600">Décor Type</p>
+                        <p className="text-sm text-gray-600">Decorations Type</p>
                         <p className="font-semibold">{vendor.decorType}</p>
                       </div>
                     )}
                     {vendor.decorStyle && (
                       <div>
-                        <p className="text-sm text-gray-600">Décor Style</p>
+                        <p className="text-sm text-gray-600">Decorations Style</p>
                         <p className="font-semibold">{vendor.decorStyle}</p>
                       </div>
                     )}
