@@ -299,7 +299,7 @@ export default function ContactPage() {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3622.087932639192!2d67.07311257604532!3d24.792442347974664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33d6a2e0bdae9%3A0xd60bac34cadc498e!2sCraftsmen%20Media!5e0!3m2!1sen!2s!4v1763467501708!5m2!1sen!2s"
             ></iframe>
           </div>
-           <p className='text-xl text-gray-700 text-center leading-relaxed pt-12'><strong>Please Note:</strong> <a href='https://theweddingandevent.com'>The Wedding and Events</a>  is a subsidiary of <a href="https://mctbusiness.com/">MCT Business (Pvt) Ltd.</a> 
+           <p className='text-xl text-gray-700 text-center leading-relaxed pt-12'><strong>Please Note:</strong> <a href='https://theweddingandevent.com'>The Wedding and Events</a>  is a subsidiary of <a className='underline' href="https://mctbusiness.com/">MCT Business (Pvt) Ltd.</a> 
 </p>
         </div>
       </section>

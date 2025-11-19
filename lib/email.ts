@@ -15,7 +15,7 @@ export async function sendEmail({
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: Number(process.env.SMTP_PORT),
-    secure: false,
+    secure: true, // true for port 465, false for other ports
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
@@ -23,7 +23,7 @@ export async function sendEmail({
   })
 
   const info = await transporter.sendMail({
-    from: `"Shadi Portal" <${process.env.SMTP_USER}>`,
+    from: `"Wedding & Events" <${process.env.SMTP_USER}>`,
     to,
     subject,
     text,

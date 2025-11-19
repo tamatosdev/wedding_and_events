@@ -77,7 +77,7 @@ export default function AboutPage() {
 
       <main className="mt-20">
         {/* Hero Section */}
-        <section className="relative py-16">
+        <section className="relative pt-16">
           <div className="Left-Floral absolute left-0 top-0 z-0">
             <Image
               src="/uploads/Flower-1.png"
@@ -189,7 +189,7 @@ export default function AboutPage() {
                 To simplify and innovate the way people plan weddings and events - by offering a complete, one-window solution that ensures every 
                 celebration is smooth, joyful, excellent value for money and completely stress-free.
               </p>
-              <p className='text-xl text-gray-700 text-center leading-relaxed pt-12'><strong>Please Note:</strong> <a href='https://theweddingandevent.com'>The Wedding and Events</a>  is a subsidiary of <a href="https://mctbusiness.com/">MCT Business (Pvt) Ltd.</a> 
+              <p className='text-xl text-gray-700 text-center leading-relaxed pt-12'><strong>Please Note:</strong> <a href='https://theweddingandevent.com'>The Wedding and Events</a>  is a subsidiary of <a className='underline' href="https://mctbusiness.com/">MCT Business (Pvt) Ltd.</a> 
 </p>
             </div>
           </div>
