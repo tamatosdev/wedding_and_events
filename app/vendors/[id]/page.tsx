@@ -531,6 +531,33 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
                             </div>
                           </div>
                         )}
+                        {vendor.cateringAvailable && (
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                                <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Catering Available</p>
+                              <p className="font-semibold text-sm truncate">{vendor.cateringAvailable}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.outsideCateringAllowed && (
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Outside Catering</p>
+                              <p className="font-semibold text-sm truncate">{vendor.outsideCateringAllowed}</p>
+                            </div>
+                          </div>
+                        )}
                         {vendor.parkingCapacity && (
                           <div className="flex items-center space-x-3">
                             <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
@@ -542,6 +569,71 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
                             <div className="flex-1 min-w-0">
                               <p className="text-xs text-gray-600">Parking Capacity</p>
                               <p className="font-semibold text-sm truncate">{vendor.parkingCapacity}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.parkingType && (
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Parking Type</p>
+                              <p className="font-semibold text-sm truncate">{vendor.parkingType}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.amenities && (
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Amenities</p>
+                              <p className="font-semibold text-sm line-clamp-3">{vendor.amenities}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.bridalSuite && (
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Bridal Suite</p>
+                              <p className="font-semibold text-sm truncate">{vendor.bridalSuite}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.namazAreaMen && (
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Namaz Area (Men)</p>
+                              <p className="font-semibold text-sm truncate">{vendor.namazAreaMen}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.namazAreaLadies && (
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Namaz Area (Ladies)</p>
+                              <p className="font-semibold text-sm truncate">{vendor.namazAreaLadies}</p>
                             </div>
                           </div>
                         )}
@@ -595,6 +687,59 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
                             </div>
                           </div>
                         )}
+                        {vendor.fabrics && (
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Fabrics</p>
+                              <p className="font-semibold text-sm line-clamp-3">{vendor.fabrics}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.customization && (
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Customization</p>
+                              <p className="font-semibold text-sm line-clamp-3">{vendor.customization}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.rentalPolicy && (
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Rental Policy</p>
+                              <p className="font-semibold text-sm line-clamp-3">{vendor.rentalPolicy}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.delivery && (
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                                <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Delivery</p>
+                              <p className="font-semibold text-sm line-clamp-3">{vendor.delivery}</p>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </>
@@ -605,6 +750,33 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
                     <div className="pt-6 border-t">
                       <h4 className="font-semibold mb-3 text-gray-900">Salon Details</h4>
                       <div className="space-y-3">
+                        {vendor.servicesList && (
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                                <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Services Offered</p>
+                              <p className="font-semibold text-sm line-clamp-3">{vendor.servicesList}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.packages && (
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Packages & Pricing</p>
+                              <p className="font-semibold text-sm line-clamp-3">{vendor.packages}</p>
+                            </div>
+                          </div>
+                        )}
                         {vendor.operatingHours && (
                           <div className="flex items-center space-x-3">
                             <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
@@ -615,6 +787,46 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
                             <div className="flex-1 min-w-0">
                               <p className="text-xs text-gray-600">Operating Hours</p>
                               <p className="font-semibold text-sm truncate">{vendor.operatingHours}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.brandsUsed && (
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clipRule="evenodd" />
+                                <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Brands & Products Used</p>
+                              <p className="font-semibold text-sm line-clamp-3">{vendor.brandsUsed}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.staffExpertise && (
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Staff Expertise</p>
+                              <p className="font-semibold text-sm line-clamp-3">{vendor.staffExpertise}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.bridalTrials && (
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Bridal Trials</p>
+                              <p className="font-semibold text-sm line-clamp-3">{vendor.bridalTrials}</p>
                             </div>
                           </div>
                         )}
@@ -632,16 +844,30 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
                             </div>
                           </div>
                         )}
-                        {vendor.bridalTrials && (
-                          <div className="flex items-center space-x-3">
-                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        {vendor.promotions && (
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                               <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                                <path fillRule="evenodd" d="M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H16a2 2 0 110 4h-5V9a1 1 0 10-2 0v1H4a2 2 0 110-4h1.17C5.06 5.687 5 5.35 5 5zm4 1V5a1 1 0 10-1 1h1zm3 0a1 1 0 10-1-1v1h1z" clipRule="evenodd" />
+                                <path d="M9 11H3v5a2 2 0 002 2h4v-7zM11 18h4a2 2 0 002-2v-5h-6v7z" />
                               </svg>
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="text-xs text-gray-600">Bridal Trials</p>
-                              <p className="font-semibold text-sm truncate">{vendor.bridalTrials}</p>
+                              <p className="text-xs text-gray-600">Promotions</p>
+                              <p className="font-semibold text-sm line-clamp-3">{vendor.promotions}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.hygiene && (
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Hygiene Standards</p>
+                              <p className="font-semibold text-sm line-clamp-3">{vendor.hygiene}</p>
                             </div>
                           </div>
                         )}
@@ -708,6 +934,86 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
                             </div>
                           </div>
                         )}
+                        {vendor.eventTypes && (
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Event Types</p>
+                              <p className="font-semibold text-sm line-clamp-3">{vendor.eventTypes}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.equipmentProvided && (
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                                <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Equipment Provided</p>
+                              <p className="font-semibold text-sm line-clamp-3">{vendor.equipmentProvided}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.customDesign && (
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Custom Design</p>
+                              <p className="font-semibold text-sm truncate">{vendor.customDesign}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.floralsIncluded && (
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1H8a3 3 0 00-3 3v1.5a1.5 1.5 0 01-3 0V6z" clipRule="evenodd" />
+                                <path d="M6 12a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H2h2a2 2 0 002-2v-2z" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Florals Included</p>
+                              <p className="font-semibold text-sm truncate">{vendor.floralsIncluded}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.themesAvailable && (
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Themes Available</p>
+                              <p className="font-semibold text-sm line-clamp-3">{vendor.themesAvailable}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.lightingServices && (
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Lighting Services</p>
+                              <p className="font-semibold text-sm truncate">{vendor.lightingServices}</p>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </>
@@ -728,6 +1034,19 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
                             <div className="flex-1 min-w-0">
                               <p className="text-xs text-gray-600">Cuisine Type</p>
                               <p className="font-semibold text-sm truncate">{vendor.cuisineType}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.menuStyle && (
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Menu Style</p>
+                              <p className="font-semibold text-sm truncate">{vendor.menuStyle}</p>
                             </div>
                           </div>
                         )}
@@ -769,6 +1088,84 @@ Additional Information: ${bookingForm.additionalInfo || 'None'}`,
                             <div className="flex-1 min-w-0">
                               <p className="text-xs text-gray-600">Pricing Range</p>
                               <p className="font-semibold text-sm truncate">{vendor.cateringPricingRange}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.halalCertified && (
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Halal Certified</p>
+                              <p className="font-semibold text-sm truncate">{vendor.halalCertified}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.vegetarianOptions && (
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Vegetarian Options</p>
+                              <p className="font-semibold text-sm truncate">{vendor.vegetarianOptions}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.dietaryAccommodations && (
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Dietary Accommodations</p>
+                              <p className="font-semibold text-sm line-clamp-3">{vendor.dietaryAccommodations}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.setupService && (
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Setup Service</p>
+                              <p className="font-semibold text-sm truncate">{vendor.setupService}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.servingStaff && (
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Serving Staff</p>
+                              <p className="font-semibold text-sm truncate">{vendor.servingStaff}</p>
+                            </div>
+                          </div>
+                        )}
+                        {vendor.equipmentRental && (
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs text-gray-600">Equipment Rental</p>
+                              <p className="font-semibold text-sm truncate">{vendor.equipmentRental}</p>
                             </div>
                           </div>
                         )}
