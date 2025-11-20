@@ -767,10 +767,24 @@
   }
 
   .dream-event p {
-    width: 100% !important;
+    width: 90% !important;
     font-size: 0.875rem !important;
     padding-inline: 0 !important;
   }
+  .flower-1 {
+    width: 30%;
+    margin-bottom: 170px;
+}
+
+.flower-2 {
+    width: 30%;
+    margin-left: auto;
+    margin-bottom: 170px;
+}
+
+.inner-item span {
+    width: fit-content;
+}
 }
 
 /* Tablet (640px - 1023px) */
