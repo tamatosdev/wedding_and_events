@@ -60,15 +60,15 @@ export function BannerSection() {
 
   return (
     <section className="relative w-full banner-section">
-      <div className="container-main px-4">
+      <div className="container-main px-2 sm:px-4">
         <div className="flex justify-center items-center">
           {/* Left Arrow - Outside Banner */}
           <button
             onClick={goToPrevious}
-            className="bg-[#D13F43] hover:bg-[#B8363A] text-white rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110 mr-6"
+            className="hidden sm:block bg-[#D13F43] hover:bg-[#B8363A] text-white rounded-full p-2 sm:p-3 shadow-lg transition-all duration-200 hover:scale-110 mr-3 sm:mr-6"
             aria-label="Previous banner"
           >
-            <ChevronLeft size={24} strokeWidth={2.5} />
+            <ChevronLeft size={20} className="sm:w-6 sm:h-6" strokeWidth={2.5} />
           </button>
 
           {/* Banner Slider Container */}
@@ -98,16 +98,30 @@ export function BannerSection() {
                   </div>
                 ))}
               </div>
+              
+              {/* Mobile Navigation Dots */}
+              <div className="flex sm:hidden justify-center mt-4 gap-2">
+                {banners.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      currentSlide === index ? 'bg-[#D13F43] w-6' : 'bg-gray-300'
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Right Arrow - Outside Banner */}
           <button
             onClick={goToNext}
-            className="bg-[#D13F43] hover:bg-[#B8363A] text-white rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110 ml-6"
+            className="hidden sm:block bg-[#D13F43] hover:bg-[#B8363A] text-white rounded-full p-2 sm:p-3 shadow-lg transition-all duration-200 hover:scale-110 ml-3 sm:ml-6"
             aria-label="Next banner"
           >
-            <ChevronRight size={24} strokeWidth={2.5} />
+            <ChevronRight size={20} className="sm:w-6 sm:h-6" strokeWidth={2.5} />
           </button>
         </div>
       </div>

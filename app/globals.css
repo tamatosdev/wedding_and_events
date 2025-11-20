@@ -455,3 +455,329 @@
 .service-desc {
     min-height: 108px;
 }
+
+/* ========================================
+   RESPONSIVE STYLES FOR HOMEPAGE
+   ======================================== */
+
+/* Mobile First - Base Styles (< 640px) */
+@media (max-width: 639px) {
+  /* Hero Section */
+  .herro-main {
+    min-height: auto !important;
+    padding-bottom: 2rem;
+  }
+
+  .background-hero-img {
+    padding-top: 1rem;
+    padding-inline: 0.5rem;
+  }
+
+  .inner-background-hero-img {
+    margin-top: 1rem;
+  }
+
+  .Left-Floral,
+  .Right-Floral,
+  .Left-Floral-first,
+  .Left-Floral-Planning,
+  .Right-Floral-Planning {
+    display: none !important;
+  }
+
+  /* Hero Title */
+  .herro-main h1 {
+    font-size: 1.75rem !important;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Search Box */
+  .herro-main .bg-white.rounded-2xl {
+    padding: 1rem;
+  }
+
+  .herro-main .mt-1.mb-5 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+  }
+
+  .herro-main button[class*="px-6"] {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 0.75rem;
+  }
+
+  /* Hero Images Grid */
+  .herro-main .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem;
+  }
+
+  .herro-main .grid > div {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  /* Categories Section */
+  .Find-Every-Vendor {
+    margin-top: 2rem !important;
+  }
+
+  .h2eading {
+    font-size: 1.75rem !important;
+  }
+
+  .Venues-cart {
+    margin-inline: 0 !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+
+  .Venues-cart > a {
+    justify-content: center;
+  }
+
+  .Venues-cart .bg-\[#F7E9DB\] {
+    width: 100% !important;
+    max-width: 140px;
+    height: 140px !important;
+    padding: 1rem !important;
+  }
+
+  .vendor-span {
+    font-size: 14px !important;
+    text-align: center;
+  }
+
+  /* Banner Section */
+  .banner-section {
+    margin-block: 2rem !important;
+  }
+
+  .banner-section .container-main {
+    padding-inline: 0.5rem;
+  }
+
+  .banner-section button {
+    display: none !important;
+  }
+
+  /* Simple Seamless Stress Free Section */
+  .simple-inner-item {
+    width: 100% !important;
+  }
+
+  .Find-Every-Vendor .flex {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .inner-item {
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    padding: 1rem !important;
+  }
+
+  .inner-item h2 {
+    font-size: 1.125rem !important;
+  }
+
+  .inner-item p {
+    font-size: 0.875rem !important;
+  }
+
+  /* Featured Listings */
+  .FeaturedListings h2 {
+    font-size: 1.5rem !important;
+  }
+
+  /* Wedding Planning Section */
+  .Planning-main {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    margin-bottom: 3rem !important;
+  }
+
+  .Planning-image,
+  .Planning-text {
+    width: 100% !important;
+  }
+
+  .Planning-text {
+    text-align: center !important;
+  }
+
+  .Planning-text h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .Planning-text p {
+    font-size: 0.875rem !important;
+  }
+
+  /* Testimonials */
+  .Testimonial-cards {
+    width: 320px !important;
+  }
+
+  .Testimonial-cards > div {
+    flex-direction: column !important;
+  }
+
+  .Testimonial-cards .w-2\/5,
+  .Testimonial-cards .w-3\/5 {
+    width: 100% !important;
+  }
+
+  .Testimonial-cards .w-2\/5 {
+    height: 200px;
+  }
+
+  .inner-testimonial p {
+    font-size: 0.875rem !important;
+  }
+
+  /* CTA Section */
+  .dream-event {
+    margin-inline: 1rem !important;
+    padding-block: 2rem !important;
+  }
+
+  .dream-event h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .dream-event p {
+    width: 100% !important;
+    font-size: 0.875rem !important;
+    padding-inline: 0 !important;
+  }
+}
+
+/* Tablet (640px - 1023px) */
+@media (min-width: 640px) and (max-width: 1023px) {
+  /* Hero Section */
+  .herro-main {
+    min-height: 700px !important;
+  }
+
+  .Left-Floral,
+  .Right-Floral,
+  .Left-Floral-first,
+  .Left-Floral-Planning,
+  .Right-Floral-Planning {
+    display: none !important;
+  }
+
+  .herro-main h1 {
+    font-size: 2.5rem !important;
+  }
+
+  .herro-main .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Categories Section */
+  .Venues-cart {
+    margin-inline: 1rem !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .Venues-cart .bg-\[#F7E9DB\] {
+    width: 160px !important;
+    height: 160px !important;
+  }
+
+  /* Banner Section */
+  .banner-section {
+    margin-block: 3rem !important;
+  }
+
+  /* Simple Seamless Section */
+  .simple-inner-item {
+    width: 50% !important;
+  }
+
+  .Find-Every-Vendor .flex {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Wedding Planning */
+  .Planning-main {
+    gap: 2rem !important;
+  }
+
+  .Planning-text h2 {
+    font-size: 2rem !important;
+  }
+
+  /* Testimonials */
+  .Testimonial-cards {
+    width: 450px !important;
+  }
+
+  /* CTA Section */
+  .dream-event {
+    margin-inline: 2rem !important;
+    padding-block: 3rem !important;
+  }
+
+  .dream-event h2 {
+    font-size: 2.5rem !important;
+  }
+
+  .dream-event p {
+    width: 80% !important;
+  }
+}
+
+/* Desktop (1024px - 1279px) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .Venues-cart {
+    margin-inline: 2rem !important;
+  }
+
+  .Left-Floral img,
+  .Right-Floral img {
+    width: 180px !important;
+    height: auto;
+  }
+
+  .dream-event {
+    margin-inline: 3rem !important;
+  }
+
+  .dream-event p {
+    width: 60% !important;
+  }
+}
+
+/* Large Desktop (1280px+) */
+@media (min-width: 1280px) {
+  .container-main {
+    max-width: 1200px;
+  }
+}
+
+/* Responsive Featured Listings Carousel */
+@media (max-width: 1023px) {
+  .FeaturedListings .w-1\/4 {
+    width: 50% !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .FeaturedListings .w-1\/4 {
+    width: 100% !important;
+  }
+  
+  .FeaturedListings .relative > div {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}

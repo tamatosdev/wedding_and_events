@@ -24,13 +24,13 @@ export default function HomePage() {
         <img
           src="/uploads/Border.png"
           alt="Left Border"
-          className="site-border left"
+          className="site-border left hidden lg:block"
         />
         {/* Right Border */}
         <img
           src="/uploads/Border.png"
           alt="Right Border"
-          className="site-border right"
+          className="site-border right hidden lg:block"
         />
       <Header />
       

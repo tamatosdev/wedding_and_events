@@ -47,8 +47,8 @@ export function FeaturedListings() {
   const categories = categoriesContent?.content?.items || getCategories()
 
   return (
-    <div className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="py-12 sm:py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
         {categories.map((categoryData: any, categoryIndex: number) => {
           // Map category to vendor category
           const vendorCategory = categoryData.vendorCategory || categoryMapping[categoryData.category]?.category || categoryData.category
@@ -123,13 +123,13 @@ function CategorySection({ title, category, vendorCategory, link }: { title: str
   }
 
   return (
-    <div className="mb-16">
-      <div className="flex justify-between items-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+    <div className="mb-12 sm:mb-16">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 gap-3">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 px-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>
           {title}
         </h2>
         <Link href={`/vendors?category=${encodeURIComponent(vendorCategory)}`}>
-          <Button variant="outline" className="text-[#D13F43] border-[#D13F43] hover:bg-[#F7E9DB]">
+          <Button variant="outline" className="text-[#D13F43] border-[#D13F43] hover:bg-[#F7E9DB] mx-2 sm:mx-0">
             View All
           </Button>
         </Link>
@@ -142,7 +142,25 @@ function CategorySection({ title, category, vendorCategory, link }: { title: str
 
 function VendorCarousel({ vendors }: { vendors: Vendor[] }) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const itemsPerView = 4
+  const [itemsPerView, setItemsPerView] = useState(4)
+
+  // Update items per view based on screen size
+  useEffect(() => {
+    const updateItemsPerView = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerView(1)
+      } else if (window.innerWidth < 1024) {
+        setItemsPerView(2)
+      } else {
+        setItemsPerView(4)
+      }
+    }
+
+    updateItemsPerView()
+    window.addEventListener('resize', updateItemsPerView)
+    return () => window.removeEventListener('resize', updateItemsPerView)
+  }, [])
+
   const maxIndex = Math.max(0, vendors.length - itemsPerView)
 
   const nextSlide = () => {
@@ -158,17 +176,17 @@ function VendorCarousel({ vendors }: { vendors: Vendor[] }) {
   }
 
   return (
-    <div className="relative">
+    <div className="relative px-2 sm:px-0">
       {/* Carousel Container */}
       <div className="overflow-hidden">
         <div 
-          className="flex transition-transform duration-300 ease-in-out"
+          className="flex transition-transform duration-300 ease-in-out gap-2 sm:gap-0"
           style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
         >
           {vendors.map((vendor) => (
-            <div key={vendor.id} className="w-1/4 flex-shrink-0 px-3">
+            <div key={vendor.id} className="w-full sm:w-1/2 lg:w-1/4 flex-shrink-0 px-1 sm:px-3">
               <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-[#DD374033]">
-                <div className="relative h-48 bg-gradient-to-br from-[#F7E9DB] to-[#F7E9DB]/50">
+                <div className="relative h-40 sm:h-48 bg-gradient-to-br from-[#F7E9DB] to-[#F7E9DB]/50">
                   {vendor.images && vendor.images.length > 0 && vendor.images[0] ? (
                     <Image
                       src={vendor.images[0]}
@@ -176,26 +194,26 @@ function VendorCarousel({ vendors }: { vendors: Vendor[] }) {
                       fill
                       style={{ objectFit: 'cover' }}
                       className="rounded-t-xl"
-                      sizes="(max-width: 768px) 100vw, 25vw"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       priority={true}
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-[#D13F43] text-4xl font-bold" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                      <div className="text-[#D13F43] text-3xl sm:text-4xl font-bold" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                         {vendor.name.charAt(0)}
                       </div>
                     </div>
                   )}
                 </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-[#2E2E2E] mb-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>{vendor.name}</h3>
+                <div className="p-3 sm:p-4">
+                  <h3 className="font-semibold text-[#2E2E2E] mb-2 text-sm sm:text-base line-clamp-1" style={{ fontFamily: 'DM Sans, sans-serif' }}>{vendor.name}</h3>
                   <div className="flex items-center mb-2">
                     {vendor.rating && (
                       <div className="flex items-center">
                         {[...Array(5)].map((_, i) => (
                           <svg
                             key={i}
-                            className={`w-4 h-4 ${
+                            className={`w-3 h-3 sm:w-4 sm:h-4 ${
                               i < Math.floor(vendor.rating || 0) ? 'text-yellow-400' : 'text-gray-300'
                             }`}
                             fill="currentColor"
@@ -206,14 +224,14 @@ function VendorCarousel({ vendors }: { vendors: Vendor[] }) {
                         ))}
                       </div>
                     )}
-                    <span className="text-sm text-[#666666] ml-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                    <span className="text-xs sm:text-sm text-[#666666] ml-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                       {vendor.rating?.toFixed(1) || '0.0'} ({vendor.reviews || 0})
                     </span>
                   </div>
-                  <p className="text-sm text-[#666666] mb-3 line-clamp-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>{vendor.description}</p>
+                  <p className="text-xs sm:text-sm text-[#666666] mb-3 line-clamp-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>{vendor.description}</p>
 
                   <Link href={`/vendors/${vendor.id}`}>
-                    <Button className="w-full bg-[#D13F43] hover:bg-[#b82f33] text-white" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                    <Button className="w-full bg-[#D13F43] hover:bg-[#b82f33] text-white text-sm" style={{ fontFamily: 'DM Sans, sans-serif' }}>
                       View Details
                     </Button>
                   </Link>
@@ -230,18 +248,18 @@ function VendorCarousel({ vendors }: { vendors: Vendor[] }) {
           <button
             onClick={prevSlide}
             disabled={currentIndex === 0}
-            className="w-10 h-10 bg-[#D13F43] text-white rounded-full flex items-center justify-center hover:bg-[#b82f33] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-8 h-8 sm:w-10 sm:h-10 bg-[#D13F43] text-white rounded-full flex items-center justify-center hover:bg-[#b82f33] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
           <button
             onClick={nextSlide}
             disabled={currentIndex === maxIndex}
-            className="w-10 h-10 bg-[#D13F43] text-white rounded-full flex items-center justify-center hover:bg-[#b82f33] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-8 h-8 sm:w-10 sm:h-10 bg-[#D13F43] text-white rounded-full flex items-center justify-center hover:bg-[#b82f33] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>

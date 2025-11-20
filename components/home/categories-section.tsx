@@ -17,7 +17,7 @@ const defaultCategories: Category[] = [
     name: "Wedding Halls/Venues", 
     category: "Venue", 
     image: "/uploads/Vendor-1.png",
-    link: "/vendors?category=Venue"
+    link: "/vendors?category=Venue" 
   },
   { 
     name: "Catering", 
@@ -56,10 +56,10 @@ export function CategoriesSection() {
   const rightFloral = categoriesContent?.images?.[1] || "/uploads/Flower-2.png";
 
   return (
-    <section className="relative flex items-center mt-10">
-      <div className="px-4 relative z-10 container-main Find-Every-Vendor">
+    <section className="relative flex items-center mt-6 sm:mt-10">
+      <div className="px-2 sm:px-4 relative z-10 container-main Find-Every-Vendor">
         <div className="text-center mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold mb-8 h2eading">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 h2eading px-2">
             {title.split('\n').map((line, i) => (
               <span key={i}>
                 {line}
@@ -68,7 +68,7 @@ export function CategoriesSection() {
             ))}
           </h1>
           {/* Featured Categories with Icons */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-12 Venues-cart">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 mt-8 sm:mt-12 Venues-cart">
             {categories.map((cat: Category) => {
             
               return (
@@ -77,20 +77,20 @@ export function CategoriesSection() {
                   href={cat.link}
                   className="flex flex-col items-center hover:scale-105 transition-transform cursor-pointer"
                 >
-                  <div className="bg-[#F7E9DB] border-vendor p-6 rounded-lg w-48 h-48 flex items-center justify-center mb-3 relative overflow-hidden group">
+                  <div className="bg-[#F7E9DB] border-vendor p-4 sm:p-6 rounded-lg w-full max-w-[180px] aspect-square flex items-center justify-center mb-3 relative overflow-hidden group">
                     <Image
                       src={cat.image}
                       alt={cat.name}
                       width={68}
                       height={68}
-                      className="text-[#d13f43] transition-transform group-hover:scale-110"
+                      className="text-[#d13f43] transition-transform group-hover:scale-110 w-12 sm:w-16 md:w-[68px] h-auto"
                     />
                     {/* Icon overlay on hover */}
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-[#D13F43]/10">
                      
                     </div>
                   </div>
-                  <span className="text-gray-800 font-medium vendor-span">
+                  <span className="text-gray-800 font-medium vendor-span text-center text-sm sm:text-base">
                     {cat.name}
                   </span>
                 </Link>
@@ -100,7 +100,7 @@ export function CategoriesSection() {
         </div>
       </div>
       {/* Floral Decorations */}
-      <div className="Left-Floral">
+      <div className="Left-Floral hidden lg:block">
         <Image
           src={leftFloral}
           alt="Left Floral"
@@ -108,7 +108,7 @@ export function CategoriesSection() {
           height={600}
         />
       </div>
-      <div className="Right-Floral">
+      <div className="Right-Floral hidden lg:block">
         <Image
           src={rightFloral}
           alt="Right Floral"

@@ -77,9 +77,9 @@ export function HeroSection() {
   ];
 
   return (
-    <section className="relative herro-main  flex items-center mt-10">
+    <section className="relative herro-main flex items-center mt-6 sm:mt-10">
       {/* Floral Decorations */}
-      <div className="Left-Floral">
+      <div className="Left-Floral hidden lg:block">
         <Image
           src="/uploads/Artboard-2@4x.png" // Add your left floral image
           alt="Left Floral"
@@ -87,7 +87,7 @@ export function HeroSection() {
           height={700}
         />
       </div>
-      <div className="Right-Floral">
+      <div className="Right-Floral hidden lg:block">
         <Image
           src="/uploads/Artboard2@4x(1).png" // Add your right floral image
           alt="Right Floral"
@@ -97,9 +97,9 @@ export function HeroSection() {
       </div>
       {/* Background Image */}
       <div className="absolute inset-0 z-0 background-hero-img container-main">
-        <div className="px-4 relative z-10 inner-background-hero-img">
+        <div className="px-2 sm:px-4 relative z-10 inner-background-hero-img">
           <div className="text-center mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold mb-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 px-2">
               {heroTitle.split('\n').map((line, i) => (
                 <span key={i}>
                   {line.includes('Event') ? (
@@ -120,15 +120,15 @@ export function HeroSection() {
             </h1>
 
             {/* Search Box */}
-            <div className="bg-white rounded-2xl p-4 shadow-lg max-w-3xl mx-auto">
+            <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-lg max-w-3xl mx-auto">
               {/* Search Tabs */}
-              <div className="mt-1 mb-5 flex justify-center gap-4">
+              <div className="mt-1 mb-4 sm:mb-5 flex justify-center gap-2 sm:gap-4 flex-wrap">
                 <button 
                   onClick={() => {
                     setSearchMode("service");
                     setSearchTerm("");
                   }}
-                  className={`px-6 py-2 rounded-full text-sm transition-colors ${
+                  className={`px-3 sm:px-6 py-2 rounded-full text-xs sm:text-sm transition-colors ${
                     searchMode === "service"
                       ? "bg-[#d13f43] text-white"
                       : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
@@ -142,7 +142,7 @@ export function HeroSection() {
                     setSelectedCategory("");
                     setSelectedCity("");
                   }}
-                  className={`px-6 py-2 rounded-full text-sm transition-colors ${
+                  className={`px-3 sm:px-6 py-2 rounded-full text-xs sm:text-sm transition-colors ${
                     searchMode === "name"
                       ? "bg-[#d13f43] text-white"
                       : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
@@ -154,7 +154,7 @@ export function HeroSection() {
 
               {searchMode === "name" ? (
                 /* Search by Name Mode */
-                <div className="flex flex-col md:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <div className="flex-1">
                     <Input
                       type="text"
@@ -166,22 +166,22 @@ export function HeroSection() {
                           handleSearch();
                         }
                       }}
-                      className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#d13f43]"
+                      className="w-full p-2 sm:p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#d13f43] text-sm sm:text-base"
                     />
                   </div>
                   <button 
                     onClick={handleSearch}
-                    className="bg-[#d13f43] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#bf383c] transition-colors"
+                    className="bg-[#d13f43] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-semibold hover:bg-[#bf383c] transition-colors text-sm sm:text-base"
                   >
                     Search
                   </button>
                 </div>
               ) : (
                 /* Search by Service & City Mode */
-                <div className="flex flex-col md:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <div className="flex-1">
                     <select 
-                      className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#d13f43]"
+                      className="w-full p-2 sm:p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#d13f43] text-sm sm:text-base"
                       value={selectedCategory}
                       onChange={(e) => setSelectedCategory(e.target.value)}
                     >
@@ -193,7 +193,7 @@ export function HeroSection() {
                   </div>
                   <div className="flex-1">
                     <select 
-                      className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#d13f43]"
+                      className="w-full p-2 sm:p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#d13f43] text-sm sm:text-base"
                       value={selectedCity}
                       onChange={(e) => setSelectedCity(e.target.value)}
                     >
@@ -205,7 +205,7 @@ export function HeroSection() {
                   </div>
                   <button 
                     onClick={handleSearch}
-                    className="bg-[#d13f43] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#bf383c] transition-colors"
+                    className="bg-[#d13f43] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-semibold hover:bg-[#bf383c] transition-colors text-sm sm:text-base"
                   >
                     Search
                   </button>
@@ -214,29 +214,21 @@ export function HeroSection() {
             </div>
 
             {/* Featured Venues Images */}
-            <div className="mt-12 pt-4 grid grid-cols-1 md:grid-cols-4 gap-4 mx-auto">
+            <div className="mt-8 sm:mt-12 pt-4 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 mx-auto px-2">
               {heroImages.map((image, index) => (
                 <div 
                   key={index} 
-                  className={`relative h-100 rounded-lg overflow-hidden ${index % 2 === 0 ? 'mt-2 pt-12' : ''}`}
+                  className={`relative h-100 rounded-lg overflow-hidden ${index % 2 === 0 && 'lg:mt-2 lg:pt-12'}`}
                 >
                   <Image
                     src={image}
                     alt={`Hero Image ${index + 1}`}
                     width={300}
                     height={600}
-                    className="rounded-lg"
+                    className="rounded-lg w-full h-auto"
                   />
                 </div>
               ))}
-              {/* <div className="relative h-100 rounded-lg overflow-hidden">
-                <Image
-                  src="/uploads/decor.png"
-                  alt="Venue 5"
-                  width={300}
-                  height={600}
-                />
-              </div> */}
             </div>
           </div>
         </div>
