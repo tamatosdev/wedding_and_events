@@ -27,7 +27,7 @@ export function CTASection() {
           alt="Decorative flowers"
           width={330}
           height={330}
-          className="object-contain"
+          className="object-contain flower-1"
         />
       </div>
 
@@ -38,7 +38,7 @@ export function CTASection() {
           alt="Decorative flowers"
           width={330}
           height={330}
-          className="object-contain"
+          className="object-contain flower-2"
         />
       </div>
 

@@ -624,7 +624,7 @@
   /* Categories Section */
   .Find-Every-Vendor {
     margin-top: 1.5rem !important;
-    padding-inline: 0 !important;
+    /* padding-inline: 0 !important; */
   }
 
   .h2eading {
@@ -654,8 +654,9 @@
   }
 
   .Venues-cart img {
-    width: 40px !important;
-    height: 40px !important;
+    width: 70px !important;
+    height: 70px !important;
+    object-fit: contain;
   }
 
   .vendor-span {
@@ -696,11 +697,12 @@
   }
 
   .inner-item h2 {
-    font-size: 1.125rem !important;
+    font-size: 1.5rem !important;
+    text-align: left !important;
   }
 
   .inner-item p {
-    font-size: 0.875rem !important;
+    font-size: 1rem !important;
   }
 
   /* Featured Listings */
