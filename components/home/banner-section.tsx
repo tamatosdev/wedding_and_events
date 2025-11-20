@@ -65,10 +65,10 @@ export function BannerSection() {
           {/* Left Arrow - Outside Banner */}
           <button
             onClick={goToPrevious}
-            className="hidden sm:block bg-[#D13F43] hover:bg-[#B8363A] text-white rounded-full p-2 sm:p-3 shadow-lg transition-all duration-200 hover:scale-110 mr-3 sm:mr-6"
+            className="bg-[#D13F43] hover:bg-[#B8363A] text-white rounded-full p-2 sm:p-3 shadow-lg transition-all duration-200 hover:scale-110 mr-2 sm:mr-6"
             aria-label="Previous banner"
           >
-            <ChevronLeft size={20} className="sm:w-6 sm:h-6" strokeWidth={2.5} />
+            <ChevronLeft size={16} className="sm:w-6 sm:h-6" strokeWidth={2.5} />
           </button>
 
           {/* Banner Slider Container */}
@@ -100,7 +100,7 @@ export function BannerSection() {
               </div>
               
               {/* Mobile Navigation Dots */}
-              <div className="flex sm:hidden justify-center mt-4 gap-2">
+              <div className="flex justify-center mt-4 gap-2">
                 {banners.map((_, index) => (
                   <button
                     key={index}
@@ -118,10 +118,10 @@ export function BannerSection() {
           {/* Right Arrow - Outside Banner */}
           <button
             onClick={goToNext}
-            className="hidden sm:block bg-[#D13F43] hover:bg-[#B8363A] text-white rounded-full p-2 sm:p-3 shadow-lg transition-all duration-200 hover:scale-110 ml-3 sm:ml-6"
+            className="bg-[#D13F43] hover:bg-[#B8363A] text-white rounded-full p-2 sm:p-3 shadow-lg transition-all duration-200 hover:scale-110 ml-2 sm:ml-6"
             aria-label="Next banner"
           >
-            <ChevronRight size={20} className="sm:w-6 sm:h-6" strokeWidth={2.5} />
+            <ChevronRight size={16} className="sm:w-6 sm:h-6" strokeWidth={2.5} />
           </button>
         </div>
       </div>
