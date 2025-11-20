@@ -558,9 +558,16 @@
   }
 
   .background-hero-img {
-    padding-top: 0.5rem !important;
+    padding-top: 2.5rem !important;
     padding-inline: 0 !important;
   }
+.inner-testimonial {
+    padding-left: 0;
+}
+
+img.site-border.left, img.site-border.right {
+    width: 0;
+}
 
   .inner-background-hero-img {
     margin-top: 0.5rem !important;
@@ -753,9 +760,12 @@
   }
 
   .inner-testimonial p {
-    font-size: 0.875rem !important;
+    font-size: 1rem !important;
+    line-height: 1.2em !important;
   }
-
+.testimonials-marquee .h-80 {
+    height: 22rem;
+}
   /* CTA Section */
   .dream-event {
     margin-inline: 1rem !important;
