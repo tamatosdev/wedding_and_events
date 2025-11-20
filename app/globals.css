@@ -125,33 +125,47 @@
 
 /* footer css */
 
-.logo-desc {
-    width: 25%;
-}
-.Quick-links {
-    width: 10%;
+/* Desktop footer layout */
+@media (min-width: 1024px) {
+  .logo-desc {
+    width: 100%;
+  }
+  .Quick-links {
+    width: 100%;
+  }
+  .services {
+    width: 100%;
+  }
+  .useful {
+    width: 100%;
+  }
 }
 
-.services {
-    width: 13%;
+/* Mobile and tablet responsive footer */
+@media (max-width: 1023px) {
+  .logo-desc,
+  .Quick-links,
+  .services,
+  .useful {
+    width: 100%;
+  }
 }
 
-.md\:col-span-1.useful {
-    width: 13%;
+.Quick-links h3,
+.services h3,
+.useful h3 {
+  font-size: 18px;
+  font-weight: 600;
 }
 
-.newsletter {
-    width: 30%;
+@media (max-width: 640px) {
+  .Quick-links h3,
+  .services h3,
+  .useful h3 {
+    font-size: 16px;
+  }
 }
-.main-footer-flex {
-    display: flex !important;
-    justify-content: space-between;
-}
-.Quick-links h3 {
-    font-size: 18px;
-    /* font-family: 'DM Sans'; */
-    font-weight: 600;
-}
+
 .justify-sub{
     justify-content: flex-end;
 }
