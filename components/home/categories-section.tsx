@@ -56,10 +56,10 @@ export function CategoriesSection() {
   const rightFloral = categoriesContent?.images?.[1] || "/uploads/Flower-2.png";
 
   return (
-    <section className="relative flex items-center mt-6 sm:mt-10">
-      <div className="px-2 sm:px-4 relative z-10 container-main Find-Every-Vendor">
-        <div className="text-center mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 h2eading px-2">
+    <section className="relative w-full overflow-hidden py-6 sm:py-8 lg:py-10">
+      <div className="container-main mx-auto px-3 sm:px-4 lg:px-6">
+        <div className="text-center mx-auto max-w-6xl">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 sm:mb-8 lg:mb-12 h2eading px-2">
             {title.split('\n').map((line, i) => (
               <span key={i}>
                 {line}
@@ -68,7 +68,7 @@ export function CategoriesSection() {
             ))}
           </h1>
           {/* Featured Categories with Icons */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 mt-8 sm:mt-12 Venues-cart">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6 Venues-cart">
             {categories.map((cat: Category) => {
             
               return (
@@ -77,20 +77,20 @@ export function CategoriesSection() {
                   href={cat.link}
                   className="flex flex-col items-center hover:scale-105 transition-transform cursor-pointer"
                 >
-                  <div className="bg-[#F7E9DB] border-vendor p-4 sm:p-6 rounded-lg w-full max-w-[180px] aspect-square flex items-center justify-center mb-3 relative overflow-hidden group">
+                  <div className="bg-[#F7E9DB] border-vendor p-3 sm:p-4 lg:p-6 rounded-lg w-full aspect-square flex items-center justify-center mb-2 sm:mb-3 relative overflow-hidden group">
                     <Image
                       src={cat.image}
                       alt={cat.name}
                       width={68}
                       height={68}
-                      className="text-[#d13f43] transition-transform group-hover:scale-110 w-12 sm:w-16 md:w-[68px] h-auto"
+                      className="text-[#d13f43] transition-transform group-hover:scale-110 w-10 sm:w-12 md:w-14 lg:w-16 xl:w-[68px] h-auto"
                     />
                     {/* Icon overlay on hover */}
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-[#D13F43]/10">
                      
                     </div>
                   </div>
-                  <span className="text-gray-800 font-medium vendor-span text-center text-sm sm:text-base">
+                  <span className="text-gray-800 font-medium vendor-span text-center text-[11px] sm:text-xs md:text-sm lg:text-base leading-tight">
                     {cat.name}
                   </span>
                 </Link>

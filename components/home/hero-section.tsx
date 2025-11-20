@@ -77,11 +77,11 @@ export function HeroSection() {
   ];
 
   return (
-    <section className="relative herro-main flex items-center mt-6 sm:mt-10">
+    <section className="relative herro-main w-full overflow-hidden">
       {/* Floral Decorations */}
       <div className="Left-Floral hidden lg:block">
         <Image
-          src="/uploads/Artboard-2@4x.png" // Add your left floral image
+          src="/uploads/Artboard-2@4x.png"
           alt="Left Floral"
           width={250}
           height={700}
@@ -89,76 +89,77 @@ export function HeroSection() {
       </div>
       <div className="Right-Floral hidden lg:block">
         <Image
-          src="/uploads/Artboard2@4x(1).png" // Add your right floral image
+          src="/uploads/Artboard2@4x(1).png"
           alt="Right Floral"
           width={250}
           height={700}
         />
       </div>
       {/* Background Image */}
-      <div className="absolute inset-0 z-0 background-hero-img container-main">
-        <div className="px-2 sm:px-4 relative z-10 inner-background-hero-img">
-          <div className="text-center mx-auto">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 px-2">
-              {heroTitle.split('\n').map((line, i) => (
-                <span key={i}>
-                  {line.includes('Event') ? (
-                    <>
-                      {line.split('Event').map((part, j) => (
-                        <span key={j}>
-                          {part}
-                          {j === 0 && <span className="text-[#d13f43]">Event</span>}
-                        </span>
-                      ))}
-                    </>
-                  ) : (
-                    line
-                  )}
-                  {i < heroTitle.split('\n').length - 1 && <br />}
-                </span>
-              ))}
-            </h1>
+      <div className="w-full background-hero-img">
+        <div className="container-main mx-auto px-3 sm:px-4 lg:px-6">
+          <div className="inner-background-hero-img">
+            <div className="text-center mx-auto max-w-4xl">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 lg:mb-8 px-2">
+                {heroTitle.split('\n').map((line, i) => (
+                  <span key={i}>
+                    {line.includes('Event') ? (
+                      <>
+                        {line.split('Event').map((part, j) => (
+                          <span key={j}>
+                            {part}
+                            {j === 0 && <span className="text-[#d13f43]">Event</span>}
+                          </span>
+                        ))}
+                      </>
+                    ) : (
+                      line
+                    )}
+                    {i < heroTitle.split('\n').length - 1 && <br />}
+                  </span>
+                ))}
+              </h1>
 
-            {/* Search Box */}
-            <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-lg max-w-3xl mx-auto">
-              {/* Search Tabs */}
-              <div className="mt-1 mb-4 sm:mb-5 flex justify-center gap-2 sm:gap-4 flex-wrap">
-                <button 
-                  onClick={() => {
-                    setSearchMode("service");
-                    setSearchTerm("");
-                  }}
-                  className={`px-3 sm:px-6 py-2 rounded-full text-xs sm:text-sm transition-colors ${
-                    searchMode === "service"
-                      ? "bg-[#d13f43] text-white"
-                      : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
-                  }`}
-                >
-                  Search by Service & City
-                </button>
-                <button 
-                  onClick={() => {
-                    setSearchMode("name");
-                    setSelectedCategory("");
-                    setSelectedCity("");
-                  }}
-                  className={`px-3 sm:px-6 py-2 rounded-full text-xs sm:text-sm transition-colors ${
-                    searchMode === "name"
-                      ? "bg-[#d13f43] text-white"
-                      : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
-                  }`}
-                >
-                  Search by Name
-                </button>
-              </div>
+              {/* Search Box */}
+              <div className="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl p-2.5 sm:p-3 lg:p-4 shadow-lg max-w-3xl mx-auto mb-4 sm:mb-6 lg:mb-8">
+                {/* Search Tabs */}
+                <div className="mb-3 sm:mb-4 lg:mb-5 flex justify-center gap-1.5 sm:gap-2 lg:gap-4 flex-wrap">
+                  <button 
+                    onClick={() => {
+                      setSearchMode("service");
+                      setSearchTerm("");
+                    }}
+                    className={`px-2.5 sm:px-4 lg:px-6 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs lg:text-sm transition-colors whitespace-nowrap ${
+                      searchMode === "service"
+                        ? "bg-[#d13f43] text-white"
+                        : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
+                    }`}
+                  >
+                    Search by Service & City
+                  </button>
+                  <button 
+                    onClick={() => {
+                      setSearchMode("name");
+                      setSelectedCategory("");
+                      setSelectedCity("");
+                    }}
+                    className={`px-2.5 sm:px-4 lg:px-6 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs lg:text-sm transition-colors whitespace-nowrap ${
+                      searchMode === "name"
+                        ? "bg-[#d13f43] text-white"
+                        : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
+                    }`}
+                  >
+                    Search by Name
+                  </button>
+                </div>
 
-              {searchMode === "name" ? (
+                {searchMode === "name" ? (
                 /* Search by Name Mode */
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                   <div className="flex-1">
                     <Input
                       type="text"
-                      placeholder="Enter vendor name to search..."
+                      placeholder="Enter vendor name..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       onKeyDown={(e) => {
@@ -166,22 +167,22 @@ export function HeroSection() {
                           handleSearch();
                         }
                       }}
-                      className="w-full p-2 sm:p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#d13f43] text-sm sm:text-base"
+                      className="w-full p-2 sm:p-2.5 lg:p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#d13f43] text-xs sm:text-sm lg:text-base"
                     />
                   </div>
                   <button 
                     onClick={handleSearch}
-                    className="bg-[#d13f43] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-semibold hover:bg-[#bf383c] transition-colors text-sm sm:text-base"
+                    className="bg-[#d13f43] text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 rounded-lg font-semibold hover:bg-[#bf383c] transition-colors text-xs sm:text-sm lg:text-base whitespace-nowrap"
                   >
                     Search
                   </button>
                 </div>
               ) : (
                 /* Search by Service & City Mode */
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                   <div className="flex-1">
                     <select 
-                      className="w-full p-2 sm:p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#d13f43] text-sm sm:text-base"
+                      className="w-full p-2 sm:p-2.5 lg:p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#d13f43] text-xs sm:text-sm lg:text-base"
                       value={selectedCategory}
                       onChange={(e) => setSelectedCategory(e.target.value)}
                     >
@@ -193,7 +194,7 @@ export function HeroSection() {
                   </div>
                   <div className="flex-1">
                     <select 
-                      className="w-full p-2 sm:p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#d13f43] text-sm sm:text-base"
+                      className="w-full p-2 sm:p-2.5 lg:p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#d13f43] text-xs sm:text-sm lg:text-base"
                       value={selectedCity}
                       onChange={(e) => setSelectedCity(e.target.value)}
                     >
@@ -205,7 +206,7 @@ export function HeroSection() {
                   </div>
                   <button 
                     onClick={handleSearch}
-                    className="bg-[#d13f43] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-semibold hover:bg-[#bf383c] transition-colors text-sm sm:text-base"
+                    className="bg-[#d13f43] text-white px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 rounded-lg font-semibold hover:bg-[#bf383c] transition-colors text-xs sm:text-sm lg:text-base whitespace-nowrap"
                   >
                     Search
                   </button>
@@ -214,18 +215,18 @@ export function HeroSection() {
             </div>
 
             {/* Featured Venues Images */}
-            <div className="mt-8 sm:mt-12 pt-4 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 mx-auto px-2">
+            <div className="mt-4 sm:mt-6 lg:mt-8 grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4 px-2">
               {heroImages.map((image, index) => (
                 <div 
                   key={index} 
-                  className={`relative h-100 rounded-lg overflow-hidden ${index % 2 === 0 && 'lg:mt-2 lg:pt-12'}`}
+                  className={`relative rounded-lg overflow-hidden ${index % 2 === 0 ? 'lg:mt-2 lg:pt-12' : ''}`}
                 >
                   <Image
                     src={image}
                     alt={`Hero Image ${index + 1}`}
                     width={300}
                     height={600}
-                    className="rounded-lg w-full h-auto"
+                    className="rounded-lg w-full h-auto object-cover"
                   />
                 </div>
               ))}
