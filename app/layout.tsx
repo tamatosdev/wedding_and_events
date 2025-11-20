@@ -12,6 +12,11 @@ export const metadata: Metadata = {
   title: 'Wedding & Events - Your Wedding, Your Way',
   description: 'Find the best wedding venues and event services in Pakistan. Explore trusted vendors, compare prices, and plan your perfect celebration.',
   keywords: 'wedding venues, event planning, wedding vendors, Karachi weddings, Pakistan weddings',
+  icons: {
+    icon: '/uploads/wedding-event-fav.png',
+    shortcut: '/uploads/wedding-event-fav.png',
+    apple: '/uploads/wedding-event-fav.png',
+  },
 }
 
 export default function RootLayout({
