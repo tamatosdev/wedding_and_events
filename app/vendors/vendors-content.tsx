@@ -189,10 +189,10 @@ export default function VendorsPage() {
     <div className="min-h-screen bg-white">
       <Header />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Breadcrumb */}
-        <nav className="mb-6">
-          <div className="flex items-center space-x-2 text-sm text-gray-600">
+        <nav className="mb-4 sm:mb-6">
+          <div className="flex items-center space-x-2 text-xs sm:text-sm text-gray-600">
             <Link href="/" className="hover:text-red-600">Home</Link>
             <span>/</span>
             <Link href="/services" className="hover:text-red-600">Services</Link>
@@ -211,16 +211,16 @@ export default function VendorsPage() {
         </nav>
 
         {/* Header Section */}
-        <div className="relative mb-8">
-          <div className="absolute left-0 top-0 w-32 h-32 opacity-20">
+        <div className="relative mb-6 sm:mb-8">
+          <div className="absolute left-0 top-0 w-16 h-16 sm:w-32 sm:h-32 opacity-20">
             <div className="w-full h-full bg-gradient-to-br from-pink-200 to-pink-300 rounded-full"></div>
           </div>
-          <div className="absolute right-0 top-0 w-24 h-24 opacity-20">
+          <div className="absolute right-0 top-0 w-12 h-12 sm:w-24 sm:h-24 opacity-20">
             <div className="w-full h-full bg-gradient-to-br from-blue-200 to-blue-300 rounded-full"></div>
           </div>
           
           <div className="relative z-10">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
               {filters.category ? (
                 filters.category === 'Venue' ? 'Top Event Venues' :
                 filters.category === 'Decoration' ? 'Best Decoration Services' :
@@ -230,7 +230,7 @@ export default function VendorsPage() {
                 `Top ${filters.category} Services`
               ) : 'Top Event Venues'}
             </h1>
-            <p className="text-lg text-gray-600 max-w-3xl">
+            <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-3xl">
               {filters.category ? (
                 filters.category === 'Venue' ? 'Browse verified venues across your city. Filter by location, price and capacity to find your dream space.' :
                 filters.category === 'Decoration' ? 'Discover stunning decoration services to transform your special day. Find the perfect decor that matches your vision and style.' :
@@ -243,21 +243,21 @@ export default function VendorsPage() {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
           {/* Filters Sidebar */}
           {showFilters && (
             <div className="lg:w-80 flex-shrink-0">
-              <Card className="sticky top-8">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-6">Filters</h3>
+              <Card className="lg:sticky lg:top-8">
+                <CardContent className="p-4 sm:p-5 lg:p-6">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Filters</h3>
                   
                   {/* Category */}
-                  <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <div className="mb-4 sm:mb-6">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                       Category
                     </label>
                     <select
-                      className="w-full h-10 px-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                      className="w-full h-9 sm:h-10 px-2 sm:px-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
                       value={filters.category}
                       onChange={(e) => handleFilterChange('category', e.target.value)}
                     >
@@ -271,12 +271,12 @@ export default function VendorsPage() {
                   </div>
 
                   {/* Location */}
-                  <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <div className="mb-4 sm:mb-6">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                       Location
                     </label>
                     <select
-                      className="w-full h-10 px-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                      className="w-full h-9 sm:h-10 px-2 sm:px-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
                       value={filters.city}
                       onChange={(e) => handleFilterChange('city', e.target.value)}
                     >
@@ -288,8 +288,8 @@ export default function VendorsPage() {
                   </div>
 
                   {/* Price Range */}
-                  <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <div className="mb-4 sm:mb-6">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                       Price Range
                     </label>
                     <div className="flex gap-2">
@@ -297,20 +297,20 @@ export default function VendorsPage() {
                         placeholder="Min"
                         value={filters.minPrice}
                         onChange={(e) => handleFilterChange('minPrice', e.target.value)}
-                        className="h-10"
+                        className="h-9 sm:h-10 text-sm"
                       />
                       <Input
                         placeholder="Max"
                         value={filters.maxPrice}
                         onChange={(e) => handleFilterChange('maxPrice', e.target.value)}
-                        className="h-10"
+                        className="h-9 sm:h-10 text-sm"
                       />
                     </div>
                   </div>
 
                   {/* Capacity */}
-                  <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-3">
+                  <div className="mb-4 sm:mb-6">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">
                       Capacity
                     </label>
                     <div className="space-y-2">
@@ -322,15 +322,15 @@ export default function VendorsPage() {
                             onChange={() => handleCapacityChange(capacity)}
                             className="rounded border-gray-300 text-red-600 focus:ring-red-500"
                           />
-                          <span className="ml-2 text-sm text-gray-700">{capacity}</span>
+                          <span className="ml-2 text-xs sm:text-sm text-gray-700">{capacity}</span>
                         </label>
                       ))}
                     </div>
                   </div>
 
                   {/* Type */}
-                  <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-3">
+                  <div className="mb-4 sm:mb-6">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">
                       Type
                     </label>
                     <div className="space-y-2">
@@ -342,15 +342,15 @@ export default function VendorsPage() {
                             onChange={() => handleTypeChange(type)}
                             className="rounded border-gray-300 text-red-600 focus:ring-red-500"
                           />
-                          <span className="ml-2 text-sm text-gray-700">{type}</span>
+                          <span className="ml-2 text-xs sm:text-sm text-gray-700">{type}</span>
                         </label>
                       ))}
                     </div>
                   </div>
 
                   {/* Rating */}
-                  <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-3">
+                  <div className="mb-4 sm:mb-6">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">
                       Rating
                     </label>
                     <div className="space-y-2">
@@ -362,7 +362,7 @@ export default function VendorsPage() {
                             onChange={() => handleRatingChange(rating)}
                             className="rounded border-gray-300 text-red-600 focus:ring-red-500"
                           />
-                          <span className="ml-2 text-sm text-gray-700">{rating}</span>
+                          <span className="ml-2 text-xs sm:text-sm text-gray-700">{rating}</span>
                         </label>
                       ))}
                     </div>
@@ -378,7 +378,7 @@ export default function VendorsPage() {
                     </Button>
                     <button
                       onClick={clearFilters}
-                      className="w-full text-sm text-gray-600 hover:text-red-600"
+                      className="w-full text-xs sm:text-sm text-gray-600 hover:text-red-600"
                     >
                       Clear Filter
                     </button>
@@ -391,23 +391,23 @@ export default function VendorsPage() {
           {/* Main Content */}
           <div className="flex-1">
             {/* Results Header */}
-            <div className="flex justify-between items-center mb-6">
-              <div className="flex items-center space-x-4">
-                <span className="text-gray-600">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-4">
+                <span className="text-xs sm:text-sm text-gray-600">
                   Showing {vendors.length} of {pagination.total} results
                 </span>
                 <button
                   onClick={() => setShowFilters(!showFilters)}
-                  className="text-sm text-gray-600 hover:text-red-600"
+                  className="text-xs sm:text-sm text-gray-600 hover:text-red-600 lg:hidden"
                 >
                   {showFilters ? 'Hide Filters' : 'Show Filters'}
                 </button>
               </div>
               
               <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-600">Sort By:</span>
+                <span className="text-xs sm:text-sm text-gray-600">Sort By:</span>
                 <select
-                  className="h-8 px-3 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                  className="h-8 sm:h-9 px-2 sm:px-3 border border-gray-300 rounded text-xs sm:text-sm focus:ring-2 focus:ring-red-500 focus:border-red-500"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
                 >
@@ -422,7 +422,7 @@ export default function VendorsPage() {
 
             {/* Vendors Grid */}
             {loading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {[...Array(6)].map((_, i) => (
                   <Card key={i} className="animate-pulse">
                     <div className="h-48 bg-gray-200 rounded-t-lg"></div>
@@ -437,10 +437,10 @@ export default function VendorsPage() {
               </div>
             ) : vendors.length > 0 ? (
               <>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
                   {vendors.map((vendor) => (
                     <Card key={vendor.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                      <div className="relative h-48">
+                      <div className="relative h-40 sm:h-48">
                         <Image
                           src={vendor.images[0] || '/placeholder-image.jpg'}
                           alt={vendor.name}
@@ -449,10 +449,10 @@ export default function VendorsPage() {
                           unoptimized
                         />
                       </div>
-                      <CardContent className="p-4">
-                        <h3 className="font-semibold text-lg mb-2">{vendor.name}</h3>
+                      <CardContent className="p-3 sm:p-4">
+                        <h3 className="font-semibold text-base sm:text-lg mb-2">{vendor.name}</h3>
                         
-                        <div className="flex items-center space-x-4 text-sm text-gray-600 mb-2">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 text-xs sm:text-sm text-gray-600 mb-2">
                           <span className="flex items-center">
                             <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
@@ -467,7 +467,7 @@ export default function VendorsPage() {
                           </span>
                         </div>
 
-                        <div className="flex items-center mb-3">
+                        <div className="flex items-center mb-2 sm:mb-3">
                           <div className="flex items-center">
                             {[...Array(5)].map((_, i) => (
                               <svg
@@ -482,19 +482,19 @@ export default function VendorsPage() {
                               </svg>
                             ))}
                           </div>
-                          <span className="text-sm text-gray-600 ml-2">
+                          <span className="text-xs sm:text-sm text-gray-600 ml-2">
                             {vendor.rating} ({vendor.reviews || 18} reviews)
                           </span>
                         </div>
 
-                        <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+                        <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 line-clamp-2">
                           {vendor.description || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
                         </p>
 
                         <div className="flex justify-between items-center">
 
                           <Link href={`/vendors/${vendor.id}`}>
-                            <Button size="sm" className="bg-red-600 hover:bg-red-700 text-white">
+                            <Button size="sm" className="bg-red-600 hover:bg-red-700 text-white text-xs sm:text-sm">
                               View Details
                             </Button>
                           </Link>
@@ -506,7 +506,7 @@ export default function VendorsPage() {
 
                 {/* Pagination */}
                 {pagination.pages > 1 && (
-                  <div className="flex justify-center items-center space-x-2">
+                  <div className="flex flex-wrap justify-center items-center gap-2">
                     <Button
                       variant="outline"
                       disabled={currentPage === 1}
