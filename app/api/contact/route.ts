@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { sendInitialNotification } from '@/lib/escalation'
+import { sendPopupQueryNotification } from '@/lib/email'
 
 export const dynamic = 'force-dynamic'
 
@@ -35,6 +36,25 @@ export async function POST(request: NextRequest) {
         message,
       },
     })
+
+    // Check if this is a popup submission (Newsletter Signup)
+    const isPopupSubmission = subject && subject.includes('Newsletter Signup')
+
+    if (isPopupSubmission) {
+      // Send special popup query notification for newsletter signups
+      try {
+        await sendPopupQueryNotification({
+          name,
+          email,
+          phone: phone || undefined,
+          message: message || 'Newsletter signup request',
+        })
+        console.log('Popup query notification sent successfully')
+      } catch (emailError) {
+        console.error('Failed to send popup query notification:', emailError)
+        // Continue even if this fails
+      }
+    }
 
     // Send initial notifications to customer support (email + WhatsApp)
     try {

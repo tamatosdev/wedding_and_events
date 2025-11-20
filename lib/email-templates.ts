@@ -438,3 +438,117 @@ export function generateWelcomeEmailTemplate(user: {
 </html>
   `
 }
+
+export function generatePartnerOnboardingEmailTemplate(submission: {
+  businessType: string
+  ownerName: string
+  ownerEmail: string
+  ownerMobile1: string
+  businessName?: string
+  city?: string
+  id: string
+}) {
+  const businessTypeMap: Record<string, string> = {
+    'WEDDING': 'Wedding Venue',
+    'BOUTIQUES': 'Boutique',
+    'BEAUTY_PARLOR': 'Beauty Parlor',
+    'DECOR': 'Decoration',
+    'CATERING': 'Catering',
+  }
+
+  return `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>New Partner Onboarding Application</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
+    .container { background-color: white; border-radius: 10px; padding: 30px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+    .header { text-align: center; border-bottom: 3px solid #dc2626; padding-bottom: 20px; margin-bottom: 30px; }
+    .logo { font-size: 24px; font-weight: bold; color: #dc2626; }
+    .field { margin-bottom: 15px; }
+    .field-label { font-weight: bold; color: #374151; }
+    .field-value { background-color: #f3f4f6; padding: 10px; border-radius: 5px; border-left: 4px solid #dc2626; }
+    .cta-button { display: inline-block; background-color: #dc2626; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">💒 Wedding & Events Portal</div>
+      <h2>New Partner Application</h2>
+    </div>
+    <div class="field">
+      <div class="field-label">Business Type:</div>
+      <div class="field-value">${businessTypeMap[submission.businessType] || submission.businessType}</div>
+    </div>
+    ${submission.businessName ? `<div class="field"><div class="field-label">Business Name:</div><div class="field-value">${submission.businessName}</div></div>` : ''}
+    <div class="field">
+      <div class="field-label">Owner:</div>
+      <div class="field-value">${submission.ownerName} - ${submission.ownerEmail} - ${submission.ownerMobile1}</div>
+    </div>
+    ${submission.city ? `<div class="field"><div class="field-label">City:</div><div class="field-value">${submission.city}</div></div>` : ''}
+    <div style="text-align: center;">
+      <a href="${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/admin" class="cta-button">Review Application</a>
+    </div>
+  </div>
+</body>
+</html>
+  `
+}
+
+export function generatePopupQueryEmailTemplate(query: {
+  name: string
+  email: string
+  phone?: string
+  message: string
+}) {
+  return `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>New Query from Welcome Popup</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
+    .container { background-color: white; border-radius: 10px; padding: 30px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+    .header { text-align: center; border-bottom: 3px solid #dc2626; padding-bottom: 20px; margin-bottom: 30px; }
+    .logo { font-size: 24px; font-weight: bold; color: #dc2626; }
+    .badge { display: inline-block; background-color: #10b981; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 12px; }
+    .field { margin-bottom: 15px; }
+    .field-label { font-weight: bold; color: #374151; }
+    .field-value { background-color: #f3f4f6; padding: 10px; border-radius: 5px; border-left: 4px solid #dc2626; }
+    .message-box { background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 20px; margin-top: 20px; }
+    .cta-button { display: inline-block; background-color: #dc2626; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">💒 Wedding & Events Portal</div>
+      <h2>New Query Received</h2>
+      <span class="badge">NEW LEAD</span>
+    </div>
+    <div class="field">
+      <div class="field-label">Name:</div>
+      <div class="field-value">${query.name}</div>
+    </div>
+    <div class="field">
+      <div class="field-label">Email:</div>
+      <div class="field-value">${query.email}</div>
+    </div>
+    ${query.phone ? `<div class="field"><div class="field-label">Phone:</div><div class="field-value">${query.phone}</div></div>` : ''}
+    <div class="field">
+      <div class="field-label">Message:</div>
+      <div class="message-box">${query.message.replace(/\n/g, '<br>')}</div>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="mailto:${query.email}" class="cta-button">Reply to Customer</a>
+    </div>
+    <p style="text-align: center; color: #dc2626; font-weight: bold; margin-top: 20px;">Priority: HIGH - Respond within 2 hours!</p>
+  </div>
+</body>
+</html>
+  `
+}

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { sendPartnerOnboardingNotification } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   try {
@@ -157,6 +158,23 @@ export async function POST(request: NextRequest) {
         status: 'PENDING',
       },
     })
+
+    // Send email notification to admin
+    try {
+      await sendPartnerOnboardingNotification({
+        businessType: submission.businessType,
+        ownerName: submission.ownerName,
+        ownerEmail: submission.ownerEmail,
+        ownerMobile1: submission.ownerMobile1,
+        businessName: submission.businessName || undefined,
+        city: submission.city || undefined,
+        id: submission.id,
+      })
+      console.log('Partner onboarding email notification sent successfully')
+    } catch (emailError) {
+      console.error('Failed to send partner onboarding email notification:', emailError)
+      // Don't fail the request if email fails
+    }
 
     return NextResponse.json(
       { 

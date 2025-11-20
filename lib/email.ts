@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-import { generateInquiryEmailTemplate, generateWelcomeEmailTemplate, generateAdminInquiryEmailTemplate } from './email-templates'
+import { generateInquiryEmailTemplate, generateWelcomeEmailTemplate, generateAdminInquiryEmailTemplate, generatePartnerOnboardingEmailTemplate, generatePopupQueryEmailTemplate } from './email-templates'
 
 export async function sendEmail({
   to,
@@ -79,6 +79,41 @@ export async function sendAdminInquiryNotification(inquiry: {
     to: process.env.ADMIN_EMAIL || 'admin@shadiportal.com',
     subject: `New Customer Inquiry for ${inquiry.vendorName} - ${inquiry.name}`,
     text: `New inquiry from ${inquiry.name} for ${inquiry.vendorName}. Customer email: ${inquiry.email}`,
+    html,
+  })
+}
+
+export async function sendPartnerOnboardingNotification(submission: {
+  businessType: string
+  ownerName: string
+  ownerEmail: string
+  ownerMobile1: string
+  businessName?: string
+  city?: string
+  id: string
+}) {
+  const html = generatePartnerOnboardingEmailTemplate(submission)
+  
+  return await sendEmail({
+    to: process.env.ADMIN_EMAIL || 'admin@shadiportal.com',
+    subject: `New Partner Application - ${submission.ownerName} (${submission.businessType})`,
+    text: `New partner onboarding application from ${submission.ownerName}`,
+    html,
+  })
+}
+
+export async function sendPopupQueryNotification(query: {
+  name: string
+  email: string
+  phone?: string
+  message: string
+}) {
+  const html = generatePopupQueryEmailTemplate(query)
+  
+  return await sendEmail({
+    to: process.env.ADMIN_EMAIL || 'admin@shadiportal.com',
+    subject: `New Popup Query - ${query.name}`,
+    text: `New query from welcome popup: ${query.name} - ${query.email}`,
     html,
   })
 }
