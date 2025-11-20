@@ -556,7 +556,9 @@
     min-height: auto !important;
     padding-bottom: 1rem;
   }
-
+header img.h-16 {
+    height: 5.5rem;
+}
   .background-hero-img {
     padding-top: 2.5rem !important;
     padding-inline: 0 !important;

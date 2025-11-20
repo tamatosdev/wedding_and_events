@@ -353,16 +353,16 @@ function PartnerOnboardingForm() {
     return (
       <>
         <Header />
-        <div className="min-h-screen bg-white py-12 px-4">
-          <div className="max-w-2xl mx-auto">
+        <div className="min-h-screen bg-white py-6 sm:py-8 lg:py-12 px-3 sm:px-4">
+          <div className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               className="text-center"
             >
-              <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-green-100 mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full bg-green-100 mb-4 sm:mb-6">
                 <svg
-                  className="w-12 h-12 text-green-600"
+                  className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-green-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -375,32 +375,32 @@ function PartnerOnboardingForm() {
                   />
                 </svg>
               </div>
-              <h1 className="text-4xl font-bold text-[#2E2E2E] mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+              <h1 className="font-bold text-[#2E2E2E] mb-3 sm:mb-4" style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 'clamp(24px, 5vw, 32px)' }}>
                 Thank You!
               </h1>
-              <p className="text-xl text-[#666666] mb-8" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+              <p className="text-[#666666] mb-6 sm:mb-8" style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 'clamp(16px, 3vw, 20px)' }}>
                 Thank you for partnering with The Wedding & Event (WE)! Our team will contact you soon.
               </p>
-              <div className="bg-white rounded-lg shadow-lg p-6 space-y-4 border border-[#DD374033]">
-                <h2 className="text-lg font-semibold text-[#2E2E2E] mb-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>Contact Information</h2>
-                <div className="space-y-3">
+              <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 space-y-3 sm:space-y-4 border border-[#DD374033]">
+                <h2 className="font-semibold text-[#2E2E2E] mb-3 sm:mb-4" style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 'clamp(16px, 3vw, 18px)' }}>Contact Information</h2>
+                <div className="space-y-2 sm:space-y-3">
                   <a
                     href="https://wa.me/923141113007"
-                    className="flex items-center justify-center gap-3 p-3 bg-green-50 hover:bg-green-100 rounded-lg transition-colors"
+                    className="flex items-center justify-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-green-50 hover:bg-green-100 rounded-lg transition-colors"
                   >
-                    <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
                     </svg>
-                    <span className="text-green-700 font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>WhatsApp: 03141113007</span>
+                    <span className="text-green-700 font-medium" style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 'clamp(14px, 2.5vw, 16px)' }}>WhatsApp: 03141113007</span>
                   </a>
                   <a
                     href="mailto:info@theweddingandevent.com"
-                    className="flex items-center justify-center gap-3 p-3 bg-[#F7E9DB] hover:bg-[#F7E9DB]/80 rounded-lg transition-colors"
+                    className="flex items-center justify-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-[#F7E9DB] hover:bg-[#F7E9DB]/80 rounded-lg transition-colors"
                   >
-                    <svg className="w-5 h-5 text-[#D13F43]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#D13F43]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                    <span className="text-[#2E2E2E] font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>info@theweddingandevent.com</span>
+                    <span className="text-[#2E2E2E] font-medium" style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 'clamp(14px, 2.5vw, 16px)' }}>info@theweddingandevent.com</span>
                   </a>
                 </div>
               </div>
@@ -422,7 +422,7 @@ function PartnerOnboardingForm() {
 
           <StepWrapper stepKey={currentStep}>
             <FormProvider {...form}>
-              <form onSubmit={form.handleSubmit(handleSubmit, handleSubmitError)} className="bg-white rounded-lg shadow-lg p-8 border border-[#DD374033]">
+              <form onSubmit={form.handleSubmit(handleSubmit, handleSubmitError)} className="bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:p-8 border border-[#DD374033]" style={{fontSize: '16px'}}>
                 {debug && (
                   <div className="mb-4 p-2 bg-yellow-100 border border-yellow-300 rounded text-yellow-800">
                     Debug: {debug}
