@@ -646,6 +646,56 @@ export function VendorFormTabs({ formData, setFormData }: VendorFormTabsProps) {
                 placeholder="Delivery options and charges"
               />
             </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="sellOrRent">Sell or Rent</Label>
+                <Input
+                  id="sellOrRent"
+                  value={formData.sellOrRent}
+                  onChange={(e) => setFormData({ ...formData, sellOrRent: e.target.value })}
+                  placeholder="e.g., Sell Only, Rent Only, Both"
+                />
+              </div>
+              <div>
+                <Label htmlFor="onlinePayment">Online Payment</Label>
+                <Input
+                  id="onlinePayment"
+                  value={formData.onlinePayment}
+                  onChange={(e) => setFormData({ ...formData, onlinePayment: e.target.value })}
+                  placeholder="e.g., Available, Not Available"
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="salePriceRange">Average Price Range for Sale</Label>
+                <Input
+                  id="salePriceRange"
+                  value={formData.salePriceRange}
+                  onChange={(e) => setFormData({ ...formData, salePriceRange: e.target.value })}
+                  placeholder="e.g., Rs. 15,000 - Rs. 150,000"
+                />
+              </div>
+              <div>
+                <Label htmlFor="rentPriceRange">Average Price Range for Rent</Label>
+                <Input
+                  id="rentPriceRange"
+                  value={formData.rentPriceRange}
+                  onChange={(e) => setFormData({ ...formData, rentPriceRange: e.target.value })}
+                  placeholder="e.g., Rs. 5,000 - Rs. 25,000"
+                />
+              </div>
+            </div>
+            <div>
+              <Label htmlFor="returnExchangePolicy">Return, Exchange, or Refund Policy</Label>
+              <Textarea
+                id="returnExchangePolicy"
+                value={formData.returnExchangePolicy}
+                onChange={(e) => setFormData({ ...formData, returnExchangePolicy: e.target.value })}
+                rows={3}
+                placeholder="Describe return, exchange, and refund policy"
+              />
+            </div>
           </div>
         )}
 
